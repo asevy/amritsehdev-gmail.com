@@ -115,15 +115,19 @@ class Journal:
         rs = [l.r_multiple for l in rows]
         wins = [r for r in rs if r > 0]
         losses = [r for r in rs if r <= 0]
-        gross_win = sum(wins) or 0.0
-        gross_loss = abs(sum(losses)) or 1e-9
+        gross_win = sum(wins)
+        gross_loss = abs(sum(losses))
+        # No losses yet: PF is undefined, not a 9-digit number. Report inf and
+        # let the formatter render it honestly until enough trades accumulate.
+        pf = float("inf") if gross_loss == 0 and gross_win > 0 else (
+            0.0 if gross_loss == 0 else round(gross_win / gross_loss, 2))
         return {
             "n": n,
             "win_rate": round(len(wins) / n, 3),
             "avg_R": round(sum(rs) / n, 3),              # expectancy in R
             "avg_win_R": round(sum(wins) / len(wins), 3) if wins else 0.0,
             "avg_loss_R": round(sum(losses) / len(losses), 3) if losses else 0.0,
-            "profit_factor": round(gross_win / gross_loss, 2),
+            "profit_factor": pf,
             "expectancy_positive": (sum(rs) / n) > 0,
         }
 
@@ -136,9 +140,11 @@ class Journal:
             if s.get("n", 0) == 0:
                 lines.append(f"{label:12} {s.get('note','-')}")
             else:
+                pf = s['profit_factor']
+                pf_str = "inf" if pf == float("inf") else f"{pf:.2f}"
                 lines.append(
                     f"{label:12} n={s['n']:3d}  win%={s['win_rate']:.0%}  "
-                    f"avgR={s['avg_R']:+.2f}  PF={s['profit_factor']:.2f}  "
+                    f"avgR={s['avg_R']:+.2f}  PF={pf_str}  "
                     f"{'EDGE' if s['expectancy_positive'] else 'no edge yet'}")
         return "\n".join(lines)
 
