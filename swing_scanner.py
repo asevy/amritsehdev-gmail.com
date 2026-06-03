@@ -11,13 +11,13 @@ not exist in any price/volume dataset beforehand.
 
 What it DOES is two honest jobs:
 
-  1. "MOVING NOW"  -- detects abnormal price+volume action AS IT HAPPENS.
+  1. "MOVING NOW"  — detects abnormal price+volume action AS IT HAPPENS.
                      A react-fast momentum/breakout scanner. Tells you a name
                      is moving hard on heavy volume right now. This is detection,
                      not prediction.
 
-  2. "LOADED"      -- the closest legitimate thing to "about to pop": finds
-                     stocks storing POTENTIAL energy -- volatility compressed,
+  2. "LOADED"      — the closest legitimate thing to "about to pop": finds
+                     stocks storing POTENTIAL energy — volatility compressed,
                      volume dried up, price coiled in a tight base near its
                      highs. Big moves are preceded by unusually quiet ones more
                      often than chance. It identifies the coil; it CANNOT tell
@@ -28,7 +28,7 @@ What it DOES is two honest jobs:
 DISCIPLINE BUILT IN
 -------------------
 Every actionable candidate is emitted WITH a predetermined entry trigger and a
-stop. The scanner will not surface a "buy" without a stop attached -- this is
+stop. The scanner will not surface a "buy" without a stop attached — this is
 the Constellation rule enforced in code. Index ETFs can be excluded from
 signals (forever-hold/DCA names should not be traded on momentum).
 
@@ -57,7 +57,7 @@ from typing import Iterable, Optional
 
 
 # ----------------------------------------------------------------------
-# Data layer -- swap this one function for your own feed
+# Data layer — swap this one function for your own feed
 # ----------------------------------------------------------------------
 def fetch_ohlcv(ticker: str, lookback_days: int = 400) -> Optional[pd.DataFrame]:
     """Return a DataFrame indexed by date with columns:
@@ -78,10 +78,10 @@ def fetch_ohlcv(ticker: str, lookback_days: int = 400) -> Optional[pd.DataFrame]
 
 
 # ----------------------------------------------------------------------
-# Indicators (pure functions, no I/O -- these are unit-tested below)
+# Indicators (pure functions, no I/O — these are unit-tested below)
 # ----------------------------------------------------------------------
 def atr(df: pd.DataFrame, n: int = 14) -> pd.Series:
-    """Average True Range -- the stock's typical daily movement."""
+    """Average True Range — the stock's typical daily movement."""
     h, l, c = df["high"], df["low"], df["close"]
     prev_c = c.shift(1)
     tr = pd.concat([h - l, (h - prev_c).abs(), (l - prev_c).abs()], axis=1).max(axis=1)
@@ -156,7 +156,7 @@ def nr7(df: pd.DataFrame) -> bool:
 
 
 def inside_day(df: pd.DataFrame) -> bool:
-    """Today's high/low inside yesterday's -- consolidation."""
+    """Today's high/low inside yesterday's — consolidation."""
     return bool(df["high"].iloc[-1] <= df["high"].iloc[-2]
                 and df["low"].iloc[-1] >= df["low"].iloc[-2])
 
@@ -168,8 +168,8 @@ def inside_day(df: pd.DataFrame) -> bool:
 class Signal:
     ticker: str
     price: float = np.nan
-    moving_now: float = 0.0      # 0..100 -- abnormal action happening right now
-    loaded: float = 0.0          # 0..100 -- coiled-spring / potential-energy score
+    moving_now: float = 0.0      # 0..100 — abnormal action happening right now
+    loaded: float = 0.0          # 0..100 — coiled-spring / potential-energy score
     vol_z: float = np.nan        # volume z-score (today vs 20d)
     bbw_pctile: float = np.nan   # Bollinger bandwidth percentile (low=compressed)
     range_pos: float = np.nan    # position in 52wk range (1=at high)
