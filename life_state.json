@@ -1,0 +1,83 @@
+{
+  "meta": {
+    "operator": "Amrit",
+    "co_founder": "Munsa",
+    "kids": ["Nihaal", "Ilaahi"],
+    "as_of": "2026-07-02",
+    "stated_overall": "A-",
+    "stated_overall_source": "operator, opening state July 2026",
+    "season": {
+      "label": "Summer 2026 (Q3)",
+      "main_quest": "Execution",
+      "declared": "2026-07",
+      "reason_if_switched": null
+    },
+    "notes": "Grades pay on completion, not commitment or planning quality. Ungraded domains carry no data yet and must be set at the first monthly regrade rather than guessed."
+  },
+
+  "domains": {
+    "Wealth":     { "grade": "A-", "movement": "→", "why": "The machine: portfolio, real estate, corps, tax. Baseline entering the game.", "graded": true },
+    "Execution":  { "grade": "B-", "movement": "→", "why": "Throughput on decided items. Baseline B-; six items open this season.", "graded": true },
+    "Health":     { "grade": null, "movement": "→", "why": "Not yet graded. THE MULTIPLIER — a failing Health grade caps overall at C. Standing burnout watch is live.", "graded": false, "multiplier": true },
+    "Marriage":   { "grade": null, "movement": "→", "why": "Not yet graded — set at first regrade. Munsa: time, partnership, fun, the co-founder relationship.", "graded": false },
+    "Kids":       { "grade": null, "movement": "→", "why": "Not yet graded — set at first regrade. Presence during the years they're watching, not provision.", "graded": false },
+    "Family":     { "grade": null, "movement": "→", "why": "Not yet graded — set at first regrade. Mom, Dash, the extended web.", "graded": false },
+    "Business":   { "grade": null, "movement": "→", "why": "Not yet graded — set at first regrade. Eyeology growth, MSO, India research, frames/tele levers.", "graded": false },
+    "Craft":      { "grade": null, "movement": "→", "why": "Not yet graded — set at first regrade. Clinical skill + income resilience: USG injections, IME, the OHIP race.", "graded": false },
+    "Adventure":  { "grade": null, "movement": "→", "why": "Not yet graded — set at first regrade. Travel, BC summers, winters, the Italy/Cyprus fork.", "graded": false },
+    "Character":  { "grade": null, "movement": "→", "why": "Not yet graded — set at first regrade. Discipline, generosity, long thinking, calm under pressure.", "graded": false }
+  },
+
+  "domain_order": ["Wealth", "Execution", "Health", "Marriage", "Kids", "Family", "Business", "Craft", "Adventure", "Character"],
+
+  "scorecards": {
+    "Execution": [
+      { "item": "Wills / estate docs", "done_means": "Wills signed, witnessed, and executed; estate documents in force", "why_now": "L2 estate armor; protects you and Munsa and the kids", "target": null, "status": "open", "blocked_on": null },
+      { "item": "Capital dividend elections", "done_means": "CDA elections filed and accepted with CRA", "why_now": "Tax-free capital extraction; feeds the machine", "target": null, "status": "open", "blocked_on": null },
+      { "item": "MacNicol mapping", "done_means": "MacNicol holdings fully mapped and documented", "why_now": "Know the machine before optimizing it", "target": null, "status": "open", "blocked_on": null },
+      { "item": "Commercial refinance", "done_means": "Refinance locked (financing before consolidation — locked decision)", "why_now": "L3 commercial debt self-servicing; sequence gate", "target": null, "status": "open", "blocked_on": null },
+      { "item": "India affiliation letter", "done_means": "Affiliation letter executed", "why_now": "Unblocks India research lever", "target": null, "status": "open", "blocked_on": null },
+      { "item": "Eyeology freeze", "done_means": "Eyeology estate freeze completed", "why_now": "Locks in growth to next generation; corp/tax armor", "target": null, "status": "open", "blocked_on": null }
+    ]
+  },
+
+  "boss_risks": [
+    { "name": "OHIP cut", "warning_signs": ["fee-schedule news"], "status": "watching", "last_reviewed": "2026-07-02" },
+    { "name": "Operator burnout", "warning_signs": ["sleep debt", "dread", "skipped workouts"], "status": "STANDING WATCH", "last_reviewed": "2026-07-02" },
+    { "name": "Drift", "warning_signs": ["new clever ideas cutting ahead of open scorecard items"], "status": "watching", "last_reviewed": "2026-07-02" }
+  ],
+
+  "life_levels": [
+    { "level": "L1", "name": "Personal burn covered by portfolio yield", "achieved": true },
+    { "level": "L2", "name": "Wills/estate armor complete", "achieved": false },
+    { "level": "L3", "name": "Commercial debt self-servicing (refinance locked)", "achieved": false },
+    { "level": "L4", "name": "First $500K year of household surplus", "achieved": false },
+    { "level": "L5", "name": "Commercial debt gone; ~$300K/yr freed rent", "achieved": false },
+    { "level": "L6", "name": "Portfolio crosses $10M untouched", "achieved": false },
+    { "level": "L7", "name": "The fork decided (stay & optimize / genuinely leave) with real information", "achieved": false }
+  ],
+
+  "locked_decisions": [
+    "Portfolio untouched (it compounds; it is not a piggy bank)",
+    "Rent compounds in Canada",
+    "Lazeez out",
+    "CDA → Pitch Pine",
+    "Financing before consolidation"
+  ],
+
+  "the_line": {
+    "above_line": "the open scorecard items (nothing new cuts ahead of these)",
+    "below_line": []
+  },
+
+  "streaks": [
+    { "name": "Weekly sweep", "cadence": "weekly", "current": 0, "best": 0, "last_done": null },
+    { "name": "Training sessions", "cadence": "declared", "current": 0, "best": 0, "last_done": null },
+    { "name": "Date nights", "cadence": "declared", "current": 0, "best": 0, "last_done": null },
+    { "name": "Kid one-on-ones", "cadence": "declared", "current": 0, "best": 0, "last_done": null }
+  ],
+
+  "regrade_history": [
+    { "date": "2026-07-02", "note": "Opening state. Overall A- as stated by operator. Only Wealth (A-) and Execution (B-) carry graded baselines; all other domains ungraded pending first monthly regrade. Main Quest: Execution." }
+  ]
+}
