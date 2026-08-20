@@ -1,10 +1,15 @@
 """
-shortlist.py -- run the full pipeline on a small list of tickers and print
+shortlist.py -- run the full pipeline on a list of tickers and print
 trade cards (account + size + stop) for any that clear the gates.
 
 Usage:
-    python shortlist.py                              # default list
-    python shortlist.py GOOGL LMT PWR AMZN JPM      # any custom list
+    python shortlist.py                              # loads universe.txt
+    python shortlist.py GOOGL LMT PWR AMZN JPM      # ad-hoc override
+
+With no CLI args, reads `universe.txt` from the current directory:
+one ticker per line, blank lines and #-comments ignored. If the file is
+missing or empty, prints instructions and exits -- no silent fallback,
+so a scan is always deliberate about which universe it ran.
 
 Pipeline applied: liquidity/size gate + fundamental quality gate (forensic
 gate skipped until SEC_UA is set in filing_forensics.py), then daily-setup
@@ -14,6 +19,7 @@ risk_manager (0.75% sleeve risk per trade, 2x-ATR stop).
 from __future__ import annotations
 import sys
 import re
+import os
 import pandas as pd
 
 from swing_pipeline import SwingPipeline, QualityGate
@@ -23,7 +29,20 @@ from account_router import infer_horizon, route
 from risk_manager import RiskManager, RiskConfig
 
 
-DEFAULT_SHORTLIST = ["GOOGL", "LMT", "PWR", "AMZN", "JPM"]
+UNIVERSE_FILE = "universe.txt"
+
+
+def load_universe(path: str = UNIVERSE_FILE) -> list[str]:
+    """Read a ticker-per-line file; strip # comments and blank lines."""
+    if not os.path.exists(path):
+        return []
+    out: list[str] = []
+    with open(path) as f:
+        for raw in f:
+            line = raw.split("#", 1)[0].strip()
+            if line:
+                out.append(line.upper())
+    return out
 
 
 def main(tickers: list[str]) -> None:
@@ -75,5 +94,17 @@ def main(tickers: list[str]) -> None:
 
 
 if __name__ == "__main__":
-    tickers = sys.argv[1:] or DEFAULT_SHORTLIST
+    tickers = [t.upper() for t in sys.argv[1:]]
+    if not tickers:
+        tickers = load_universe()
+        if not tickers:
+            print(f"ERROR: no tickers given and '{UNIVERSE_FILE}' is missing "
+                  f"or empty.\n"
+                  f"       Create {UNIVERSE_FILE} (one ticker per line, "
+                  f"# comments ok),\n"
+                  f"       or pass tickers directly: "
+                  f"python shortlist.py NVDA AMD ...", file=sys.stderr)
+            sys.exit(1)
+        print(f"# loaded {len(tickers)} tickers from {UNIVERSE_FILE}",
+              file=sys.stderr)
     main(tickers)
