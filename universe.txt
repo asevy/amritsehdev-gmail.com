@@ -1,0 +1,60 @@
+# Quality US large-cap swing universe (40 names) — the validated list from
+# session 2026-06-03. Filtered day-of by the scanner + pipeline gates.
+# Edit freely: one ticker per line, blank lines and #-comments ignored.
+
+# AI / semiconductors
+NVDA
+AMD
+AVGO
+MRVL
+TSM
+ASML
+ARM
+MU
+ANET
+SMCI
+
+# Software / cloud / cybersecurity
+MSFT
+GOOGL
+META
+AMZN
+NOW
+CRWD
+PLTR
+SNOW
+ORCL
+
+# AI power / electrification (picks-and-shovels)
+GEV
+ETN
+VRT
+PWR
+CEG
+VST
+NEE
+
+# Industrials / defense
+GE
+RTX
+LMT
+CAT
+DE
+
+# Financials
+JPM
+GS
+V
+MA
+KKR
+
+# Healthcare
+LLY
+NVO
+ISRG
+
+# Mega-cap movers
+COST
+NFLX
+TSLA
+AAPL
