@@ -205,11 +205,47 @@ Perfect for the affluent readership and advertisers.
 
 ## 6. Real Estate & Architecture
 
-Another enormous vertical. The ambition: "the Architectural Digest of the
-Caribbean" on photography, access and design authority — plus the layer AD
-never adds: ownership, developers, transactions, valuations and market data
-wired into the wealth database (see
+A flagship vertical — like hotels, it could almost support its own
+publication, and developers are among the publication's largest natural
+advertisers. The ambition: "the Architectural Digest of the Caribbean" on
+photography, access and design authority — plus the layer AD never adds:
+ownership, developers, transactions, valuations and market data wired into
+the wealth database (see
 [COMPETITIVE_LANDSCAPE.md](COMPETITIVE_LANDSCAPE.md)).
+
+**Lead coverage — New & the business of property.** Property is capital, so
+this coverage is business reporting first:
+
+- New developments and launches
+- New luxury towers
+- Resort residences and branded residences (these bridge into the Caribbean
+  Development Pipeline tracked in the Hotels vertical)
+- Private islands
+- Record property sales
+- Major transactions — who bought, who sold, at what price
+- Most important developers and developer profiles
+- Market reports
+- Price-per-square-foot indices
+- Where wealthy families are buying
+- Second-home markets
+- Emerging luxury destinations
+- Best neighbourhoods
+- **Caribbean Property Record** (proprietary data product): record sales,
+  ownership, valuations and developer track records, accumulated year after
+  year — public property registries make this buildable, and it feeds
+  [Brand] Intelligence directly
+
+**The homes & design layer — the AD of the Caribbean:**
+
+- Exceptional homes, villas and penthouses, shot to AD standard
+- Celebrity/family homes where legitimately public
+- Architect profiles
+- Interior designer profiles
+- Architecture and design criticism
+
+**Franchises & awards.** Unlike hotels, no incumbent owns "best Caribbean
+homes" — this shelf is open, so these franchises can lead early (from Year
+2) rather than waiting on inspection infrastructure:
 
 - Most Expensive Caribbean Homes
 - House of the Year
@@ -224,18 +260,6 @@ wired into the wealth database (see
 - Architect of the Year
 - Interior Designer of the Year
 - Developer of the Year
-- Most important developers
-- Record property sales
-- Celebrity/family homes where legitimately public
-- New luxury towers
-- Resort residences
-- Private islands
-- Market reports
-- Price-per-square-foot indices
-- Best neighbourhoods
-- Where wealthy families are buying
-- Second-home markets
-- Emerging luxury destinations
 
 ## 7. Schools & Education
 

@@ -51,6 +51,13 @@ Best Hotels arrives only once anonymous inspection makes it defensible
 (Years 3–5). Same logic applies across lifestyle categories: own "new"
 first, crown "best" once credibility exists.
 
+Real estate is the opposite case: no incumbent owns "best Caribbean homes,"
+so the June flagship and its awards (House of the Year, Development of the
+Year, Architect of the Year, Most Expensive Caribbean Homes) can be
+signature franchises from Year 2 — homes are judged through access,
+reporting and photography, not anonymous stays, so no inspection
+infrastructure gates them.
+
 **Content multiplication:** a single Caribbean's 25 Best Golf Courses ranking
 generates the overall ranking + 25 individual course profiles + island
 rankings + architect interviews + golf-resort rankings + real-estate stories

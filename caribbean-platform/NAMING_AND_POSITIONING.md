@@ -184,3 +184,9 @@ public use.
   the masthead exactly or the B2B line takes a slightly more sober lockup.
 - Whether island editions carry sub-mastheads (e.g., "[X] República
   Dominicana") and in which language each island edition leads.
+- Whether the Real Estate & Architecture vertical eventually carries its own
+  sub-masthead — "[X] Homes" — the way AD sits within Condé Nast: it is the
+  most magazine-like, most visual and most sponsorable vertical, and the
+  "AD homes Caribbean" instinct points that way. Launch it under the main
+  masthead first; spin out the sub-brand only once the masthead itself has
+  authority to lend.
