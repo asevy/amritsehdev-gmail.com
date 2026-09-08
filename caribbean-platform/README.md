@@ -51,13 +51,15 @@ database underneath it all.
 
 ## Documents
 
-| Document | Purpose |
-| --- | --- |
-| [FOUNDING_BRIEF.md](FOUNDING_BRIEF.md) | The master prompt / founding brief, preserved as written, with the strategic sharpening that followed competitor research. |
-| [COMPETITIVE_LANDSCAPE.md](COMPETITIVE_LANDSCAPE.md) | Who occupies which territory today, the whitespace (Forbes-grade wealth infrastructure), the family-page prototype, and the strategic implications. |
-| [CONTENT_UNIVERSE.md](CONTENT_UNIVERSE.md) | The master content universe: 13 editorial verticals, from Wealth & Power to Achievement & Culture, with every ranking and franchise each vertical supports. |
-| [AWARDS_ECOSYSTEM.md](AWARDS_ECOSYSTEM.md) | The awards strategy: the annual flagship calendar, island-level awards, the phased build-out, the gala, and the flywheel that turns reporting into institutional prestige. |
-| [NAMING_AND_POSITIONING.md](NAMING_AND_POSITIONING.md) | The next exercise (working draft): criteria, brand architecture across the six product lines, candidate names and diligence checklist. |
+| Document | Status | Purpose |
+| --- | --- | --- |
+| [FOUNDING_BRIEF.md](FOUNDING_BRIEF.md) | **Locked v1** | The founding charter, preserved as written, with the strategic-sharpening addendum. No longer accumulates ideas — new thinking goes to the supporting documents. |
+| [COMPETITIVE_LANDSCAPE.md](COMPETITIVE_LANDSCAPE.md) | **Locked v1** | Who occupies which territory today, the whitespace (Forbes-grade wealth infrastructure), the family-page prototype, and the competitors to [Brand] Intelligence. |
+| [CONTENT_UNIVERSE.md](CONTENT_UNIVERSE.md) | **Locked v1** | 13 editorial verticals plus the operating principles: the three-things filter, own change before opinion, ownership as mandatory metadata, the six-section reader navigation, and the recurring indices. |
+| [AWARDS_ECOSYSTEM.md](AWARDS_ECOSYSTEM.md) | **Locked v1** | Rankings vs. awards vs. honors vs. guides, the calendar, governance, scarcity rules, the Summit & Honors, and the two inviolable rules. |
+| [DATA_MODEL_AND_METHODOLOGY.md](DATA_MODEL_AND_METHODOLOGY.md) | **v1 draft — current build priority** | The graph model (person/family/branch/company/asset/transaction), the family web, wealth methodology, "Caribbean" eligibility rules, and the 10-family validation sprint. |
+| [EDITORIAL_STANDARDS.md](EDITORIAL_STANDARDS.md) | **v1 draft — ratify before publication** | Sourcing, anonymous sources, estimates, right of reply, corrections, conflicts, privacy and minors, political coverage, sponsored content, commercial separation, legal review. |
+| [NAMING_AND_POSITIONING.md](NAMING_AND_POSITIONING.md) | **Positioning settled; name open** | First-round candidates struck (with reasons), the non-geographic reframe, tightened criteria, and the 100–150-candidate next round — which runs after the data-model validation. |
 
 ## Product architecture (long-term)
 
@@ -96,10 +98,25 @@ Dominican Republic, Puerto Rico, Jamaica, Bahamas, Cayman Islands,
 Trinidad & Tobago, Barbados and Turks & Caicos — expanding selectively
 across the wider Caribbean.
 
-## Status
+## Status and build sequence
 
-- **2026-09-08** — Founding brief locked and preserved here; first-pass
-  competitor research completed and positioning sharpened accordingly.
-- **Next exercise** — Naming and positioning the institution, so the name
-  sounds credible attached to a wealth ranking or award 20 years from now.
-  See [NAMING_AND_POSITIONING.md](NAMING_AND_POSITIONING.md).
+**2026-09-08** — Founding brief, competitive thesis, content universe and
+rankings/awards architecture locked at v1. Data model & methodology and
+editorial standards drafted. First naming round struck; next round specced.
+
+Conceptual planning is over. The build sequence from here:
+
+1. **Data model & methodology** → validate with 10 real families across
+   4–5 islands (the go/no-go test for the whole thesis)
+2. **Name** → the 100–150-candidate round → brand/domain/trademark diligence
+3. **Editorial standards** ratified
+4. **Wealth methodology** finalized from validation-sprint lessons
+5. **Database schema** implemented
+6. **First 100 families** → **first 100 companies**
+7. **Launch editorial calendar** → **website**
+
+The first 100 family/company profiles matter more to the long-term moat
+than the first 1,000 articles. Researching them tells us whether the
+thesis works: whether sufficient public data exist, what can be
+systematically collected, how long profiles take, where the gaps are, and
+what stories naturally emerge from the database.

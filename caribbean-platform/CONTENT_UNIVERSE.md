@@ -1,9 +1,18 @@
 # The Master Content Universe
 
+> **Status: LOCKED v1 (2026-09-08).** The universe is not to be expanded
+> much further — it already holds decades of coverage. The hard work now is
+> determining what gets published on Day 1 versus Year 5.
+
 Thirteen editorial verticals. Together they supply multiple stories every day
 across the major islands, feed the proprietary database, and generate the
 rankings and awards franchises described in
 [AWARDS_ECOSYSTEM.md](AWARDS_ECOSYSTEM.md).
+
+**The three-things principle:** every story should do at least one of three
+things — reveal who owns something, document meaningful change, or identify
+excellence. The strongest stories do all three. This is the filter against
+ever becoming a content mill.
 
 **Hierarchy (from the 2026-09-08 strategic sharpening):** the verticals are
 not equal. Wealth, Power & Families and Business & Capital are the spine —
@@ -12,12 +21,39 @@ database that becomes the moat. The lifestyle verticals (hotels, restaurants,
 golf, real estate, schools, clubs, travel, art, luxury, wellness) make the
 publication beautiful and habit-forming and carry the advertising inventory.
 
-**Within the lifestyle verticals, lead with what is NEW before what is
-BEST.** "Best" lists are the crowded corner (see
-[COMPETITIVE_LANDSCAPE.md](COMPETITIVE_LANDSCAPE.md)); the *new* — openings,
-developments, launches, brand entrances, deals — is daily news nobody owns
-regionally, it is business reporting at heart, and every story feeds the
-database. "Best" franchises launch later, backed by inspection credibility.
+**Own change before opinion.** The hotels rule — own "new" before "best" —
+generalizes across the whole company. New hotel. New restaurant. New
+development. Acquisition. Sale. Succession. Appointment. Financing.
+Expansion. School opening. New golf course. Record property transaction.
+New family-office investment. International achievement. These are factual
+events, they generate daily traffic, and — most importantly — every one
+makes the proprietary dataset better. "Best" lists are the crowded corner
+(see [COMPETITIVE_LANDSCAPE.md](COMPETITIVE_LANDSCAPE.md)); once enough
+history and expertise accumulate, the institution earns the right to say
+what is best.
+
+**Ownership is mandatory metadata.** Whenever we cover a hotel, restaurant,
+golf course, development, private school, hospital, luxury retailer or
+other significant institution, internally ask: *who owns it?* Even when
+ownership isn't interesting enough for the published story, record it in
+the database. A new luxury hotel opening in Turks & Caicos gives the reader
+a beautiful hotel story; it gives the database Hotel → Brand → Operator →
+Developer → Landowner → Investors → Financing → Architects → Opening date →
+Rooms → Development cost → Related family. That is the moat quietly
+accumulating underneath the journalism (see
+[DATA_MODEL_AND_METHODOLOGY.md](DATA_MODEL_AND_METHODOLOGY.md)).
+
+**Reader navigation is not the org chart.** The public website should not
+display 13 equal tabs — that reads as a general lifestyle portal. The
+reader sees perhaps six sections:
+
+**WEALTH | BUSINESS | PROPERTY | LIFE | CULTURE | RANKINGS**
+
+The 13 verticals remain the internal organization for editorial teams,
+databases, newsletters and commercial packages. LIFE contains hotels,
+restaurants, golf, clubs, schools, travel and luxury; the masthead keeps
+saying money, power and authority. The content universe can be enormous
+without the brand feeling enormous.
 
 **The editorial test:** if something happens that increases the wealth,
 prestige, influence or global relevance of a Caribbean person, family,
@@ -53,6 +89,21 @@ record of Caribbean success, power, taste and achievement.
 - Political/institutional influence, carefully and transparently sourced
 - Caribbean diaspora fortunes
 - Caribbean-linked international families
+
+**Philanthropy — deliberately elevated.** Philanthropy is one of the
+bridges between wealth and influence, so it is a beat of its own, not a
+line item: major gifts, foundations, hospital and university donations,
+cultural patronage, scholarships, conservation, foundation boards and
+annual giving. Eventual franchises: **Caribbean Philanthropy 50**, **Gift
+of the Year**, **Foundation of the Year** — ranked by influence and
+effectiveness methodology, not simply by dollars.
+
+**Obituaries & Legacies.** When an important Caribbean founder,
+industrialist, cultural figure or family patriarch/matriarch dies, produce
+a serious Legacy piece: what they built, ownership, family succession,
+philanthropy and impact. Forbes, the FT and major institutional
+publications do this for a reason — it is culturally important journalism
+and extraordinarily relevant to the wealth and succession database.
 
 ## 2. Business & Capital
 
@@ -90,6 +141,13 @@ Daily reporting gives this section enormous depth:
 - Foreign investment
 - Major government contracts, with appropriate sourcing
 - Economic reports by island
+
+**People & Careers** (inside Business, not a 14th vertical): CEO
+appointments, board appointments, executive departures, partner
+promotions, prominent professional moves, compensation where public,
+executive searches and rising executives. Over ten years this produces
+another valuable graph — Person → Family → Company → Board → Investment →
+Institution — useful to banks, recruiters, law firms and investors.
 
 ## 3. Hotels & Resorts
 
@@ -273,6 +331,15 @@ homes" — this shelf is open, so these franchises can lead early (from Year
 Particularly powerful because there is very little sophisticated comparative
 information available. This becomes evergreen, highly searched content.
 
+**Guide before award.** Schools involve children, very different
+educational philosophies, selective admissions and outcomes heavily shaped
+by student and family characteristics — a simplistic "School of the Year"
+could undermine credibility. The flagship here is the **Caribbean Private
+Schools Guide**: standardized profiles with comparable data — tuition •
+curriculum • accreditation • enrollment • class size • languages •
+university destinations • facilities • admissions • extracurriculars.
+Evidence-based distinctions can emerge later if the data support them.
+
 - Best Private Schools in the Caribbean
 - Best International Schools
 - Best School by island
@@ -404,7 +471,9 @@ An underdeveloped information category for this readership:
 - Sports ownership/business
 
 Awards involving professional services or healthcare need particularly
-careful, objective methodologies.
+careful, objective methodologies — the same guide-before-award restraint as
+schools applies to hospitals and physicians: standardized comparable
+profiles first, evidence-based distinctions only if the data support them.
 
 ## 13. Achievement & Culture
 
@@ -433,3 +502,24 @@ or even a major international placement — becomes: breaking news, profile,
 fashion/designers, family/background, brand endorsements, economic/cultural
 impact, interview, and input to the annual Caribbean Culture & Influence
 ranking.
+
+---
+
+## Recurring indices — longitudinal data, not only rankings
+
+Alongside editorial rankings, eventually maintain standing indices,
+refreshed on a fixed cadence. Rankings are moments; indices are time
+series, and after ten years the archive itself becomes difficult to
+reproduce. They are also natural [Brand] Intelligence products:
+
+- Caribbean Wealth Index
+- Caribbean Family Business Index
+- Caribbean Luxury Property Index
+- Caribbean Hotel Development Index
+- Caribbean Private School Tuition Index
+- Caribbean Fine Dining Index
+- Caribbean Art Market Index
+
+Each index needs the same governance as a ranking: fixed methodology,
+measurement dates and a published revision policy (see
+[AWARDS_ECOSYSTEM.md](AWARDS_ECOSYSTEM.md) on ranking governance).

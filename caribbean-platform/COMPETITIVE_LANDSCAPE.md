@@ -1,5 +1,8 @@
 # Competitive Landscape
 
+> **Status: LOCKED v1 (2026-09-08)** as the competitive thesis, with the
+> Intelligence-competitor analysis below added before locking.
+>
 > First-pass desk research, September 2026. Figures and claims below come
 > from that research; re-verify before citing externally (in a pitch deck,
 > business plan or editorial copy).
@@ -151,6 +154,34 @@ What no one else offers in one authoritative institution:
 | **Achievement** | Which Caribbean people are succeeding globally? |
 | **Luxury** | What is actually the best? |
 | **Data** | How has all of the above changed over 5, 10, 20 years? |
+
+## Competitors to [Brand] Intelligence
+
+The more dangerous long-term competition may sit against the B2B data
+product, not the publication. Before building the paid Intelligence line, we
+need to know exactly what a private bank can already buy:
+
+| Provider | What it sells | Caribbean gap to verify |
+| --- | --- | --- |
+| PitchBook | Private-market deals, funds, companies | Thin on Caribbean private/family companies outside VC/PE flows |
+| Orbis / Bureau van Dijk (Moody's) | Global private-company data, ownership chains | Coverage depends on local registry feeds; family/kinship context absent |
+| S&P Capital IQ | Company financials, ownership, screening | Strong on listed and large private firms; weak on island holdcos |
+| Preqin | Alternative assets, funds, LPs | Caribbean relevance mostly fund domiciles, not operating families |
+| Altrata (Wealth-X, BoardEx, RelSci) | UHNW dossiers, relationship mapping | The closest analogue — but global-first; Caribbean family depth and local sourcing to be tested |
+| Knight Frank (Wealth Report) and bank wealth research | Macro wealth trends, property markets | Aggregate research, not entity-level data |
+| Local corporate registries and property databases | Primary records | Raw, fragmented, island-by-island — inputs, not products |
+
+None of these appears to provide the Caribbean family graph — persons,
+families, branches, companies, ownership, transactions, properties and
+relationships, maintained longitudinally with local sourcing. But several
+could bolt on a Caribbean module if the niche proves valuable, so the moat
+must be depth they cannot cheaply replicate: kinship and succession context,
+private-company coverage below their radar, local-language sources, and the
+daily journalism that keeps the graph current.
+
+**Diligence task before building Intelligence:** obtain trials or demos of
+Wealth-X/Altrata, Orbis and PitchBook and map their actual coverage of, say,
+25 known Caribbean families and 50 companies. Sell against what they miss.
 
 ## Strategic implications
 

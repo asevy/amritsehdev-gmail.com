@@ -1,8 +1,32 @@
-# The Awards & Rankings Ecosystem
+# The Rankings, Awards & Honors Ecosystem
+
+> **Status: LOCKED v1 (2026-09-08)**, incorporating the rankings/awards
+> distinction, the governance system, the scarcity rules, the Summit &
+> Honors structure and the schools correction below.
 
 The rankings and awards are not editorial features; they become part of the
 institution. Eventually a hotel, school, golf course, restaurant, developer
 or family should care that it was ranked by this publication.
+
+**The four modes — when something is a ranking, an award, an honor or a
+guide:**
+
+> **Rank what can be measured.**
+> **Judge what can be experienced.**
+> **Honor what deserves recognition.**
+> **Guide where comparison is more useful than declaring a winner.**
+
+**Rankings and awards are not synonyms — never let them merge.** The most
+valuable franchises may ultimately be the rankings, not the trophies.
+Caribbean Wealth 100, 50 Most Influential Caribbean Families, Family
+Business 100, Next Generation 40 and Caribbean 50 Best Restaurants are
+editorial/data products: nobody "wins" the Wealth 100, and their authority
+comes from methodology. The awards layer — Hotel of the Year, CEO of the
+Year, Architect of the Year — is separate and judged. Honors are the very
+few summit-level recognitions (Person of the Year, Global Achievement).
+Guides serve categories where declaring a winner would be simplistic or
+harmful (schools, hospitals). Maintaining these distinctions makes the
+institution feel like Forbes or the FT, not an awards company.
 
 **Competitive reality (September 2026 research):** Caribbean awards are
 crowded but fragmented. World Travel Awards runs dozens of Caribbean
@@ -93,11 +117,20 @@ don't immediately create 100 awards. In hotels and luxury, lead with new —
 openings, pipeline, renovations, brand entrances, transactions — where no
 incumbent list stands in the way and every story feeds the database.
 
-**Year 2 — Introduce signature awards.** Start with perhaps 5–7 franchises
-where we can genuinely establish expertise: Caribbean Hotel Awards, Caribbean
-Restaurant Awards, Caribbean Golf Awards, Caribbean Luxury Real Estate
-Awards, Caribbean Business Awards, Caribbean Influence 50, Caribbean Next
-Generation 40.
+**Year 2 — Launch three things exceptionally well.** Seven broad award
+programs is too much before the institution has earned authority. Launch
+exactly three franchises, each of a different kind, and make each one
+excellent:
+
+1. **A data-driven business/wealth ranking** — e.g., Caribbean Wealth 100
+2. **A genuinely judged lifestyle ranking** — e.g., Caribbean 50 Best
+   Restaurants
+3. **One category where the market is open** — e.g., Caribbean Real Estate
+   & Architecture Awards
+
+Then expand based on where the brand develops genuine authority. The wider
+set (hotel awards, golf awards, Influence 50, Next Generation 40) follows
+as it is earned.
 
 **Years 3–5 — Make winning matter.** Independent judging panels, anonymous
 inspections where appropriate, transparent scoring, beautiful physical
@@ -124,35 +157,101 @@ Winners receive a mark such as "2029 Caribbean Hotel of the Year."
 - Caribbean 25 Best Golf Courses
 - Development of the Year
 - Architect / Designer of the Year
-- Private School of the Year
+- Caribbean Private Schools Guide (a guide, not an award — no "School of
+  the Year": see the schools correction below)
 - Artist of the Year
 - Athlete of the Year
 - Cultural Ambassador of the Year
 - Caribbean Global Achievement Award
 
-## The Caribbean Awards Gala
+## Ranking governance
 
-The annual gala could become one of the company's most important assets:
-500–800 attendees — major families, CEOs, hotel owners, chefs, developers,
-athletes, artists and cultural figures from across the islands. Private
-banks, luxury automotive brands, airlines and hospitality groups as
-sponsors.
+Every franchise — ranking, award or index — carries a permanent methodology
+document covering: eligibility • geographic scope • measurement period •
+scoring criteria and weights • judging composition • conflicts policy •
+inspection requirements • treatment of advertisers • appeals and
+corrections • how ties are resolved.
 
-That's where the influence starts compounding: no longer merely documenting
-the Caribbean elite, but creating a respected institution where different
-parts of Caribbean leadership meet one another.
+Once a methodology is established, it is never quietly changed to produce a
+more attractive winner. Methodology revisions are versioned, dated,
+explained publicly, and take effect the following cycle.
 
-## The inviolable rule
+## Scarcity creates prestige
 
-**Nobody can buy an award, ranking or favourable review. Ever.**
+If everyone gets something, nothing matters. Standing limits:
+
+- Few awards; difficult rankings.
+- No invented subcategories to accommodate sponsors.
+- No "finalist" badges handed to half the market.
+- No participation plaques.
+- No expensive winner packages required to use the mark — reasonable,
+  uniform licensing at most, never a condition of the recognition itself.
+
+A restaurant being #17 of the Caribbean 50 should mean considerably more
+than winning "Best Luxury Oceanfront Contemporary Caribbean Restaurant —
+Dominican Republic." That restraint is part of the brand.
+
+## The schools correction — and the guide principle
+
+No "Private School of the Year," at least initially. Schools involve
+children, divergent educational philosophies, selective admissions and
+outcomes heavily influenced by student and family characteristics; a
+simplistic winner could undermine credibility. The franchise is the
+**Caribbean Private Schools Guide** — standardized profiles and comparable
+data (tuition, curriculum, accreditation, enrollment, class size,
+languages, university destinations, facilities, admissions,
+extracurriculars). If the data later support them, specific evidence-based
+distinctions can emerge. The same restraint applies to hospitals and
+physicians. This is the "guide" mode of the four-mode principle at the top
+of this document.
+
+## [Brand] Summit & Honors — the flagship gathering
+
+Not "the Caribbean Awards Gala": the company will run many awards through
+the year, and the flagship gathering should attach to the highest-status
+intellectual property rather than feel like a ceremony handing out 75
+trophies.
+
+**[Brand] Summit & Honors — the annual gathering of Caribbean business,
+wealth, culture and leadership.**
+
+- **Daytime — the Summit:** family business, investment, tourism capital,
+  succession, Caribbean development, AI, philanthropy.
+- **Evening — the Honors:** Person of the Year, Entrepreneur of the Year,
+  Global Achievement, Culture, Philanthropy — a very small number of major
+  honors.
+
+The ambition stands: 500–800 attendees — major families, CEOs, hotel
+owners, chefs, developers, athletes, artists and cultural figures from
+across the islands, with private banks, luxury automotive brands, airlines
+and hospitality groups as sponsors. That's where the influence compounds:
+a respected institution where different parts of Caribbean leadership meet
+one another. Hotel, restaurant and golf awards get their own smaller
+industry events.
+
+## The inviolable rules
+
+**1. Nobody can buy an award, ranking or favourable review. Ever.**
 
 Sponsors can sponsor the ceremony or a category, but they cannot influence
 selection. Otherwise the awards become another paid plaque within a few
 years. Editorial rankings can never be purchasable; advertising and
-sponsorship are structurally separated from judging. That is what allows the
-awards to become worth something — and if credibility is preserved for 10–20
-years, the real asset isn't traffic: it's that being ranked, profiled or
-awarded by the institution carries reputational value across the Caribbean.
+sponsorship are structurally separated from judging.
+
+**2. Commercial relationships never affect eligibility, consideration,
+scoring, placement or editorial coverage. A company does not need to
+advertise, subscribe, attend the gala or purchase a plaque to be considered
+or to win.**
+
+The second rule is deliberately stronger than the first: it closes the
+subtler routes through which award businesses lose credibility — not just
+selling awards, but quietly favouring the commercially connected or making
+participation contingent on spending.
+
+These rules are what allow the recognition to become worth something — and
+if credibility is preserved for 10–20 years, the real asset isn't traffic:
+it's that being ranked, profiled or awarded by the institution carries
+reputational value across the Caribbean.
 
 Additional safeguards:
 

@@ -1,5 +1,13 @@
 # Founding Brief — The Master Prompt
 
+> **Status: LOCKED v1 (2026-09-08).** This document is the founding charter
+> and no longer accumulates ideas — new thinking goes into the supporting
+> documents so the founding thesis stays undiluted. Its hierarchy is
+> settled: wealth/business/influence is the core asset; achievement
+> broadens relevance; exceptional living creates daily engagement and
+> commercial inventory; rankings and awards create IP; Intelligence creates
+> the long-term enterprise value.
+>
 > Preserved 2026-09-08 as the founding statement of the company. The
 > strategic sharpening that followed the same day's competitor research is
 > recorded in the addendum at the end; it refines emphasis and does not
