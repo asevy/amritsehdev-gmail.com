@@ -223,6 +223,12 @@ this coverage is business reporting first:
 - Private islands
 - Record property sales
 - Major transactions — who bought, who sold, at what price
+- Commercial sales and transactions: hotels and resorts, office towers,
+  retail and shopping centres, marinas, mixed-use projects and land — the
+  deals that reveal what families and companies actually own, often more
+  telling for the wealth database than any villa sale
+- New commercial development: office, retail, logistics, marinas and
+  mixed-use projects
 - Most important developers and developer profiles
 - Market reports
 - Price-per-square-foot indices
@@ -230,10 +236,11 @@ this coverage is business reporting first:
 - Second-home markets
 - Emerging luxury destinations
 - Best neighbourhoods
-- **Caribbean Property Record** (proprietary data product): record sales,
-  ownership, valuations and developer track records, accumulated year after
-  year — public property registries make this buildable, and it feeds
-  [Brand] Intelligence directly
+- **Caribbean Property Record** (proprietary data product): record
+  residential and commercial sales, ownership, valuations and developer
+  track records, accumulated year after year — public property registries
+  and corporate filings make this buildable, and it feeds [Brand]
+  Intelligence directly
 
 **The homes & design layer — the AD of the Caribbean:**
 
