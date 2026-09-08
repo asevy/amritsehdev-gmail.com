@@ -94,9 +94,15 @@ crowded "Caribbean + noun" shelf makes a distinctive masthead more valuable,
 not less. Test lines: *The Antillean 100* • *Caribbean Hotel of the Year —
 The Antillean* • *Antillean Intelligence* • *"according to The Antillean…"*
 
-Risks to check: the Bahamas and Turks & Caicos sit technically outside the
-Antilles proper (the Lucayan Archipelago) — likely acceptable as a broad
-regional brand, but test with Bahamian readers; pronunciation for
+Coverage check: the name covers the initial markets almost perfectly.
+Jamaica, Cuba, Hispaniola (Dominican Republic) and Puerto Rico *are* the
+Greater Antilles; the eastern arc from the Virgin Islands down through
+Barbados to Trinidad & Tobago is the Lesser Antilles. Of the eight launch
+markets, only the Bahamas and Turks & Caicos sit technically outside the
+Antilles proper (the Lucayan Archipelago).
+
+Risks to check: acceptance of the name as a broad regional brand in the
+Bahamas and Turks & Caicos — test with Bahamian readers; pronunciation for
 first-time English readers; existing usage of "Antillean" in media names.
 
 ### 2. Tradewind / The Tradewinds

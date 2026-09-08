@@ -43,6 +43,14 @@ Underneath, every major island gets localized rankings: Best of Dominican
 Republic, Best of Puerto Rico, Best of Jamaica, Best of The Bahamas, and so
 on, each year.
 
+**Sequencing note (2026-09-08):** the "best hotels" shelf is the most
+crowded in the region, so the February flagship leads in the early years
+with the *new* — New Hotels & Openings of the Year, Best New Hotel, the
+development pipeline, transactions and ownership. The full Caribbean's 50
+Best Hotels arrives only once anonymous inspection makes it defensible
+(Years 3–5). Same logic applies across lifestyle categories: own "new"
+first, crown "best" once credibility exists.
+
 **Content multiplication:** a single Caribbean's 25 Best Golf Courses ranking
 generates the overall ranking + 25 individual course profiles + island
 rankings + architect interviews + golf-resort rankings + real-estate stories
@@ -74,7 +82,9 @@ status. Its rankings begin to confer status:
 **Year 1 — Establish authority.** Report and contextualize existing Michelin
 Keys, World's 50 Best, Forbes Travel Guide, golf rankings, architecture
 awards, pageants, business awards. Publish our own researched rankings, but
-don't immediately create 100 awards.
+don't immediately create 100 awards. In hotels and luxury, lead with new —
+openings, pipeline, renovations, brand entrances, transactions — where no
+incumbent list stands in the way and every story feeds the database.
 
 **Year 2 — Introduce signature awards.** Start with perhaps 5–7 franchises
 where we can genuinely establish expertise: Caribbean Hotel Awards, Caribbean

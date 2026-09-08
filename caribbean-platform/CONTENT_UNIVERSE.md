@@ -12,6 +12,13 @@ database that becomes the moat. The lifestyle verticals (hotels, restaurants,
 golf, real estate, schools, clubs, travel, art, luxury, wellness) make the
 publication beautiful and habit-forming and carry the advertising inventory.
 
+**Within the lifestyle verticals, lead with what is NEW before what is
+BEST.** "Best" lists are the crowded corner (see
+[COMPETITIVE_LANDSCAPE.md](COMPETITIVE_LANDSCAPE.md)); the *new* — openings,
+developments, launches, brand entrances, deals — is daily news nobody owns
+regionally, it is business reporting at heart, and every story feeds the
+database. "Best" franchises launch later, backed by inspection credibility.
+
 **The editorial test:** if something happens that increases the wealth,
 prestige, influence or global relevance of a Caribbean person, family,
 company, institution or destination, we cover it.
@@ -88,8 +95,23 @@ Daily reporting gives this section enormous depth:
 
 This could almost support its own publication.
 
+**Lead coverage — New & the business of hotels.** The "best hotels" shelf is
+crowded; the new is unowned. Lead with:
+
+- Most anticipated openings
+- New hotel reviews and first looks
+- Renovations/relaunches
+- Caribbean Development Pipeline: every hotel, resort and branded residence
+  under construction — developer, brand, capital, opening date
+- Hotel transactions
+- Who owns the hotels
+- Developer profiles
+- Best New Hotel (the winnable early franchise — a fresh field every year)
+
+**Best-of franchises — build toward these once inspection credibility
+exists:**
+
 - Caribbean's 50 Best Hotels
-- Best New Hotel
 - Hotel of the Year
 - Best Resort
 - Best Boutique Hotel
@@ -112,11 +134,6 @@ This could almost support its own publication.
 - Best Service
 - Best Value Luxury Hotel
 - Best Hotel in each island
-- Most anticipated openings
-- Renovations/relaunches
-- Hotel transactions
-- Who owns the hotels
-- Developer profiles
 
 Actual critics should visit anonymously eventually. That's how the awards
 become valuable.
@@ -188,7 +205,11 @@ Perfect for the affluent readership and advertisers.
 
 ## 6. Real Estate & Architecture
 
-Another enormous vertical.
+Another enormous vertical. The ambition: "the Architectural Digest of the
+Caribbean" on photography, access and design authority — plus the layer AD
+never adds: ownership, developers, transactions, valuations and market data
+wired into the wealth database (see
+[COMPETITIVE_LANDSCAPE.md](COMPETITIVE_LANDSCAPE.md)).
 
 - Most Expensive Caribbean Homes
 - House of the Year
@@ -311,6 +332,10 @@ Not generic travel blogging. Travel for affluent Caribbean residents.
 - Collecting guides
 
 ## 11. Luxury
+
+New luxury leads here too: brand entrances into the Caribbean, new
+boutiques, new services, new marinas and clubs — covered as news, before the
+year-end "of the Year" franchises.
 
 - Car of the Year
 - Luxury SUV of the Year

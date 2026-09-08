@@ -18,6 +18,8 @@ the whitespace, and it reshapes how we position and sequence the launch.
 | World Travel Awards | Huge Caribbean hospitality awards | Journalism, people, wealth, influence, proprietary regional intelligence |
 | World Golf Awards | Golf rankings/awards | Everything else |
 | Forbes / Bloomberg | Individual Caribbean billionaires/business stories | No systematic Caribbean institution |
+| Architectural Digest (incl. AD México y Latinoamérica) | Glossy individual home/villa features, global design authority | No Caribbean edition, no systematic regional coverage, no ownership/price/transaction context |
+| Condé Nast Traveler / Travel + Leisure / Forbes Travel Guide | "Best hotels" lists and star ratings that include the Caribbean | Regional depth, ownership/business reporting, year-round Caribbean authority |
 | Local society/business magazines | Island-specific personalities and lifestyle | Cross-Caribbean scale + data + credibility |
 
 ## Caribbean Journal — the most important competitor
@@ -50,6 +52,22 @@ newsletter.
 respect in Puerto Rico business coverage, and a reminder to move before
 anyone extends a business brand region-wide.
 
+## Architectural Digest and the homes space
+
+AD is the global authority on homes and design, and it does feature Caribbean
+villas and celebrity homes episodically. The nearest edition is AD México y
+Latinoamérica, which covers Latin America and occasionally touches the
+Caribbean. But there is no AD Caribbean, no systematic regional coverage —
+and, structurally, AD never publishes what a home cost, who owns it, who
+financed it or what it sold for. Its access model depends on not asking.
+
+**Implication:** the Real Estate & Architecture vertical should aim to be
+"the AD of the Caribbean" on photography, access and design authority —
+*plus* the layer AD will never add: ownership, developers, transactions,
+valuations and market data wired into the wealth database. Individual glossy
+features are competition; the systematic, data-backed record of Caribbean
+homes is open territory.
+
 ## Awards: crowded but fragmented
 
 There are already many Caribbean awards:
@@ -61,13 +79,33 @@ There are already many Caribbean awards:
   Guide, Condé Nast Traveler, GOLF Magazine, USA Today, World Culinary
   Awards, Caribbean Journal and many others.
 
+"Best hotels" lists are the most crowded corner of all: Caribbean Journal's
+awards, Condé Nast Traveler's Gold List and Readers' Choice, Travel +
+Leisure's World's Best, Forbes Travel Guide star ratings and World Travel
+Awards all already rank Caribbean hotels.
+
 **Implication:** we should not try to differentiate merely by inventing
-another Best Golf Course trophy. Differentiation comes from the combination
+another Best Golf Course trophy — and we should not *launch* on "the 50 best
+hotels in the Caribbean" at all. Differentiation comes from the combination
 (the wealth/business/influence spine underneath the lifestyle coverage), from
 editorial credibility (independent judging, anonymous inspection, transparent
 scoring — never reader polls or pay-to-plaque), and from owning the calendar
 as a system rather than one ceremony. See
 [AWARDS_ECOSYSTEM.md](AWARDS_ECOSYSTEM.md).
+
+**In hotels specifically, own "new" before "best."** Nobody systematically
+owns the *new*: openings, pipeline, renovations, brand entrances,
+transactions, who is building and financing what. That coverage is daily
+news rather than an annual list, it is inherently business reporting (a new
+resort is a capital project with a developer, a brand and financing — which
+matches "lead with people, money and power"), and every story feeds the
+database. A **Caribbean Development Pipeline** — every hotel, resort and
+branded residence under construction, with developer, brand, capital and
+opening date — is a proprietary data product no one offers for the region
+and a natural seed for [Brand] Intelligence. The "Best New Hotel of the
+Year" franchise is winnable early (a fresh field every year, no incumbent
+list to displace); the full 50 Best Hotels list waits until anonymous
+inspection makes it defensible.
 
 ## The whitespace: Forbes-grade wealth infrastructure
 
