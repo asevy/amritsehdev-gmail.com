@@ -16,6 +16,11 @@ coverage as one highly visible part of it.
 **Public-facing idea:** the daily record of Caribbean success, power, taste
 and achievement.
 
+**Founding principle (one line):** to understand the Caribbean, you must
+understand the people who build it. (Full framing — pro-business, never
+pro-any-particular-business — in
+[EDITORIAL_STANDARDS.md](EDITORIAL_STANDARDS.md).)
+
 **What we are never:** a luxury Caribbean magazine (Caribbean Journal
 already does a good version of that), a gossip site, a tacky display of
 wealth, or a pay-to-rank plaque business.

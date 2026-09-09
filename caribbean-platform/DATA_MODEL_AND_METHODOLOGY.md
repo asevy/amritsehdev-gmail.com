@@ -475,6 +475,11 @@ $73 million today") and a **mark-to-model estimate with an audit trail.**
 
 Per-family history charts: 1D | 1M | YTD | 1Y | 5Y | MAX.
 
+The graph's public face is the **interactive relationship map** on every
+family, company, property and institution page — approved claims only,
+unknowns rendered honestly, restricted fields never rendered (see
+[DESIGN_LANGUAGE.md](DESIGN_LANGUAGE.md)).
+
 ### How the engine works
 
 - **Graph traversal for attributable value.** The family owns 62.4% of

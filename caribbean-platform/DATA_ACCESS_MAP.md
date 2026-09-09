@@ -163,9 +163,15 @@ research team rather than founder-dependent. Standard structure, in order:
 8. How to check courts/probate
 9. How to preserve the evidence
 
-Playbooks live in `playbooks/` — first one drafted:
-[playbooks/BARBADOS.md](playbooks/BARBADOS.md) (active, because Profile #1
-runs there). Jamaica is next (richest access).
+Playbooks live in `playbooks/`. The canonical structure is
+[playbooks/TEMPLATE.md](playbooks/TEMPLATE.md) — expected-outputs boxes,
+per-route O/I/P states, friction/automation/depth lines, failure paths,
+automation hooks, live-request checklists. Drafted so far:
+[playbooks/BARBADOS.md](playbooks/BARBADOS.md) (reference instance;
+Profile #1 runs there) and [playbooks/JAMAICA.md](playbooks/JAMAICA.md)
+(richest access found). The remaining markets get playbooks as their
+Phase 0 research completes — cloned from the template, never invented
+from blanks.
 
 ## Standing watch
 

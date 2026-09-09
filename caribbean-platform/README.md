@@ -62,7 +62,8 @@ database underneath it all.
 | [HOUSE_STYLE.md](HOUSE_STYLE.md) | Working draft | Narrative authority: the voice, the arc, headline forms and per-section voice — pending analysis of the founder's reference publication. |
 | [VALIDATION_SPRINT.md](VALIDATION_SPRINT.md) | **OPEN — active workstream** | The ownership-first sprint: ten stress-case families, the four legitimate outcomes, per-profile deliverables and the running log. |
 | [DATA_ACCESS_MAP.md](DATA_ACCESS_MAP.md) | **OPEN — Phase 0, living operational doc** | The research/staffing/cost architecture: source record template, three access states (obtainable ≠ internal-use ≠ publishable), access matrix, jurisdiction scorecard (identity resolution, historical depth, automation, friction), entity-status taxonomy, Panama's dual role. |
-| [playbooks/](playbooks/) | **First playbook drafted** | Per-market Jurisdiction Research Playbooks (nine standard steps, person → companies → ownership → intermediaries → property → charges → courts → evidence). Barbados drafted; Jamaica next. |
+| [playbooks/](playbooks/) | **Template + 2 drafted** | The research operating system: canonical TEMPLATE, Barbados (reference instance) and Jamaica — expected outputs, O/I/P states per route, friction scores, failure paths, automation hooks, live-request checklists. |
+| [DESIGN_LANGUAGE.md](DESIGN_LANGUAGE.md) | v1 draft | "Power with elegance": the philosophy (important, not luxurious), homepage as intelligence briefing, page templates, the relationship-map signature feature, typography, photography, color, the Intelligence interface, award objects. |
 | [NAMING_AND_POSITIONING.md](NAMING_AND_POSITIONING.md) | **Positioning settled; name open** | First-round candidates struck (with reasons), the non-geographic reframe, tightened criteria, and the 100–150-candidate next round — which runs after the data-model validation. |
 
 ## Product architecture (long-term)

@@ -18,6 +18,31 @@
 
 That paragraph should survive essentially unchanged for 50 years.
 
+**The founding principle — and its careful framing.** The institution is
+never an advocate for wealthy families, and never implies that their
+interests and the public interest are the same. The defensible
+proposition is:
+
+> We believe that understanding the people who build businesses, allocate
+> capital, create employment, support culture and invest in the Caribbean
+> is essential to understanding the Caribbean itself. We celebrate
+> achievement, examine influence, document change and hold ourselves to
+> the same standards of accuracy and independence regardless of who is
+> being covered.
+
+In one line: **to understand the Caribbean, you must understand the
+people who build it** — multi-generational families and first-generation
+entrepreneurs, public companies, developers, hoteliers, restaurateurs,
+artists, athletes, scientists, philanthropists, cultural leaders. In
+practice: a transformative investment is celebrated and analyzed; a sale
+of a historic business is explained; a succession dispute is reported
+fairly; a failure or an accusation of misconduct is investigated under
+the same standards as everything else. **Pro-business, never pro-any
+particular business** — and a story is never softened to preserve
+access. That independence is what makes profiles prestigious, interviews
+sought, data trusted and readers loyal — it is worth more to the covered
+families themselves than flattery would be.
+
 ## 1. Sourcing — and the two-layer rule
 
 - Facts follow the evidence tiers in
