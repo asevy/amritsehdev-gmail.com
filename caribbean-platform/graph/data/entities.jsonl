@@ -1,0 +1,7 @@
+{"id": "goddard_enterprises", "name": "Goddard Enterprises Limited", "type": "company", "jurisdiction": "BB", "status": null, "notes": "BSE-listed conglomerate; validation-sprint Profile #1 anchor"}
+{"id": "goddard_family", "name": "Goddard family", "type": "family", "jurisdiction": "BB", "status": null, "notes": "Founding family of Goddard Enterprises; current economic ownership is the open Profile #1 question"}
+{"id": "neptune_investments_bb", "name": "Neptune Investments Limited", "type": "company", "jurisdiction": "BB", "status": "unknown", "notes": "Disclosed >5% GEL holder per 2022 shareholder analysis; ownership unresolved - CAIPO inquiry is the follow-up task"}
+{"id": "sagicor_group", "name": "Sagicor Group", "type": "company", "jurisdiction": null, "status": null, "notes": "Disclosed >5% GEL holder per 2022 shareholder analysis; institutional"}
+{"id": "matthew_d_goddard", "name": "Matthew D. Goddard", "type": "person", "jurisdiction": "BB", "status": null, "notes": ""}
+{"id": "wisynco_group", "name": "Wisynco Group Limited", "type": "company", "jurisdiction": "JM", "status": null, "notes": "JSE-listed; validation-sprint Profile #3 anchor"}
+{"id": "mahfood_family", "name": "Mahfood family", "type": "family", "jurisdiction": "JM", "status": null, "notes": "Profile #3; listed/private hybrid stress case"}

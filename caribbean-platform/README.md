@@ -1,5 +1,23 @@
 # Caribbean Wealth, Business & Achievement Institution — Founding Documents
 
+> ## Protect the graph.
+>
+> Every article, every filing, every interview, every award, every
+> correction, every photograph and every relationship should strengthen
+> one thing: **the verified graph of Caribbean people, families,
+> companies, assets and influence.**
+>
+> The publication may become famous. The awards may become prestigious.
+> The conferences may become influential.
+>
+> **But the graph is the institution.**
+
+**The media company is the acquisition channel. The database is the
+product** — PitchBook + Bloomberg + Forbes + LexisNexis for Caribbean
+capital. The publication builds trust; the rankings build prestige; the
+awards build influence; the events build relationships; the graph builds
+enterprise value.
+
 This directory holds the founding materials for **the intelligence and media
 institution for Caribbean wealth, business, families, influence and
 exceptional life — with luxury coverage as one highly visible part of it.**
@@ -62,7 +80,9 @@ database underneath it all.
 | [HOUSE_STYLE.md](HOUSE_STYLE.md) | Working draft | Narrative authority: the voice, the arc, headline forms and per-section voice — pending analysis of the founder's reference publication. |
 | [VALIDATION_SPRINT.md](VALIDATION_SPRINT.md) | **OPEN — active workstream** | The ownership-first sprint: ten stress-case families, the four legitimate outcomes, per-profile deliverables and the running log. |
 | [DATA_ACCESS_MAP.md](DATA_ACCESS_MAP.md) | **OPEN — Phase 0, living operational doc** | The research/staffing/cost architecture: source record template, three access states (obtainable ≠ internal-use ≠ publishable), access matrix, jurisdiction scorecard (identity resolution, historical depth, automation, friction), entity-status taxonomy, Panama's dual role. |
-| [playbooks/](playbooks/) | **Template + 2 drafted** | The research operating system: canonical TEMPLATE, Barbados (reference instance) and Jamaica — expected outputs, O/I/P states per route, friction scores, failure paths, automation hooks, live-request checklists. |
+| [playbooks/](playbooks/) | **Template FROZEN + 2 drafted** | The research operating system: canonical TEMPLATE, Barbados (reference instance) and Jamaica — expected outputs, O/I/P states per route, friction and cost fields, confidence impact, failure paths, automation hooks, live-request checklists. |
+| [PRODUCT_ROADMAP.md](PRODUCT_ROADMAP.md) | **v1 — last doc of the founding phase** | Products (not features) by year, the three build phases, the strategic frame, and the deferred Research Manual skeleton. |
+| [graph/](graph/) | **Code — the asset itself** | The claim ledger implemented: schema, append-only store, validation rules from the methodology, and the first proposed claims from the live research. |
 | [DESIGN_LANGUAGE.md](DESIGN_LANGUAGE.md) | v1 draft | "Power with elegance": the philosophy (important, not luxurious), homepage as intelligence briefing, page templates, the relationship-map signature feature, typography, photography, color, the Intelligence interface, award objects. |
 | [NAMING_AND_POSITIONING.md](NAMING_AND_POSITIONING.md) | **Positioning settled; name open** | First-round candidates struck (with reasons), the non-geographic reframe, tightened criteria, and the 100–150-candidate next round — which runs after the data-model validation. |
 
@@ -116,6 +136,15 @@ Editorial standards ratified at v1.1 (constitution, AI rules, founder
 firewall, strict minors/homes security). House style drafted (narrative
 authority). **The validation sprint is open: ten stress-case families
 selected.**
+
+**2026-09-09 — DOCUMENTATION FREEZE.** The constitution is complete: why
+we exist (Founding Brief), why the opportunity exists (Competitive
+Landscape), what we cover (Content Universe), how prestige compounds
+(Awards), what we know (Data Model), how we earn trust (Standards),
+where evidence comes from (Data Access Map), how it is collected
+(Playbooks), how we tell stories (House Style), how the institution
+feels (Design Language), what we build (Roadmap). From here, new
+documentation is written only when real research exposes a gap.
 
 Conceptual planning is over. The build sequence from here:
 
