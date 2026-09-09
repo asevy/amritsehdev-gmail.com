@@ -184,9 +184,15 @@ what separates the institution from a magazine making guesses.
    multiple recorded per estimate. Where financials are unavailable,
    triangulate: capacity × market rates, disclosed investment costs,
    competitor benchmarks, credible reporting.
-4. **Attributable ownership.** Only the family's attributable share
-   counts, traced through holdcos where registries allow. Where the chain
-   is opaque, publish a range and record the assumption.
+4. **Attributable ownership — traverse, don't stop.** Only the family's
+   attributable share counts, traced through intermediaries. A registered
+   holder is the next node, not the end: a holdco stake is calculated
+   through the chain when the chain leads to the family; not attributed
+   when it leads to unrelated institutions; investigated for beneficial
+   interest when it is a nominee; and where beneficial-ownership access is
+   legally restricted, the precise limitation is recorded rather than the
+   question treated as unknowable. Where the chain is opaque, publish a
+   range and record the assumption.
 5. **Debt — three states, stored distinctly.** **Verified debt** (filings,
    registries, disclosed facilities), **estimated debt** (reported or
    modeled, labeled as such) and **unknown debt**. Estimates net verified
@@ -308,6 +314,17 @@ record.
 Tier 3 — reputable press, trade publications (attributed).
 Tier 4 — background interviews, credible unverified reporting → leads
 queue or clearly-labeled context, never load-bearing for an estimate.
+
+**"Not readily Googleable" is not the same thing as "not public."** The
+raw material lives in corporate registries, shareholder registers,
+securities filings, proxy circulars, land registries, mortgage/charge
+registries, court records, probate/estate filings, government gazettes,
+procurement databases, planning/development records, incorporation
+documents and historical filings — fragmented, expensive, multilingual and
+tedious to assemble. Assembling it into the living ownership graph is the
+moat. What each jurisdiction actually provides, under what legal basis and
+at what cost, is mapped in [DATA_ACCESS_MAP.md](DATA_ACCESS_MAP.md) —
+Phase 0 of the validation sprint, completed before the family deep dives.
 
 **Source-document preservation (the 20-year rule).** Web pages disappear,
 registries change systems, companies delete annual reports — and in 2038

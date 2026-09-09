@@ -56,6 +56,19 @@ island minimum. Puerto Rico is deliberately reserved for the first-100
 phase (candidates there — e.g., media, retail-property and rum dynasties —
 are noted in the research layer).
 
+## Phase 0 — the Data Access Map (precedes the deep dives)
+
+Before the family research: a few days determining exactly what can
+legally be obtained in every launch jurisdiction — registry access,
+shareholder-list routes, beneficial-ownership regimes, land, charges,
+courts, gazettes; legal basis, cost, method, historical depth,
+restrictions on use. See [DATA_ACCESS_MAP.md](DATA_ACCESS_MAP.md) —
+first-pass rows for Barbados, Jamaica, DR and Cayman are already seeded
+(2026-09-09), with Jamaica emerging as unusually research-rich (reverse
+officer/shareholder search; subscriber beneficial-ownership registry) and
+Cayman confirmed opaque (confidential BO register since July 2024). The
+completed map may re-sequence the profile order below.
+
 ## Execution order
 
 1. **#1 Goddard** — establish the baseline, the claim templates and the
@@ -170,3 +183,12 @@ documents.
   a hypothesis list, not a fact list. The sprint's product is ownership
   conclusions; wealth estimates follow only where ownership supports
   them.
+- **Goddard research plan upgraded to the Barbados escalation ladder:**
+  BSE disclosures → 2025 annual report and proxy circular (shareholder
+  analysis, directors' interests) → statutory shareholder-list request
+  under Companies Act s.176 (heading confirmed in the official Act;
+  counsel to verify conditions and any permitted-use restriction, given
+  the Act's CBCA lineage) → CAIPO company search on **Neptune Investments
+  Limited** (directors, filings, charges) → beneficial-ownership tracing
+  through whatever the Neptune chain reveals. The registered holder is
+  the next node, not the end.

@@ -60,7 +60,8 @@ database underneath it all.
 | [DATA_MODEL_AND_METHODOLOGY.md](DATA_MODEL_AND_METHODOLOGY.md) | **v1.1 — governing** | The claim ledger, the graph model and family web, the 15-rule wealth methodology with two-dimension confidence, the two-tier coverage universe (Guyana in core; Panama in the Capital Network), and the Continuous Valuation Engine & Daily Wealth Index. |
 | [EDITORIAL_STANDARDS.md](EDITORIAL_STANDARDS.md) | **v1.1 — ratified** | The constitution, sourcing and the two-layer rule, the AI section, right of reply without ranking previews, source preservation, the founder firewall, MNPI infrastructure, strict minors/homes security rules, commercial separation, style. |
 | [HOUSE_STYLE.md](HOUSE_STYLE.md) | Working draft | Narrative authority: the voice, the arc, headline forms and per-section voice — pending analysis of the founder's reference publication. |
-| [VALIDATION_SPRINT.md](VALIDATION_SPRINT.md) | **OPEN — active workstream** | The ten stress-case families, execution order, per-profile deliverables and the running sprint log. |
+| [VALIDATION_SPRINT.md](VALIDATION_SPRINT.md) | **OPEN — active workstream** | The ownership-first sprint: ten stress-case families, the four legitimate outcomes, per-profile deliverables and the running log. |
+| [DATA_ACCESS_MAP.md](DATA_ACCESS_MAP.md) | **OPEN — Phase 0** | Per-jurisdiction map of what can legally be obtained (registries, shareholder lists, beneficial ownership, land, charges, courts) — the research architecture; first-pass rows seeded for Barbados, Jamaica, DR, Cayman. |
 | [NAMING_AND_POSITIONING.md](NAMING_AND_POSITIONING.md) | **Positioning settled; name open** | First-round candidates struck (with reasons), the non-geographic reframe, tightened criteria, and the 100–150-candidate next round — which runs after the data-model validation. |
 
 ## Product architecture (long-term)
