@@ -130,6 +130,162 @@ def claim_card(led, c) -> str:
             f'</div><dl>{dl}</dl></div>')
 
 
+EDGE_WORDS = ("shareholder", "owner", "owns", "controlling_interest",
+              "heritage", "founder")
+
+
+def _entity_refs(led, obj):
+    if isinstance(obj, str) and obj in led.entities:
+        return [obj]
+    if isinstance(obj, dict):
+        return [v for v in obj.values()
+                if isinstance(v, str) and v in led.entities]
+    return []
+
+
+def ownership_edges(led, scope=None):
+    """(holder, held, label, tentative) tuples for 'what owns what'."""
+    edges = []
+    for c in led.claims.values():
+        if c.status in ("SUPERSEDED", "RETRACTED", "REJECTED"):
+            continue
+        if not any(w in c.predicate for w in EDGE_WORDS):
+            continue
+        for held in _entity_refs(led, c.object):
+            if scope and not (c.subject in scope and held in scope):
+                continue
+            label = c.predicate.replace("registry_", "").replace(
+                "_", " ")
+            if isinstance(c.object, dict) and c.object.get("shares"):
+                label = f"{c.object['shares']} sh"
+            tentative = (c.status == "LEAD"
+                         or "possible" in c.predicate
+                         or "heritage" in c.predicate)
+            edges.append((c.subject, held, label, tentative))
+    return edges
+
+
+def graph_svg(led, edges) -> str:
+    """Boxes and lines. Nothing fancy. Answers: what owns what?"""
+    if not edges:
+        return '<p class="muted">No ownership edges yet.</p>'
+    nodes = sorted({n for e in edges for n in e[:2]})
+    holders = {e[0] for e in edges}
+    helds = {e[1] for e in edges}
+
+    def row(n):
+        t = led.entities[n].type
+        if t in ("family", "branch", "person"):
+            return 0
+        if n in holders and n in helds:
+            return 1
+        return 2 if n in helds else 1
+
+    rows = {}
+    for n in nodes:
+        rows.setdefault(row(n), []).append(n)
+    bw, bh, gx, gy, pad = 190, 40, 26, 90, 20
+    pos = {}
+    width = max((len(v) * (bw + gx)) for v in rows.values()) + pad * 2
+    for r, ns in sorted(rows.items()):
+        total = len(ns) * (bw + gx) - gx
+        x0 = (width - total) / 2
+        for i, n in enumerate(sorted(ns)):
+            pos[n] = (x0 + i * (bw + gx), pad + r * (bh + gy))
+    height = pad * 2 + (max(rows) + 1) * (bh + gy) - gy
+    out = [f'<svg viewBox="0 0 {width:.0f} {height:.0f}" '
+           f'style="max-width:100%;font:12px Inter,sans-serif">']
+    for a, b, label, tent in edges:
+        x1, y1 = pos[a][0] + bw / 2, pos[a][1] + bh
+        x2, y2 = pos[b][0] + bw / 2, pos[b][1]
+        if pos[a][1] == pos[b][1]:
+            y1 = pos[a][1] + bh / 2; y2 = y1
+            x1 = pos[a][0] + bw; x2 = pos[b][0]
+        dash = ' stroke-dasharray="5 4"' if tent else ""
+        out.append(f'<line x1="{x1:.0f}" y1="{y1:.0f}" x2="{x2:.0f}" '
+                   f'y2="{y2:.0f}" style="stroke:var(--muted)"{dash}/>')
+        out.append(f'<text x="{(x1+x2)/2:.0f}" y="{(y1+y2)/2-4:.0f}" '
+                   f'text-anchor="middle" style="fill:var(--muted);'
+                   f'font-size:10px">{esc(label)}</text>')
+    for n, (x, y) in pos.items():
+        name = led.entities[n].name
+        name = name if len(name) <= 26 else name[:25] + "…"
+        out.append(f'<rect x="{x:.0f}" y="{y:.0f}" width="{bw}" '
+                   f'height="{bh}" rx="3" style="fill:var(--panel);'
+                   f'stroke:var(--rule)"/>')
+        out.append(f'<text x="{x+bw/2:.0f}" y="{y+bh/2+4:.0f}" '
+                   f'text-anchor="middle" style="fill:var(--ink)">'
+                   f'{esc(name)}</text>')
+    out.append("</svg>")
+    return "".join(out)
+
+
+def connected(led, root, hops=2):
+    """Entity ids within N claim-hops of root."""
+    seen = {root}
+    frontier = {root}
+    for _ in range(hops):
+        nxt = set()
+        for c in led.claims.values():
+            ends = [c.subject] + _entity_refs(led, c.object)
+            if any(e in frontier for e in ends):
+                nxt.update(ends)
+        nxt -= seen
+        seen |= nxt
+        frontier = nxt
+    return seen
+
+
+def dossier(led, fam) -> str:
+    scope = connected(led, fam.id)
+    claims = sorted([c for c in led.claims.values()
+                     if c.subject in scope or
+                     set(_entity_refs(led, c.object)) & scope],
+                    key=lambda c: c.id)
+    by = {"APPROVED": [], "PENDING": [], "REJECTED": []}
+    for c in claims:
+        if c.status == "APPROVED":
+            by["APPROVED"].append(c)
+        elif c.status in ("PROPOSED", "LEAD"):
+            by["PENDING"].append(c)
+        elif c.status == "REJECTED":
+            by["REJECTED"].append(c)
+    srcs = sorted({s for c in claims for s in c.sources})
+    companies = sorted([e for e in scope
+                        if led.entities[e].type == "company"])
+    dated = sorted([c for c in claims if c.valid_from],
+                   key=lambda c: (str(c.valid_from), c.id))
+    tl = "".join(
+        f'<dt>{esc(c.valid_from)}</dt>'
+        f'<dd><a href="#c-{esc(c.id)}">{esc(c.id)}</a> — '
+        f'{link_entity(led, c.subject)} {esc(c.predicate)} '
+        f'{render_object(led, c.object)}</dd>'
+        for c in dated) or "<dt>—</dt><dd class='muted'>no dated " \
+                           "claims yet</dd>"
+    rows = [
+        ("Sources", " · ".join(f'<a href="#s-{esc(s)}">{esc(s)}</a>'
+                               for s in srcs) or
+         '<span class="muted">—</span>'),
+        ("Claims", " · ".join(
+            f'{k.title()}: <b>{len(v)}</b>' for k, v in by.items())),
+        ("Companies", " · ".join(link_entity(led, c)
+                                 for c in companies) or
+         '<span class="muted">—</span>'),
+    ]
+    dl = "".join(f"<dt>{k}</dt><dd>{v}</dd>" for k, v in rows)
+    svg = graph_svg(led, ownership_edges(led, scope=scope))
+    return (f'<div class="card" id="d-{esc(fam.id)}">'
+            f'<div class="cardhead"><b>{esc(fam.name)}</b>'
+            f'<span class="muted">analyst dossier</span></div>'
+            f'<dl>{dl}</dl>'
+            f'<h3 style="font:600 10.5px/1 Inter;letter-spacing:.14em;'
+            f'text-transform:uppercase;color:var(--muted);'
+            f'margin:16px 0 8px">Graph</h3>{svg}'
+            f'<h3 style="font:600 10.5px/1 Inter;letter-spacing:.14em;'
+            f'text-transform:uppercase;color:var(--muted);'
+            f'margin:16px 0 8px">Timeline</h3><dl>{tl}</dl></div>')
+
+
 def main() -> None:
     data_dir = sys.argv[1] if len(sys.argv) > 1 else "data"
     out_file = sys.argv[2] if len(sys.argv) > 2 else "explorer.html"
@@ -139,7 +295,7 @@ def main() -> None:
     research = [c for c in led.claims.values()
                 if c.status in ("PROPOSED", "LEAD")]
     history = [c for c in led.claims.values()
-               if c.status in ("SUPERSEDED", "RETRACTED")]
+               if c.status in ("SUPERSEDED", "RETRACTED", "REJECTED")]
 
     parts = [f"<title>Claim Explorer</title><style>{CSS}</style>"]
     parts.append(
@@ -158,6 +314,11 @@ def main() -> None:
         parts.append(f'<a class="chip" href="#e-{esc(e.id)}">{esc(e.name)} '
                      f'<small>{esc(e.type)} · {n}</small></a>')
     parts.append("</div>")
+
+    parts.append("<h2>Family dossiers</h2>")
+    fams = [e for e in led.entities.values() if e.type == "family"]
+    for fam in sorted(fams, key=lambda e: e.name):
+        parts.append(dossier(led, fam))
 
     for title, group in (("Verified graph (approved claims)", approved),
                          ("Research layer (proposed & leads)", research),

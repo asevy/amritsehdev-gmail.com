@@ -24,7 +24,8 @@ from dataclasses import dataclass, field, asdict
 from typing import Optional
 
 
-CLAIM_STATUSES = ("LEAD", "PROPOSED", "APPROVED", "SUPERSEDED", "RETRACTED")
+CLAIM_STATUSES = ("LEAD", "PROPOSED", "APPROVED", "REJECTED",
+                  "SUPERSEDED", "RETRACTED")
 EVIDENCE_TIERS = (1, 2, 3, 4)  # per DATA_MODEL section 6
 SOURCE_ACCESS = ("internal", "publishable")  # I / P; possession implies O
 CONFIDENCE = ("HIGH", "MODERATE", "LOW")
@@ -35,7 +36,7 @@ ENTITY_STATUSES = ("operating_company", "holdco", "nominee", "trustee",
                    "foundation", "spv", "employee_plan", "institutional",
                    "government", "estate", "unknown")
 ENTITY_TYPES = ("person", "family", "branch", "company", "asset",
-                "institution")
+                "property", "transaction", "institution")
 
 # Predicates whose object is the registry's own assertion.
 REGISTRY_PREDICATES_PREFIX = "registry_"
@@ -98,6 +99,7 @@ class Claim:
     # {"test": shares|voting|control, "threshold": str,
     #  "regime_version": str, "as_of": ISO date}
     methodology_version: str = ""  # required for APPROVED
+    jurisdiction: str = ""         # market whose playbook governed this
     notes: str = ""
 
     def validate(self) -> None:
