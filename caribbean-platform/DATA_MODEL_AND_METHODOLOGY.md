@@ -64,6 +64,20 @@ This is the audit trail that makes estimates defensible under challenge,
 and it is itself a sellable Intelligence asset: professional subscribers
 can see the evidentiary basis of every number.
 
+Two discipline rules for registry-derived claims:
+
+- **The graph preserves exactly what the registry says.** "Person →
+  registered shareholder → Company" is evidence of a registered
+  relationship as of a date — not, by itself, of current beneficial
+  ownership or an economic percentage. The interpretation is a separate,
+  labeled analyst claim built on it.
+- **Absence is only what the statute makes it.** A "not found" in a
+  beneficial-ownership register never becomes "owns below the threshold"
+  unless the regime's actual test (shares / voting rights / control), its
+  threshold, its version/date and the search's scope support that
+  inference — all of which are recorded on the claim, because BO regimes
+  change.
+
 ### Nodes
 
 | Entity | Core attributes |
@@ -305,6 +319,17 @@ geographically, in two tiers:
 - Whatever is ratified is published in every ranking's methodology note,
   before the first ranking appears.
 
+**Coverage tiers follow evidence, not ambition.** Jurisdictional
+disclosure quality varies enormously (see
+[DATA_ACCESS_MAP.md](DATA_ACCESS_MAP.md)), so the institution does not
+pretend to launch every country at equal depth. **Tier 1 coverage
+markets** carry deeply modeled, continuously updated fortunes; **Tier 2
+coverage markets** carry less complete estimates, explicitly labeled as
+such. A $900M estimate in an opaque jurisdiction and a $900M estimate in
+a rich-disclosure jurisdiction do not have equivalent evidentiary
+foundations, and the product never implies they do. A market's tier is
+set by its Data Access Map row and can rise as access improves.
+
 ## 6. Sources and evidence tiers
 
 Tier 1 — registries, court records, exchange and regulatory filings,
@@ -418,6 +443,11 @@ Secondary measurements (learning metrics, not pass/fail): research hours
 per profile (does this scale to 100 families with a small team?); story
 leads per profile (does the journalism↔database flywheel turn?); whether
 the branch/marriage cases model cleanly in §3's structure.
+
+**And the reproducibility test, applied to every completed profile:
+could another competent researcher reproduce our conclusion from our
+evidence trail?** If yes, the methodology is validated in that market.
+If no, the profile is not done, whatever its confidence labels say.
 
 **Output:** a validation memo — what worked, what broke, what data exists
 where, gap map by island, revised time/cost per profile — and the go

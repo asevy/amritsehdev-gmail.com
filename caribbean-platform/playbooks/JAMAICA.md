@@ -11,9 +11,37 @@
 > friction 1–5 (1 = cheap/easy/fast) · **Auto** H/M/L · **Depth**
 > historical coverage.
 >
-> **Standing legal rule:** the Beneficial Ownership Registry is
+> **Standing legal rules:** (1) the Beneficial Ownership Registry is
 > subscriber-gated — its terms of use decide the P state; until reviewed,
-> BO-registry output is **I-only**.
+> BO-registry output is **I-only**. (2) Never store the BO threshold as a
+> bare "≥25%": record the **statutory basis of qualification** (shares,
+> voting rights, other control — whatever test applies), the threshold,
+> and the regime version/date on every BO-derived claim. **"Not found"
+> never becomes "owns below the threshold"** unless the statute's test
+> and the search's scope actually support that inference. (3) The graph
+> preserves exactly what the registry says: "person → registered
+> shareholder → company" is evidence of a registered relationship as of a
+> date, not of current beneficial ownership or an economic percentage —
+> interpretation is a separate, labeled analyst claim.
+>
+> **Status note (2026-09-09): editing this playbook now stops. The
+> checklist executes.** Mahfood/Wisynco is the first full end-to-end
+> ownership graph, run **in parallel with** Goddard — if Jamaica's
+> disclosure quality is as good as it looks, it may validate the entire
+> workflow faster than Barbados.
+
+## Jurisdiction header
+
+| | |
+| --- | --- |
+| Legal system | Common law |
+| Primary language | English |
+| Currency | JMD |
+| Exchange | Jamaica Stock Exchange (JSE) |
+| Company registry | Companies Office of Jamaica (COJ) |
+| Land registry | National Land Agency (NLA) — access to verify |
+| Courts / probate | Supreme Court of Jamaica; gazette notices |
+| Beneficial-ownership regime | Subscriber-gated registry; statutory test/threshold to record verbatim, versioned and dated |
 
 ## Route summary
 
@@ -21,7 +49,7 @@
 | --- | --- | --- | --- | --- | --- | --- |
 | COJ entity search (account, free basic) | ✓ | ✓ | ✓ facts | 1 | M–H | TBD |
 | COJ reverse person search (director/shareholder/secretary → entities) | ✓ | ✓ | ✓ facts | 1–2 | H — graph-native | TBD |
-| Beneficial Ownership Registry (subscriber, ≥25%) | ✓ | ✓ | TBD — terms review | 2 | M | Recent regime; start date to verify |
+| Beneficial Ownership Registry (subscriber; statutory test/threshold recorded verbatim per claim) | ✓ | ✓ | TBD — terms review | 2 | M | Recent regime; start date to verify |
 | JSE disclosures + issuer annual reports | ✓ | ✓ | ✓ with attribution | 1 | H | Years of ARs online; verify span |
 | COJ annual returns / filed documents | TBD — contents to verify | TBD | TBD | TBD | TBD | TBD |
 | NLA title search (eLand) | likely O — *verify* | TBD | TBD | 2? | M? | TBD |
@@ -48,6 +76,10 @@
   makes Jamaica special; corroborate identity via AR bios, press, RGD
   records where kinship must be evidenced (subject to the minors and
   privacy rules).
+- **Confidence impact:** a reverse-search hit evidences a **registered
+  relationship as of the search date** (Tier 1 for that fact) — never,
+  by itself, current beneficial ownership or an economic percentage.
+  Record the registry's exact words; interpretation is a separate claim.
 - **F:** 1–2 · **Auto:** H · **Depth:** TBD.
 - **Failure path:** common-name collisions → disambiguate by co-officer
   patterns, addresses-for-service, entity sectors; then press.
@@ -67,8 +99,9 @@
 - **Expected outputs:** **(Listed)** substantial/top shareholder tables —
   Jamaican issuer ARs commonly disclose top-10 shareholder lists
   (*verify per issuer*: e.g., Wisynco, NCB Financial, Seprod), directors'
-  interests, shares outstanding. **(BO Registry)** beneficial owners at
-  ≥25% (shares, votes or other control). **(COJ)** share
+  interests, shares outstanding. **(BO Registry)** beneficial owners per
+  the statutory test — basis (shares / votes / other control), threshold
+  and regime version recorded verbatim on every claim. **(COJ)** share
   capital/member data in annual returns — contents *to verify*.
 - **States:** AR/JSE: O/I/P ✓. BO Registry: O/I ✓, **P TBD (terms
   review)**. Annual returns: TBD.
@@ -151,4 +184,18 @@ before the graph moves.
 - [ ] One COJ annual-return/document pull — what do returns disclose?
 - [ ] One NLA title search — method, cost, owner-name searchability.
 - [ ] One charges search; one probate/judgment search.
-- [ ] Fill every TBD in the route summary.
+- [ ] Fill every TBD in the route summary (including Cost/Refresh/Format
+      lines per the frozen template — filled from live requests, not
+      speculation).
+
+## Operational notes / known failure modes
+
+Grows with use; never deleted.
+
+- Record the BO regime's statutory test, threshold and version with every
+  BO claim; absence of an entry is only what the statute makes it.
+- Registered relationships ≠ economic interest: COJ reverse-search output
+  enters the graph in the registry's own words.
+- Common Jamaican surnames create collision risk in reverse search —
+  disambiguate by co-officer patterns and addresses before attaching a
+  hit to a person node.

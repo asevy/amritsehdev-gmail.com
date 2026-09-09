@@ -71,9 +71,13 @@ completed map may re-sequence the profile order below.
 
 ## Execution order
 
-1. **#1 Goddard** — establish the baseline, the claim templates and the
-   per-profile time budget on the easiest case.
-2. **#3 Mahfood** — first hybrid: one live-priced component, one modeled.
+1. **#1 Goddard and #3 Mahfood — in parallel.** Goddard establishes the
+   Barbados baseline; Mahfood/Wisynco runs simultaneously rather than
+   waiting for Barbados access questions (the s.176 counsel gate) to
+   resolve. If Jamaica's disclosure quality performs as the Data Access
+   Map suggests, the Mahfood graph may validate the full workflow first —
+   and the pair immediately measures how much jurisdictional disclosure
+   quality changes research cost.
 3. **#4 Sabga**, **#2 Corripio** — conglomerate depth, then fully private
    depth (Spanish-language sourcing).
 4. **#8 Stewart**, **#10 Lee-Chin** — succession mechanics; diaspora
@@ -183,6 +187,37 @@ documents.
   a hypothesis list, not a fact list. The sprint's product is ownership
   conclusions; wealth estimates follow only where ownership supports
   them.
+**2026-09-09 — Profile #3 (Mahfood/Wisynco) opened, in parallel with
+Goddard.** The first full end-to-end ownership graph attempt. Protocol:
+
+> William/Andrew Mahfood → COJ reverse search → every relevant entity →
+> Wisynco shareholder disclosures → intermediary entities → BO search
+> where legally available → subsidiaries/related holdings →
+> property/charges → attributable family ownership → valuation.
+
+Record every click/request, dollar spent and analyst minute. The
+deliverable is the full output card, not a headline number:
+
+```
+Ownership conclusion:      (one of the four outcomes, with basis)
+Public-company component:  $X
+Private-company component: $Y–Z
+Known debt:                $X (verified / estimated / unknown states)
+Other identified assets:   $X–Y
+Estimated family wealth:   $X–Y
+Evidence confidence:       High/Moderate/Low
+Valuation confidence:      High/Moderate/Low
+Live-priced portion:       X%
+Research cost:             $X
+Analyst time:              X hours
+Unresolved ownership:      X entities (each with status + follow-up)
+Next refresh:              event-driven / quarterly / annual
+```
+
+Then the question that decides whether the methodology is validated:
+**could another competent researcher reproduce our conclusion from our
+evidence trail?**
+
 - **Goddard research plan upgraded to the Barbados escalation ladder:**
   BSE disclosures → 2025 annual report and proxy circular (shareholder
   analysis, directors' interests) → statutory shareholder-list request

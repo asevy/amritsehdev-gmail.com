@@ -13,6 +13,19 @@
 > statutory shareholder-list route is a **lead-generation and internal
 > verification tool only, never publishable evidence.**
 
+## Jurisdiction header
+
+| | |
+| --- | --- |
+| Legal system | Common law; Companies Act Cap. 308 (CBCA-model) |
+| Primary language | English |
+| Currency | BBD (pegged 2:1 to USD) |
+| Exchange | Barbados Stock Exchange (BSE) |
+| Company registry | CAIPO |
+| Land registry | Barbados land registration system — authority to confirm (Phase 0) |
+| Courts / probate | Supreme Court of Barbados; gazette probate notices |
+| Beneficial-ownership regime | Records must be maintained; public-access route unmapped; statutory test/threshold to record verbatim |
+
 ## Route summary
 
 | Route | O | I | P | F | Auto | Depth |
@@ -33,6 +46,9 @@
   list.
 - **Route:** CAIPO free search → CAIPO paid Company Inquiry → BSE/issuer
   investor pages → gazette/press (Nation News, Barbados Today, Advocate).
+- **Cost / Refresh / Format:** free search $0; paid inquiry ~BBD $5 +
+  ~15–30 analyst min per entity (verify); refresh event-driven; format
+  HTML portal, output format TBD.
 - **Failure path:** free DB stale or entity missing → paid inquiry under
   name variants → gazette name-change notices → press archive.
 
@@ -45,6 +61,10 @@
   press, obituaries, probate notices; professional registries.
 - **State:** O/I ✓; P for published facts with attribution.
 - **F:** 2 · **Auto:** L · **Depth:** TBD.
+- **Cost / Refresh / Format:** analyst time dominant (TBD); refresh
+  event-driven; mixed HTML/PDF/press.
+- **Confidence impact:** identity corroboration only — never moves
+  ownership evidence by itself.
 - **Failure path:** no reverse person-search at CAIPO (to verify) → work
   company-first: known entities → officers → expand; then press/probate;
   then cross-jurisdiction reverse search (Jamaica-style) where the person
@@ -60,6 +80,10 @@
   group companies.
 - **State:** O/I ✓; P facts.
 - **F:** 2–3 · **Auto:** M · **Depth:** TBD.
+- **Cost / Refresh / Format:** ~BBD $5 per entity inquiry + analyst time
+  (TBD); refresh quarterly poll or event-driven; format TBD.
+- **Confidence impact:** registry records establish registered roles
+  (Tier 1) — a role is never a stake.
 - **Failure path:** officer-name search unavailable → cluster by
   registered office/agent → charge-filing party names → court records.
 
@@ -81,6 +105,15 @@
   - Private-company filings/annual returns: contents TBD.
 - **F:** 1 (listed) / 3 (s.176) / TBD (private) · **Auto:** H for BSE
   monitoring, L for s.176 · **Depth:** AR series ≥2012 for GEL.
+- **Cost / Refresh / Format:** ARs free (searchable PDF; annual); BSE
+  disclosures continuous; s.176 fee + likely counsel cost TBD, refreshed
+  only as a snapshot when ownership looks materially changed; private
+  filings TBD.
+- **Confidence impact:** AR substantial-holder and directors'-interests
+  tables (Tier 1–2) can set ownership evidence **High** for the listed
+  component; an s.176 snapshot (Tier 1) can set registered-holder
+  evidence High as of its date — internal-only until counsel clears use;
+  press coverage creates leads, never confidence.
 - **Failure path:** no AR table, s.176 unusable → annual returns → charge
   filings (lenders name owners/guarantors) → director/officer overlap →
   court records → cross-border registry handoff.
@@ -98,6 +131,11 @@
   conclusion); charge filings; press history.
 - **State:** O/I ✓; P facts.
 - **F:** 2–3 · **Auto:** M · **Depth:** TBD.
+- **Cost / Refresh / Format:** ~BBD $5 per intermediary + analyst time;
+  event-driven refresh; format TBD.
+- **Confidence impact:** registry officers and charges are Tier 1 for the
+  intermediary's existence and management — never, alone, for who
+  economically owns it.
 - **Failure path:** CAIPO does not reveal the intermediary's owners →
   annual returns → charge filings → director/officer overlap → court
   records → cross-border registry (Panama, BVI… via that jurisdiction's
@@ -113,6 +151,9 @@
   planning applications, AR property notes, press.
 - **State:** TBD.
 - **F:** TBD · **Auto:** TBD · **Depth:** TBD.
+- **Cost / Refresh / Format:** TBD (Phase 0); refresh event-driven.
+- **Confidence impact:** title records (Tier 1) can set
+  property-ownership evidence High; press and AR notes are leads.
 - **Failure path:** no name search → parcel-first from known addresses →
   planning records → press/AR corroboration.
 
@@ -125,6 +166,10 @@
   debt notes.
 - **State:** O/I ✓; P facts.
 - **F:** 2 · **Auto:** M (new-charge monitoring) · **Depth:** TBD.
+- **Cost / Refresh / Format:** search cost TBD; refresh continuous/
+  event-driven on new registrations; format TBD.
+- **Confidence impact:** registered charges (Tier 1) move debt from
+  estimated → verified for the secured amounts.
 - **Failure path:** nothing registered → AR debt notes → gazette →
   estimated/unknown debt states with range widening.
 
@@ -136,6 +181,9 @@
   search availability **TBD**; gazette probate notices as entry point.
 - **State:** TBD.
 - **F:** TBD · **Auto:** L–M · **Depth:** TBD.
+- **Cost / Refresh / Format:** TBD; refresh event-driven.
+- **Confidence impact:** judgments and probate grants (Tier 1) are
+  succession and dispute evidence; press coverage is a lead.
 - **Failure path:** no online access → registry visit/agent → gazette
   notices → press coverage of proceedings.
 
@@ -180,3 +228,16 @@ approval before the graph moves.
 - [ ] Charges search on one known entity.
 - [ ] Court/probate access check (one party-name search).
 - [ ] Fill every TBD in the route summary from the above.
+
+## Operational notes / known failure modes
+
+Grows with use; never deleted.
+
+- The free CAIPO database carries a freshness warning — treat it as an
+  index, never as current-state evidence; the paid inquiry is the record.
+- s.176 permitted use unresolved (counsel gate): the route is I-only —
+  leads and internal verification, never publishable evidence.
+- Expect registered-office clustering at a handful of corporate law
+  firms: high-quality lead signal, zero-conclusion signal.
+- BBD:USD peg (2:1) makes conversion trivial — still record the FX date
+  on every value.
