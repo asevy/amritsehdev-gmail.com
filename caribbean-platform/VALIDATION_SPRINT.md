@@ -77,6 +77,37 @@ are noted in the research layer).
 ledger, two-dimension confidence, three-state debt, no automatic
 discounts, beneficial-vs-legal ownership, Guyana in core, Panama in the
 Capital Network) and Editorial Standards v1.1 (ratified) are the governing
-documents. Next action: open Profile #1 (Goddard) — first pass on the
-listed anchor: registry identity, listing status, disclosed insider/family
-holdings, latest annual report, market capitalization at a stated date.
+documents.
+
+**2026-09-09 — Profile #1 (Goddard) opened. First-pass notes
+(research layer — not yet approved claims):**
+
+- Anchor confirmed by open-web search: Goddard Enterprises Limited,
+  founded 1921, headquartered Bridgetown, publicly listed (BSE), operating
+  across four divisions (Manufacturing; Catering; Import & Distribution;
+  Financial Services) in ~22 countries. Company investor site publishes
+  annual and quarterly reports (archive reaches back at least to the 2012
+  annual report). Pending primary-document verification before promotion
+  to the verified graph.
+- **Finding 1 — the baseline case immediately exercises the
+  evidence-confidence dimension.** Open BSE filing summaries do not
+  disclose a controlling-family percentage; ownership appears dispersed
+  (including an employee share purchase scheme), with founding-family
+  board presence visible historically (Joseph N. Goddard on the 2012
+  board). The family stake therefore needs the annual report's substantial-
+  interests/directors'-interests disclosures and/or registry records — the
+  exact scenario the two-dimension confidence model was built for:
+  valuation confidence can be High (listed price) while ownership evidence
+  starts Moderate at best until those documents are in hand.
+- **Finding 2 — research-environment constraint.** From this session,
+  web search works but direct retrieval of company/registry documents is
+  blocked by the network egress proxy (e.g., the GEL investor page).
+  Consequence: full profile construction and source-document preservation
+  (annual report PDFs, registry extracts, BSE data) require either a
+  session environment with broader network access or manual document
+  collection. Logged as the sprint's first tooling requirement.
+- Next actions for Profile #1: obtain the latest GEL annual report and BSE
+  listing data (shares outstanding, price at a stated date); check
+  substantial-shareholder and directors'-interests tables; Barbados
+  corporate-registry (CAIPO) extract; then draft the first claims with
+  preserved sources.
