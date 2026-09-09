@@ -5,3 +5,7 @@
 {"id": "matthew_d_goddard", "name": "Matthew D. Goddard", "type": "person", "jurisdiction": "BB", "status": null, "notes": ""}
 {"id": "wisynco_group", "name": "Wisynco Group Limited", "type": "company", "jurisdiction": "JM", "status": null, "notes": "JSE-listed; validation-sprint Profile #3 anchor"}
 {"id": "mahfood_family", "name": "Mahfood family", "type": "family", "jurisdiction": "JM", "status": null, "notes": "Profile #3; listed/private hybrid stress case"}
+{"id": "wisynco_caribbean", "name": "Wisynco Group (Caribbean) Limited", "type": "company", "jurisdiction": "JM", "status": "holdco", "notes": "Reported parent/majority holder of listed Wisynco Group Limited; ownership of THIS entity is Profile #3's next node (COJ reverse search / BO registry)"}
+{"id": "william_mahfood", "name": "William Mahfood", "type": "person", "jurisdiction": "JM", "status": null, "notes": ""}
+{"id": "andrew_mahfood", "name": "Andrew Mahfood", "type": "person", "jurisdiction": "JM", "status": null, "notes": ""}
+{"id": "honey_bun", "name": "Honey Bun (legal name to verify)", "type": "company", "jurisdiction": "JM", "status": null, "notes": ""}

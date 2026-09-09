@@ -218,6 +218,33 @@ Then the question that decides whether the methodology is validated:
 **could another competent researcher reproduce our conclusion from our
 evidence trail?**
 
+**2026-09-10 — Profile #3 first pass (search-mediated): the structure is
+visible.** Open-web extraction (full documents remain blocked by the
+session's network policy; located but not retrievable) produced, now in
+the ledger as PROPOSED/LEAD claims C-2026-0009…0015:
+
+- The family's stake does NOT sit in direct personal holdings — William
+  Mahfood 0.18%, Andrew Mahfood 0.15% (aggregator-reported). It runs
+  through **Wisynco Group (Caribbean) Limited**, a private holdco
+  reported at **73.8% / 2,776,183,736 shares** of the listed company —
+  the textbook intermediary case. Next node, exactly per the playbook:
+  who owns WGCL (COJ reverse search + BO registry).
+- Listed anchor stats (aggregator, as-of unstated): ~3.76B shares
+  outstanding, market cap ~JMD 82.4B. Cross-check passes: 73.8% × 3.76B
+  ≈ the reported WGCL share count.
+- Sell-down history flagged (IC Insider headline: family sold >111.8M
+  shares — date/detail pending retrieval) and FY2026 top-10 movements
+  reported by the Observer (GraceKennedy Pension 1.28%, Sagicor Pooled
+  0.71%, Mahfood direct stakes reduced).
+- WGCL's asset picture widens beyond the listed stake: reported Honey
+  Bun stake purchase (Aug 2024) — the holdco is an investment vehicle,
+  not a shell.
+- **Primary documents located for preservation once retrievable:**
+  Wisynco ARs on the JSE site (2020, 2021 PDFs at jamstockex.com
+  wp-content URLs; FY2025 AR announced) and wisynco.com investor pages.
+  Everything above remains Tier 3 and unapprovable until one of those
+  PDFs is archived.
+
 - **Goddard research plan upgraded to the Barbados escalation ladder:**
   BSE disclosures → 2025 annual report and proxy circular (shareholder
   analysis, directors' interests) → statutory shareholder-list request
