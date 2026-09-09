@@ -21,7 +21,8 @@ import json
 import pathlib
 from typing import Optional
 
-from schema import Claim, Entity, Source, publishable  # noqa: F401
+from schema import (Claim, Entity, Source, evidence_path_gaps,  # noqa: F401
+                    publishable)
 
 
 class Ledger:
@@ -79,13 +80,43 @@ class Ledger:
         self._append("claims", c)
         return c
 
-    def approve(self, claim_id: str, analyst: str, date: str) -> Claim:
+    def approve(self, claim_id: str, analyst: str, date: str,
+                methodology_version: str) -> Claim:
+        """Approval is impossible without a reproducible evidence path."""
         c = dataclasses.replace(self.claims[claim_id], status="APPROVED",
-                                analyst=analyst, verified_date=date)
+                                analyst=analyst, verified_date=date,
+                                methodology_version=methodology_version)
+        gaps = evidence_path_gaps(c, self.sources)
+        if gaps:
+            raise ValueError(
+                f"{claim_id}: cannot approve — evidence path incomplete: "
+                + "; ".join(gaps))
         c.validate()
         self.claims[c.id] = c
         self._append("claims", c)
         return c
+
+    def audit(self) -> dict:
+        """Re-check the invariant on every APPROVED claim.
+
+        Any approved claim whose evidence path has broken (an archive
+        lost, a source record degraded) is automatically demoted to
+        PROPOSED with the gaps recorded, until repaired.
+        """
+        demoted = {}
+        for c in list(self.claims.values()):
+            if c.status != "APPROVED":
+                continue
+            gaps = evidence_path_gaps(c, self.sources)
+            if gaps:
+                d = dataclasses.replace(
+                    c, status="PROPOSED",
+                    notes=(c.notes + " | DEMOTED by audit — evidence "
+                           "path broken: " + "; ".join(gaps)).strip(" |"))
+                self.claims[d.id] = d
+                self._append("claims", d)
+                demoted[c.id] = gaps
+        return demoted
 
     def supersede(self, old_id: str, new_claim: Claim) -> Claim:
         """Corrections chain; they never erase."""
@@ -159,13 +190,45 @@ if __name__ == "__main__":
             raise AssertionError("BO claim without basis accepted")
         except ValueError:
             pass
-        # Correct forms pass; approval and supersession chain works.
+        # Correct form passes as PROPOSED.
         c5 = led.add_claim(Claim(
             id="C5", subject="fam_y",
             predicate="registry_shareholder_of", object="co_x",
             sources=["S1"], status="PROPOSED",
             registry_verbatim="Family Y Holdings Ltd - 62,000 shares"))
-        led.approve("C5", analyst="test", date="2026-09-09")
+        # Approval without a reproducible evidence path: must fail
+        # (S1 has no passage, no archive, no reviewing analyst).
+        try:
+            led.approve("C5", analyst="test", date="2026-09-09",
+                        methodology_version="v1.1")
+            raise AssertionError("approved without evidence path")
+        except ValueError:
+            pass
+        # Repair the source: preserved archive, passage, analyst.
+        led.add_source(Source(id="S1", description="registry filing",
+                              tier=1, retrieval_date="2026-09-09",
+                              passage="Register of members, p.4",
+                              analyst="test", access="internal",
+                              preserved=True, archive_ref="sha256:abc"))
+        led.approve("C5", analyst="test", date="2026-09-09",
+                    methodology_version="v1.1")
+        assert len(led.verified_graph()) == 1
+        # Break the path (archive lost): audit demotes automatically.
+        led.add_source(Source(id="S1", description="registry filing",
+                              tier=1, retrieval_date="2026-09-09",
+                              passage="Register of members, p.4",
+                              analyst="test", access="internal",
+                              preserved=False))
+        demoted = led.audit()
+        assert "C5" in demoted and led.claims["C5"].status == "PROPOSED"
+        # Repair, re-approve, then supersede: chains, never erasure.
+        led.add_source(Source(id="S1", description="registry filing",
+                              tier=1, retrieval_date="2026-09-09",
+                              passage="Register of members, p.4",
+                              analyst="test", access="internal",
+                              preserved=True, archive_ref="sha256:abc"))
+        led.approve("C5", analyst="test", date="2026-09-09",
+                    methodology_version="v1.1")
         c6 = Claim(id="C6", subject="fam_y",
                    predicate="registry_shareholder_of", object="co_x",
                    sources=["S1"], status="PROPOSED",
@@ -178,5 +241,7 @@ if __name__ == "__main__":
         led2 = Ledger(td)
         assert led2.claims["C5"].status == "SUPERSEDED"
         assert len(led2.verified_graph()) == 0  # C5 no longer live
+        assert led2.audit() == {}
         print("ledger self-test: OK "
-              f"({len(led2.claims)} claims, {len(led2.sources)} sources)")
+              f"({len(led2.claims)} claims, {len(led2.sources)} sources; "
+              "evidence-path invariant enforced)")

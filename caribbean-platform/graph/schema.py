@@ -97,6 +97,7 @@ class Claim:
     statutory_basis: Optional[dict] = None  # required for bo_* predicates:
     # {"test": shares|voting|control, "threshold": str,
     #  "regime_version": str, "as_of": ISO date}
+    methodology_version: str = ""  # required for APPROVED
     notes: str = ""
 
     def validate(self) -> None:
@@ -135,3 +136,35 @@ def publishable(claim: Claim, sources_by_id: dict) -> bool:
         return False
     return all(sources_by_id[s].access == "publishable"
                for s in claim.sources if s in sources_by_id)
+
+
+def evidence_path_gaps(claim: Claim, sources_by_id: dict) -> list:
+    """The reproducible-evidence-path invariant.
+
+    An APPROVED claim must always answer: which document, which page/
+    passage, which analyst, which methodology version, which approval.
+    Returns a list of human-readable gaps; empty means the path is
+    complete. Enforced at approval time and re-checked by Ledger.audit(),
+    which demotes any approved claim whose path has broken.
+    """
+    gaps = []
+    if not claim.sources:
+        gaps.append("no sources")
+    for sid in claim.sources:
+        s = sources_by_id.get(sid)
+        if s is None:
+            gaps.append(f"source {sid} missing from ledger")
+            continue
+        if not s.passage:
+            gaps.append(f"{sid}: no passage/page recorded")
+        if not (s.preserved and s.archive_ref):
+            gaps.append(f"{sid}: document not preserved (archive)")
+        if not s.analyst:
+            gaps.append(f"{sid}: no reviewing analyst recorded")
+    if not claim.analyst:
+        gaps.append("no approving analyst")
+    if not claim.verified_date:
+        gaps.append("no approval date")
+    if not claim.methodology_version:
+        gaps.append("no methodology version")
+    return gaps

@@ -1,16 +1,27 @@
 # Caribbean Wealth, Business & Achievement Institution — Founding Documents
 
-> ## Protect the graph.
+> ## Protect the graph. Everything else is disposable.
 >
 > Every article, every filing, every interview, every award, every
 > correction, every photograph and every relationship should strengthen
 > one thing: **the verified graph of Caribbean people, families,
 > companies, assets and influence.**
 >
+> Lose the website, the branding, the awards, the articles, the office,
+> the CMS — but preserve the graph and the source archive — and you
+> still own the company. Lose the graph, and everything else becomes
+> replaceable media.
+>
 > The publication may become famous. The awards may become prestigious.
 > The conferences may become influential.
 >
 > **But the graph is the institution.**
+>
+> Engineering invariant, enforced in [graph/](graph/): **no approved
+> claim without a reproducible evidence path.** Every approved claim can
+> always answer — which document, which page, which passage, which
+> analyst, which methodology version, which approval. If any of those
+> disappears, the claim falls out of APPROVED until repaired.
 
 **The media company is the acquisition channel. The database is the
 product** — PitchBook + Bloomberg + Forbes + LexisNexis for Caribbean
