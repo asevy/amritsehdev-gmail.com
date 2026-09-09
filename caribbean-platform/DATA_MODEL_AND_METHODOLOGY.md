@@ -1,21 +1,29 @@
 # Data Model & Methodology
 
-> **Status: v1 draft (2026-09-08) — the next build priority, ahead of
-> naming.** The purpose of this document is to prove the central moat can
-> actually be constructed: define the family/company/person/asset/
-> transaction model, set the wealth-estimation rules, and validate both
-> against ten real Caribbean families across 4–5 islands. If those ten
-> profiles work, the fundamental product is validated and we are no longer
-> designing an idea — we are building the Caribbean wealth graph.
+> **Status: v1.1 (2026-09-09) — founder review applied; the validation
+> sprint is now the active workstream** (see
+> [VALIDATION_SPRINT.md](VALIDATION_SPRINT.md)). The purpose of this
+> document is to prove the central moat can actually be constructed:
+> define the claim/family/company/person/asset/transaction model, set the
+> wealth-estimation rules, and validate both against ten real Caribbean
+> families chosen to stress the model. The abstract design phase is over.
+>
+> The system in one line:
+> **Sources → Claims → Entities → Relationships → Transactions →
+> Valuations → Wealth Estimates → Family Profiles → Journalism → Rankings
+> → Intelligence** — and journalism feeds new sources and claims back into
+> the beginning.
 
 ## 1. The conceptual architecture
 
-- **The family page is the atomic unit.** Every family has people,
-  companies, ownership, estimated wealth, transactions, properties,
-  philanthropy, relationships and news.
-- **The company page is the second atomic unit.** Ownership, financials,
-  executives, transactions, subsidiaries, developments and related
-  families.
+- **The claim is the data atomic unit; the family page is the editorial
+  atomic unit.** Everything the system believes is stored as an auditable
+  claim (§2a); the family page is the flagship editorial projection of
+  those claims — people, companies, ownership, estimated wealth,
+  transactions, properties, philanthropy, relationships and news.
+- **The company page is the second editorial atomic unit.** Ownership,
+  financials, executives, transactions, subsidiaries, developments and
+  related families.
 - **Daily journalism is the update mechanism.** A hotel acquisition isn't
   just an article — it changes a company, a family's estimated wealth, a
   transaction history and perhaps an influence score.
@@ -34,10 +42,33 @@ financing, opening) is a graph update first and a story second (see
 
 ## 2. Entity model
 
+### 2a. The claim ledger — the atomic unit of data
+
+Every fact the system holds is a **Claim**:
+
+> **Subject → Predicate → Object/value → Valid-from/valid-to → Source(s) →
+> Evidence strength → Analyst → Verification date → Status → Superseded-by**
+
+Example: *Family X → economic ownership → Company Y → 62% → valid from
+2019 → [registry filing, annual report] → Tier 1 → analyst MR → verified
+2026-03-14 → approved → (later) superseded by claim #4812 (54%)*.
+
+The graph's edges and attributes are **projections of approved claims** —
+nothing enters the graph except through a claim. Claim statuses: proposed
+→ approved → superseded / retracted. Claims are never deleted: when the
+62% stake turns out to be 54% three years later, the ledger shows not just
+that the profile once said 62%, but *why we believed it*, which evidence
+supported it, when it applied and what superseded it.
+
+This is the audit trail that makes estimates defensible under challenge,
+and it is itself a sellable Intelligence asset: professional subscribers
+can see the evidentiary basis of every number.
+
 ### Nodes
 
 | Entity | Core attributes |
 | --- | --- |
+| **Claim** | See §2a — subject, predicate, object/value, validity dates, sources, evidence strength, analyst, verification date, status, supersession chain |
 | **Person** | Names (incl. Spanish double surnames, maiden names, aliases), birth/death dates, nationality(ies), residence(s), generation marker within family, education, roles (current/past) |
 | **Family** | Editorial designation — see §3, the family web. Name, origin island(s), founder(s), membership rule, branches, status (active/dispersed/absorbed) |
 | **Branch** | Subdivision of a family: descent line, its own holdings and management (see §3) |
@@ -46,7 +77,7 @@ financing, opening) is a graph update first and a story second (see
 | **Transaction** | Type (acquisition, sale, merger, financing, IPO, liquidation, inheritance/succession), parties, date, value + currency, evidence |
 | **Institution** | School, club, hospital, foundation, museum, association |
 | **Recognition** | Ranking placements, awards, honors — ours and third parties' — by year |
-| **WealthEstimate** | Annual snapshot per family/branch/person: range (low–high), point estimate optional, valuation date, FX date, confidence grade, methodology version, analyst notes |
+| **WealthEstimate** | Snapshot per family/branch/person: range (low–high), point estimate optional, valuation date, FX date, evidence confidence + valuation confidence (two dimensions, §4.13), valuation-state mix (§9), methodology version, analyst notes |
 | **Source** | Registry filing, court record, exchange filing, press item, interview, company statement — with date, type, reliability tier |
 
 ### Edges (all edges carry valid-from / valid-to dates and at least one Source)
@@ -55,7 +86,7 @@ financing, opening) is a graph update first and a story second (see
 | --- | --- | --- |
 | kinship | Person ↔ Person | parent/child, marriage (incl. dissolved), sibling; marriages between covered families are first-class inter-family connections |
 | membership | Person → Family/Branch | with role: founder, principal, heir, spouse-in, exited |
-| ownership | Person/Family/Company → Company/Asset | % stake, direct or via named intermediary (holdco, trust, foundation), attribution basis |
+| ownership | Person/Family/Company → Company/Asset | **Legal owner ≠ beneficial owner ≠ economic interest ≠ voting/control interest — all four recorded separately**, plus attribution status and evidence basis. Direct or via named intermediary (holdco, trust, foundation). A person may economically own 40%, vote 60%, hold nothing directly, and control the company through another entity — in the offshore Caribbean this distinction is routine, and capturing it is one of the reasons professional subscribers will pay |
 | role | Person → Company/Institution | CEO, chair, director, partner, trustee — dated; feeds People & Careers |
 | control | Person/Family → Trust/Foundation → holdings | settlor/trustee/beneficiary distinctions matter for attribution (§4) |
 | philanthropy | Person/Family/Foundation → Institution | gift, pledge, board seat, patronage |
@@ -68,9 +99,15 @@ roles and estimates are dated intervals, so the graph can be queried "as
 of" any year. The longitudinal archive — how ownership and wealth moved
 over 5, 10, 20 years — is the part competitors cannot reconstruct later.
 
-**Evidence is fact-level.** Every attribute and edge cites its source(s)
-with a reliability tier (§6). An unsourced claim does not enter the graph;
-it goes to a research-leads queue.
+**Evidence is fact-level — and the system has two layers.** Every
+attribute and edge in the **verified graph** cites its source(s) with a
+reliability tier (§6); only verified-graph claims are eligible to support
+publication or valuation. Beneath it sits a **research layer** — tips,
+hypotheses, unresolved entity matches, potential ownership connections —
+where analysts (and AI ingestion, §9) can work without sources being
+settled. Research-layer material can NEVER flow automatically into
+published products; promotion to the verified graph happens only through
+an approved claim.
 
 ## 3. The family web — how "family" is modeled
 
@@ -149,8 +186,13 @@ what separates the institution from a magazine making guesses.
 4. **Attributable ownership.** Only the family's attributable share
    counts, traced through holdcos where registries allow. Where the chain
    is opaque, publish a range and record the assumption.
-5. **Debt.** Net of known debt; where leverage is unknown, apply stated
-   sector-norm assumptions rather than ignoring debt.
+5. **Debt — three states, stored distinctly.** **Verified debt** (filings,
+   registries, disclosed facilities), **estimated debt** (reported or
+   modeled, labeled as such) and **unknown debt**. Estimates net verified
+   and clearly-labeled estimated debt. Sector-leverage norms may inform
+   the scenario range but are never recorded as if they were fact — and
+   where unknown debt could materially affect the result, widen the
+   published range rather than inventing a deduction.
 6. **Real estate.** Registry values, comparable transactions, or income
    approach for yielding assets; personal-use property included when
    ownership is legitimately public.
@@ -158,9 +200,13 @@ what separates the institution from a magazine making guesses.
    revocable/settlor-controlled → attributed; irrevocable charitable →
    excluded from personal wealth (tracked separately under philanthropy);
    ambiguous structures → range + note. Never speculate beyond sources.
-8. **Liquidity discounts.** Private, concentrated or hard-to-sell stakes
-   carry a documented discount band (indicatively 10–30%) chosen per case
-   and recorded.
+8. **Marketability and control adjustments — never automatic.** Applied
+   only when justified by the valuation method and the specific holding.
+   A blanket private-company discount double-counts whenever the
+   comparable transactions or multiples already embed illiquidity. Any
+   discount or premium must be explicitly recorded with its rationale and
+   cannot duplicate an adjustment already embedded in the comparable
+   valuation.
 9. **Currency.** All estimates in USD; conversion at valuation-date rate;
    material local-currency exposure noted (devaluation can move a fortune
    with no business change — say so).
@@ -170,34 +216,75 @@ what separates the institution from a magazine making guesses.
     then stakes move to heirs with dates.
 12. **Diaspora wealth.** Counted when the person/family qualifies under
     §5; the estimate notes what portion of wealth sits outside the region.
-13. **Confidence grades.** Every estimate carries a grade and a range:
-    - **A** — majority of value verified from filings/registries/market
-      prices;
-    - **B** — mix of verified anchors and modeled components;
-    - **C** — largely modeled from indirect evidence.
-    Publish the grade. Never publish false precision: ranges first, point
-    estimates only where grade A/B supports them.
+13. **Confidence — two dimensions, never one grade.** A single grade hides
+    the difference between knowing what a family owns and knowing what it
+    is worth. Every estimate carries both:
+    - **Evidence confidence** (High / Moderate / Low): how certain are we
+      about ownership, assets and debt?
+    - **Valuation confidence** (High / Moderate / Low): how certain are we
+      about what those holdings are worth?
+    A family can have excellent evidence of 70% ownership and poor
+    private-company financial disclosure — say so. Published form:
+    *US$420–520M — ownership evidence: High; valuation confidence:
+    Moderate.* Never publish false precision: ranges first, point
+    estimates only where both dimensions support them.
 14. **Right of reply.** Families are contacted before first publication of
-    an estimate and offered the chance to correct facts annually
-    thereafter; responses (or silence) are recorded. Cooperation can
-    improve accuracy but NEVER placement — see
-    [EDITORIAL_STANDARDS.md](EDITORIAL_STANDARDS.md).
+    an estimate and offered the chance to correct material facts before
+    each ranking's valuation date; responses are recorded. Subjects are
+    never shown final ranks, competitors' estimates, scores or unpublished
+    ranking results. Cooperation can improve accuracy but NEVER placement —
+    see [EDITORIAL_STANDARDS.md](EDITORIAL_STANDARDS.md).
+15. **Methodology-change governance.** Methodology versions are published;
+    a change (say, v1.4 altering treatment of private-company control
+    premiums) is announced and explained, never applied silently. History
+    is never rewritten: original-vintage estimates are preserved as
+    published ("2029 fortune under 2029 methodology: $600–750M"), with any
+    recast series under current methodology shown alongside, clearly
+    labeled — both series preserved.
+
+### Influence is never derived from wealth
+
+Stated now, before either index exists: **net worth is not an input that
+converts into an influence score.** Influence gets its own methodology on
+its own dimensions — corporate reach, employment and economic footprint,
+institutional positions, philanthropy, cultural reach, cross-island
+presence and demonstrated network significance. Wealth and influence will
+correlate in reality; the methodologies must remain independent, or the
+Influence 50 eventually becomes the Wealth 100 in a different order and
+one of the two franchises is redundant.
 
 ## 5. Defining "Caribbean" — eligibility rules (to ratify before any ranking)
 
 Proposed, for the founder to ratify:
 
-- **Core region:** the island Caribbean — Greater and Lesser Antilles plus
-  the Lucayan Archipelago (Bahamas, Turks & Caicos) and the island
-  territories (Cayman, USVI/BVI, the French, Dutch and other territories).
-  All eight launch markets are core.
-- **Mainland CARICOM (Guyana, Suriname, Belize):** culturally Caribbean;
-  proposed treatment — eligible for a defined "wider Caribbean" tier and
-  business coverage, included in core rankings only if/when coverage depth
-  supports it; flagged either way in methodology notes.
+The coverage universe is defined institutionally, not purely
+geographically, in two tiers:
+
+- **Core Caribbean:** the sovereign states and territories conventionally
+  regarded as Caribbean — the island Caribbean (Greater and Lesser
+  Antilles, the Lucayan Archipelago, and the island territories: Cayman,
+  USVI/BVI, the French, Dutch and other territories) — **including the
+  CARICOM mainland members Guyana, Suriname and Belize from the
+  beginning**, with methodology identifying island Caribbean and mainland
+  Caribbean where relevant. Guyana in particular is too important to
+  Caribbean capital — CARICOM membership, a rapidly transforming energy
+  economy — to relegate to a secondary tier; core status also avoids the
+  future absurdity of an enormous Guyanese fortune being ineligible for a
+  list purporting to describe Caribbean wealth. All eight launch markets
+  are core.
+- **Caribbean Capital Network:** the core region **plus Panama and other
+  external financial/business hubs when materially connected to Caribbean
+  capital** — banking, shipping, logistics, corporate structures, real
+  estate, family offices, cross-border wealth. Panama is in the database
+  from Day 1 (tracing Caribbean ownership will surface Panamanian entities
+  whether we intend it or not), and Panamanian families can carry their own
+  Panama coverage and eventually a broader Caribbean & Central American
+  Capital product. But a purely Panamanian fortune with no Caribbean
+  connection does not enter the flagship Caribbean Wealth 100 — the
+  definition of "Caribbean" is never distorted to admit it.
 - **Bermuda:** Atlantic, not Caribbean; proposed treatment — excluded from
-  core rankings, covered under Caribbean-linked/diaspora franchises where
-  relevant.
+  core rankings, covered under Caribbean-linked/diaspora franchises and the
+  Capital Network where relevant.
 - **Diaspora and multinational families:** a family/person qualifies for
   core rankings when at least one of: (a) primary residence in the region;
   (b) principal operating businesses or the origin of the fortune in the
@@ -221,6 +308,15 @@ Tier 3 — reputable press, trade publications (attributed).
 Tier 4 — background interviews, credible unverified reporting → leads
 queue or clearly-labeled context, never load-bearing for an estimate.
 
+**Source-document preservation (the 20-year rule).** Web pages disappear,
+registries change systems, companies delete annual reports — and in 2038
+someone may challenge why we estimated their family at $680M in 2029.
+Every load-bearing source therefore preserves: original document →
+retrieval date → URL/registry identifier → archive copy or hash where
+legally permissible → the relevant passage/page → the analyst who reviewed
+it. A consequential claim must be reconstructable from its preserved
+evidence years later, without depending on the live web.
+
 Starting inventory to build per market (openness varies; verify per
 island): companies registries (e.g., DR mercantile registries/ONAPI; PR
 Department of State registry plus US SEC for US-listed; Jamaica COJ and
@@ -231,38 +327,58 @@ portals, court systems, exchange disclosures, historical press archives in
 English and Spanish. Registry access, cost and disclosure depth per island
 is itself a validation-sprint deliverable.
 
-## 7. The validation sprint — 10 families, 4–5 islands
+## 7. The validation sprint — deliberately trying to break the model
 
 The go/no-go test for the entire thesis, run before naming and branding.
+The roster, protocol and running log live in
+[VALIDATION_SPRINT.md](VALIDATION_SPRINT.md).
 
-**Selection (founder to pick the names):** 10 families across the DR,
-Puerto Rico, Jamaica, Trinidad & Tobago/Barbados and Bahamas/Cayman —
-mixing: at least two anchored in listed companies (easier valuation), at
-least four fully private, at least one succession-in-progress, at least
-one diaspora-linked, at least one with a known branching structure to
-stress-test §3.
+**We are testing where the product breaks, not trying to collect ten
+passing grades.** The ten families are chosen as stress cases, not
+conveniences:
+
+| Stress case | Why |
+| --- | --- |
+| Listed-company dynasty | Establish the easy baseline |
+| DR private conglomerate | Spanish-language, private-company research |
+| Jamaican listed/private hybrid | Mixed valuation |
+| Trinidad industrial family | Conglomerate complexity |
+| Bahamian private family | Disclosure scarcity |
+| Cayman-linked structure | Offshore opacity |
+| Guyanese emerging fortune | Rapidly changing wealth |
+| Succession case | Estate/inheritance mechanics |
+| Multi-branch dynasty | Family boundary test (§3) |
+| Diaspora-linked family | Eligibility/attribution test (§5) |
+
+If the Cayman case proves almost impossible, that is a finding, not a
+failure.
 
 **For each family, produce:** the full profile to schema — people,
-branches, companies, stakes, assets, transactions, philanthropy,
-relationships — plus a wealth estimate with range and confidence grade,
-and a log of: hours spent, sources used (and refused/paywalled/absent),
-data gaps, and the natural story leads that emerged.
+branches, companies, stakes (legal/beneficial/economic/voting), assets,
+transactions, philanthropy, relationships — as approved claims with
+preserved sources; a wealth estimate with range and both confidence
+dimensions; and a log of hours spent, sources used (and
+refused/paywalled/absent), data gaps, and the natural story leads that
+emerged.
 
-**Success criteria (proposed):**
+**The success criterion is defensible uncertainty, not confident
+numbers.** We do not require any minimum count of high-confidence grades —
+that incentivizes analysts to become overconfident. The validation
+question is: **can we produce an estimate whose uncertainty is itself
+defensible?** A genuinely researched *US$300–600M — valuation confidence:
+Low* is a successful research product if we can explain precisely why the
+range cannot responsibly be narrowed. That explanation is part of the
+institution's credibility.
 
-- ≥7 of 10 profiles reach confidence grade B or better on the majority of
-  estimated wealth;
-- median build time lands within a budget that scales to 100 families with
-  a small research team (target: ≤ ~40 research hours per full profile at
-  this stage, falling with tooling);
-- every profile generates ≥3 publishable story leads (validates the
-  journalism↔database flywheel);
-- at least one branch-promotion or marriage-connection case is modeled
-  cleanly (validates the family web).
+Secondary measurements (learning metrics, not pass/fail): research hours
+per profile (does this scale to 100 families with a small team?); story
+leads per profile (does the journalism↔database flywheel turn?); whether
+the branch/marriage cases model cleanly in §3's structure.
 
-**Output:** a validation memo — what worked, what data exists where, gap
-map by island, revised time/cost per profile — and the go decision to
-proceed to naming, the first 100 families and the first 100 companies.
+**Output:** a validation memo — what worked, what broke, what data exists
+where, gap map by island, revised time/cost per profile — and the go
+decision to proceed to naming, the first 100 families and the first 100
+companies.
 
 ## 8. Build notes
 
@@ -278,3 +394,115 @@ proceed to naming, the first 100 families and the first 100 companies.
   endanger subjects (home addresses, minors' details, security
   information) follow [EDITORIAL_STANDARDS.md](EDITORIAL_STANDARDS.md)
   restrictions in the database itself, not just in print.
+
+## 9. Continuous Valuation Engine & Daily Wealth Index
+
+The graph makes possible something no annual list can be: **a living
+financial model of Caribbean family wealth that reacts to markets,
+ownership disclosures, transactions and regulatory filings as they
+happen.** This is the signature product that turns the company from a
+media startup into an information company — the Bloomberg Billionaires
+Index model, applied where Bloomberg doesn't systematically go.
+
+### The public product
+
+Daily estimated wealth of the Caribbean's major business families:
+
+| Rank | Family | Country | Fortune | Today | YTD |
+| --- | --- | --- | --- | --- | --- |
+| 1 | Family A | DR | $4.82B | +$73M | +8.4% |
+| 2 | Family B | Jamaica | $2.16B | −$41M | +2.1% |
+| 3 | Family C | Trinidad | $1.74B | +$12M | −3.7% |
+
+Every daily change is clickable and decomposes into its audit trail:
+
+> +$73M today = Public Company A +4.1% → +$51M · Public Company B +1.7% →
+> +$18M · USD/DOP movement → +$4M · private holdings → model-held.
+
+That decomposition is the difference between clickbait ("Family X made
+$73 million today") and a **mark-to-model estimate with an audit trail.**
+
+Per-family history charts: 1D | 1M | YTD | 1Y | 5Y | MAX.
+
+### How the engine works
+
+- **Graph traversal for attributable value.** The family owns 62.4% of
+  HoldCo A, which owns 71.2% of Listed Company B → effective economic
+  interest 44.43%. The engine computes attributable stakes by traversing
+  verified ownership claims (economic interest, not voting interest, for
+  valuation), then marks them against market feeds.
+- **Every fortune component carries a valuation state:**
+
+| State | Meaning |
+| --- | --- |
+| LIVE | Publicly traded / security-priced |
+| FX-LINKED | Recalculated from currency movements |
+| MODELLED | Private-company valuation (§4), periodically refreshed |
+| TRANSACTION-MARKED | Latest financing/acquisition establishes the mark |
+| PROPERTY-MARKED | Valuation/index/comparable based |
+| STALE | Insufficient recent evidence |
+| UNDER REVIEW | Material new information detected |
+
+- **Transparency of the mix is mandatory in the UI:** *"Estimated fortune:
+  $2.84B · Daily change: +$31M (+1.1%) · 43% of estimated wealth marked to
+  live market prices; remaining assets use periodically updated
+  private-market estimates."* A $2.84B fortune where only $1.2B is
+  observable is not worth $2.84B to the nearest $10M, and the product must
+  visually say so. Private companies do not pretend to change value daily.
+
+### The ingestion pipeline
+
+Continuous monitoring of regulatory and primary sources: SEC, Jamaica
+Stock Exchange, Trinidad & Tobago Stock Exchange, Barbados Stock Exchange,
+Eastern Caribbean Securities Exchange, Puerto Rico/US disclosures, company
+registries, annual reports, material-change announcements, insider
+filings, prospectuses, M&A filings, court records, government gazettes.
+
+> **Source detected → document parsed → entities resolved → claims
+> extracted → graph impact calculated → confidence assigned → analyst
+> review → graph updated → wealth recalculated → story suggested**
+
+Worked example: a filing shows a family-controlled vehicle disposed of
+2.4M shares. The system creates a **proposed claim** — *Family → economic
+ownership → Company X → 31.7% → proposed 29.9% · Source: regulatory filing
+· Tier 1 · Confidence: High* — and computes the impact (attributable value
+$481M → $454M, estimated fortune −$27M). **An analyst approves the graph
+change.** Then the index updates, and the CMS generates a story lead:
+*"Family X's stake in Company Y falls following $27 million share
+disposal."* The flywheel becomes almost mechanical.
+
+**Automation tiers.** Closing market prices and FX: automatic — the
+underlying ownership claim was already verified. A filing that alters
+beneficial interests through Trust A → Foundation B → HoldCo C: human
+review, always. AI is used aggressively for detection, parsing, entity
+resolution and impact calculation — and never allowed to move a published
+fortune by $400M on an unverified interpretation. (Binding rules in
+[EDITORIAL_STANDARDS.md](EDITORIAL_STANDARDS.md), AI section.)
+
+### Editorial products the engine generates
+
+Daily: Biggest Wealth Gainers • Biggest Wealth Decliners • Largest YTD
+Gains • New Highs • New Billionaires • Fortunes Under Review • Major
+Ownership Changes — plus alerts: *"WEALTH WATCH — Jamaica: the estimated
+fortune of Family X rose approximately $86M today after shares in its
+principal listed holding gained 7.2%,"* with the calculation one click
+away. Habit-forming in a way an annual rich list is not.
+
+### What Intelligence subscribers get
+
+Not just "Family X ≈ $1.8B" but: current estimate • defensible range •
+valuation-state mix (e.g., 37% live-priced, 41% privately modeled, 15%
+property, 7% other) • currency exposure • the ownership graph • valuation
+history • source documents • material filings • alerts • transactions •
+related families • board relationships. A professional product.
+
+### The two-product rule
+
+- **The annual Wealth 100** is authoritative and deliberately slow: deep
+  research, fixed valuation date, right of reply.
+- **The Daily Wealth Index** is dynamic and explicitly mark-to-model: the
+  best current estimate given live markets and the latest verified
+  information.
+
+**Never silently substitute one for the other.** Each is labeled as what
+it is, everywhere it appears.

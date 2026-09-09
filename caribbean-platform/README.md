@@ -57,8 +57,10 @@ database underneath it all.
 | [COMPETITIVE_LANDSCAPE.md](COMPETITIVE_LANDSCAPE.md) | **Locked v1** | Who occupies which territory today, the whitespace (Forbes-grade wealth infrastructure), the family-page prototype, and the competitors to [Brand] Intelligence. |
 | [CONTENT_UNIVERSE.md](CONTENT_UNIVERSE.md) | **Locked v1** | 13 editorial verticals plus the operating principles: the three-things filter, own change before opinion, ownership as mandatory metadata, the six-section reader navigation, and the recurring indices. |
 | [AWARDS_ECOSYSTEM.md](AWARDS_ECOSYSTEM.md) | **Locked v1** | Rankings vs. awards vs. honors vs. guides, the calendar, governance, scarcity rules, the Summit & Honors, and the two inviolable rules. |
-| [DATA_MODEL_AND_METHODOLOGY.md](DATA_MODEL_AND_METHODOLOGY.md) | **v1 draft — current build priority** | The graph model (person/family/branch/company/asset/transaction), the family web, wealth methodology, "Caribbean" eligibility rules, and the 10-family validation sprint. |
-| [EDITORIAL_STANDARDS.md](EDITORIAL_STANDARDS.md) | **v1 draft — ratify before publication** | Sourcing, anonymous sources, estimates, right of reply, corrections, conflicts, privacy and minors, political coverage, sponsored content, commercial separation, legal review. |
+| [DATA_MODEL_AND_METHODOLOGY.md](DATA_MODEL_AND_METHODOLOGY.md) | **v1.1 — governing** | The claim ledger, the graph model and family web, the 15-rule wealth methodology with two-dimension confidence, the two-tier coverage universe (Guyana in core; Panama in the Capital Network), and the Continuous Valuation Engine & Daily Wealth Index. |
+| [EDITORIAL_STANDARDS.md](EDITORIAL_STANDARDS.md) | **v1.1 — ratified** | The constitution, sourcing and the two-layer rule, the AI section, right of reply without ranking previews, source preservation, the founder firewall, MNPI infrastructure, strict minors/homes security rules, commercial separation, style. |
+| [HOUSE_STYLE.md](HOUSE_STYLE.md) | Working draft | Narrative authority: the voice, the arc, headline forms and per-section voice — pending analysis of the founder's reference publication. |
+| [VALIDATION_SPRINT.md](VALIDATION_SPRINT.md) | **OPEN — active workstream** | The ten stress-case families, execution order, per-profile deliverables and the running sprint log. |
 | [NAMING_AND_POSITIONING.md](NAMING_AND_POSITIONING.md) | **Positioning settled; name open** | First-round candidates struck (with reasons), the non-geographic reframe, tightened criteria, and the 100–150-candidate next round — which runs after the data-model validation. |
 
 ## Product architecture (long-term)
@@ -101,13 +103,21 @@ across the wider Caribbean.
 ## Status and build sequence
 
 **2026-09-08** — Founding brief, competitive thesis, content universe and
-rankings/awards architecture locked at v1. Data model & methodology and
-editorial standards drafted. First naming round struck; next round specced.
+rankings/awards architecture locked at v1. First naming round struck; next
+round specced.
+
+**2026-09-09** — Data model upgraded to v1.1 (claims ledger, two-dimension
+confidence, beneficial-vs-legal ownership, Guyana in core, Panama in the
+Capital Network, Continuous Valuation Engine & Daily Wealth Index).
+Editorial standards ratified at v1.1 (constitution, AI rules, founder
+firewall, strict minors/homes security). House style drafted (narrative
+authority). **The validation sprint is open: ten stress-case families
+selected.**
 
 Conceptual planning is over. The build sequence from here:
 
-1. **Data model & methodology** → validate with 10 real families across
-   4–5 islands (the go/no-go test for the whole thesis)
+1. **Validation sprint** → ten stress-case families (the go/no-go test for
+   the whole thesis) — RUNNING
 2. **Name** → the 100–150-candidate round → brand/domain/trademark diligence
 3. **Editorial standards** ratified
 4. **Wealth methodology** finalized from validation-sprint lessons

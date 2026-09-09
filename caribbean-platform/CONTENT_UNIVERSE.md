@@ -512,7 +512,8 @@ refreshed on a fixed cadence. Rankings are moments; indices are time
 series, and after ten years the archive itself becomes difficult to
 reproduce. They are also natural [Brand] Intelligence products:
 
-- Caribbean Wealth Index
+- Caribbean Wealth Index — including the **Daily Family Wealth Index**,
+  the mark-to-model flagship (see DATA_MODEL_AND_METHODOLOGY.md §9)
 - Caribbean Family Business Index
 - Caribbean Luxury Property Index
 - Caribbean Hotel Development Index
