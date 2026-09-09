@@ -2,9 +2,29 @@
 
 > **Status: OPEN (2026-09-09).** Operational document for the sprint
 > defined in [DATA_MODEL_AND_METHODOLOGY.md](DATA_MODEL_AND_METHODOLOGY.md)
-> §7. The purpose is to break the model, not to collect ten passing
-> grades: the success criterion is defensible uncertainty, and "the Cayman
-> case is nearly impossible" is a finding, not a failure.
+> §7. **The exercise is not "estimate the wealth of these ten families."
+> It is: determine what these ten families actually own today, then
+> determine whether a defensible wealth estimate follows.** The purpose is
+> to break the model, not to collect ten passing grades — "the Cayman case
+> is nearly impossible" is a finding, not a failure.
+>
+> **Primary KPI:** for at least 8 of 10 cases, the research process
+> reaches a **defensible ownership conclusion** — one of the four
+> legitimate outcomes below — and documents why.
+>
+> 1. **Rankable** — ownership and valuation sufficiently attributable.
+> 2. **Rankable with wide range** — ownership established, valuation
+>    uncertain.
+> 3. **Known but presently unrankable** — evidence insufficient for a
+>    responsible estimate.
+> 4. **Historical/influential, not economically rankable** — perceived
+>    family ownership unsupported by current evidence; the heritage
+>    relationship and the actual current owners are recorded separately.
+>
+> All four are successful database outcomes, and the families are not
+> forced to remain the families: if a founding family no longer holds
+> materially, the story becomes "who owns it today?" — which is exactly
+> what "own change before opinion" means.
 >
 > **On the names below:** these are prominent, publicly covered business
 > families, selected as research hypotheses because each stresses a
@@ -111,3 +131,42 @@ documents.
   substantial-shareholder and directors'-interests tables; Barbados
   corporate-registry (CAIPO) extract; then draft the first claims with
   preserved sources.
+
+**2026-09-09 — Founder review of the Goddard pass; sprint reframed.**
+
+- **Correction to Finding 2's implication:** the primary documents ARE
+  publicly accessible — GEL's site carries the 2025 annual report (notice
+  dated 31 December 2025), 2026 quarterly results, and the management
+  proxy circular, with the BSE as a second route. Verified this session:
+  the documents exist and are indexed, but this session's egress proxy
+  blocks both goddardenterprisesltd.com and bse.com.bb, so the constraint
+  is **session network policy, not public availability**. Fix before deep
+  profile work: widen the environment's network policy (or supply the
+  PDFs into the session).
+- **Founder-supplied data (research layer; to verify against the annual
+  reports themselves):** the 2022 shareholder analysis discloses two >5%
+  holders — **Neptune Investments Limited (13.87M shares)** and **Sagicor
+  Group (26.21M shares)** — and **no "Goddard family" block above 5%**.
+  The 2024 annual report shows **Matthew D. Goddard** on the board.
+- **The central Profile #1 question, now properly framed:** is Goddard
+  Enterprises a Goddard-family fortune today, or a company with
+  Goddard-family origins that evolved into dispersed/institutional
+  ownership? Board presence does not establish economic ownership
+  (heritage ≠ stake — now a first-class distinction in the data model).
+- **Open research question before concluding either way:** who is behind
+  **Neptune Investments Limited**? A >5% block held through an
+  unrevealing holdco name is exactly the beneficial-vs-legal case the
+  model exists for — it could be a family vehicle, another family, or an
+  institution. Family holdings could also sit dispersed below the 5%
+  disclosure threshold. Neither absence-of-a-named-block nor a
+  surname-free register proves absence of family ownership; the register,
+  CAIPO records and older annual reports (tracing the sell-down history,
+  if any) decide it.
+- **Possible outcomes for this case now include #4** (historical/
+  influential, not economically rankable) — with editorial leads either
+  way: *"Who Owns Goddard Enterprises Today?"* / *"The Company That
+  Outgrew Its Founding Family."*
+- **Lesson recorded:** conventional wisdom about "the wealthy families" is
+  a hypothesis list, not a fact list. The sprint's product is ownership
+  conclusions; wealth estimates follow only where ownership supports
+  them.

@@ -87,7 +87,8 @@ can see the evidentiary basis of every number.
 | kinship | Person ↔ Person | parent/child, marriage (incl. dissolved), sibling; marriages between covered families are first-class inter-family connections |
 | membership | Person → Family/Branch | with role: founder, principal, heir, spouse-in, exited |
 | ownership | Person/Family/Company → Company/Asset | **Legal owner ≠ beneficial owner ≠ economic interest ≠ voting/control interest — all four recorded separately**, plus attribution status and evidence basis. Direct or via named intermediary (holdco, trust, foundation). A person may economically own 40%, vote 60%, hold nothing directly, and control the company through another entity — in the offshore Caribbean this distinction is routine, and capturing it is one of the reasons professional subscribers will pay |
-| role | Person → Company/Institution | CEO, chair, director, partner, trustee — dated; feeds People & Careers |
+| role | Person → Company/Institution | CEO, chair, director, partner, trustee — dated; feeds People & Careers. **A board seat or executive role is never evidence of economic ownership** |
+| heritage | Person/Family → Company/Institution | Founder, historical owner, name-origin — a documented founding/historical relationship that implies NO current economic stake. Lets the graph say "Goddard family → founders of → Goddard Enterprises" while current ownership is recorded separately from whoever demonstrably holds it |
 | control | Person/Family → Trust/Foundation → holdings | settlor/trustee/beneficiary distinctions matter for attribution (§4) |
 | philanthropy | Person/Family/Foundation → Institution | gift, pledge, board seat, patronage |
 | affiliation | Person → Institution | education, club membership |
@@ -333,6 +334,16 @@ The go/no-go test for the entire thesis, run before naming and branding.
 The roster, protocol and running log live in
 [VALIDATION_SPRINT.md](VALIDATION_SPRINT.md).
 
+**The exercise is not "estimate the wealth of these ten families." It is:
+determine what these ten families actually own today, then determine
+whether a defensible wealth estimate follows.** Ownership first, valuation
+second — a family's conventional reputation is a hypothesis, never an
+input. Some supposedly major families may have sold down decades ago while
+obscure holding companies or other families actually own the capital
+today; discovering that is the product working, and the editorial output
+("Who owns X today?") is often stronger than the fortune piece would have
+been.
+
 **We are testing where the product breaks, not trying to collect ten
 passing grades.** The ten families are chosen as stress cases, not
 conveniences:
@@ -361,13 +372,29 @@ dimensions; and a log of hours spent, sources used (and
 refused/paywalled/absent), data gaps, and the natural story leads that
 emerged.
 
-**The success criterion is defensible uncertainty, not confident
-numbers.** We do not require any minimum count of high-confidence grades —
-that incentivizes analysts to become overconfident. The validation
-question is: **can we produce an estimate whose uncertainty is itself
-defensible?** A genuinely researched *US$300–600M — valuation confidence:
-Low* is a successful research product if we can explain precisely why the
-range cannot responsibly be narrowed. That explanation is part of the
+**Every case lands in one of four legitimate outcomes — all four are
+successful database outcomes:**
+
+1. **Rankable** — ownership and valuation sufficiently attributable.
+2. **Rankable with wide range** — economic ownership reasonably
+   established but valuation uncertain.
+3. **Known but presently unrankable** — evidence insufficient for a
+   responsible fortune estimate.
+4. **Historical/influential, not economically rankable** — popular
+   perception of family ownership isn't supported by current evidence;
+   the graph records the heritage relationship and, separately, whoever
+   demonstrably owns the capital today.
+
+**Primary KPI: for at least 8 of 10 cases, the research process reaches a
+defensible ownership conclusion — rankable, unrankable, historical or
+unresolved — and documents why.** This tests whether we can build the
+Caribbean wealth graph, not merely whether we can manufacture a Caribbean
+rich list. We do not require any minimum count of high-confidence wealth
+estimates — that incentivizes analysts to become overconfident. Where an
+estimate is produced, the standard is **defensible uncertainty**: a
+genuinely researched *US$300–600M — valuation confidence: Low* is a
+successful research product if we can explain precisely why the range
+cannot responsibly be narrowed. That explanation is part of the
 institution's credibility.
 
 Secondary measurements (learning metrics, not pass/fail): research hours
@@ -403,6 +430,13 @@ ownership disclosures, transactions and regulatory filings as they
 happen.** This is the signature product that turns the company from a
 media startup into an information company — the Bloomberg Billionaires
 Index model, applied where Bloomberg doesn't systematically go.
+
+The engine's valuable intellectual property is not the arithmetic —
+computers multiply a stock price by 44.43% effortlessly. It is
+**establishing that 44.43% is actually the correct attributable economic
+interest, and continuously monitoring that it stays correct.** Once the
+ownership graph is established and maintained, everything downstream
+becomes dramatically easier.
 
 ### The public product
 
