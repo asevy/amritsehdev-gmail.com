@@ -64,6 +64,20 @@ This is the audit trail that makes estimates defensible under challenge,
 and it is itself a sellable Intelligence asset: professional subscribers
 can see the evidentiary basis of every number.
 
+**The Extraction object sits between Source and Claim.** One source
+supports many claims, so the exact fragment supporting each claim is
+preserved separately: Source → Extraction (page/section, exact passage,
+table row/cell, extraction method, verifying analyst, OCR/AI confidence
+where applicable) → Claim. When a claim is challenged, the answer is the
+fragment — never a reopened 180-page report. A verified extraction
+satisfies the evidence-path passage requirement for its source.
+
+**The block invariant (deduplication).** Every countable holding carries
+a unique underlying economic block ID, and the same block can never be
+counted twice merely because an issuer attributes it to multiple
+connected persons. Aggregation without block IDs is refused by the
+engine, not discouraged by a note.
+
 Two discipline rules for registry-derived claims:
 
 - **The graph preserves exactly what the registry says.** "Person →
@@ -262,6 +276,17 @@ what separates the institution from a magazine making guesses.
     published ("2029 fortune under 2029 methodology: $600–750M"), with any
     recast series under current methodology shown alongside, clearly
     labeled — both series preserved.
+
+16. **Freshness is separate from validity.** *Facts can be true as of a
+    date without being currently verified.* A point-in-time disclosure
+    (an annual-report shareholding, a price, an FX rate) is valid as of
+    its date — never "current forever" — and carries a computed
+    freshness state: **current / aging / stale / superseded**, with
+    thresholds by claim type (indicative: market prices age in a day and
+    go stale in a week; listed shareholdings age after 90 days and go
+    stale after 365 unless refreshed by filings; roles are slower).
+    Freshness is derived at read time, never stored as fact, and the
+    Daily Wealth Engine displays it on every input it uses.
 
 ### Influence is never derived from wealth
 
@@ -581,6 +606,23 @@ valuation-state mix (e.g., 37% live-priced, 41% privately modeled, 15%
 property, 7% other) • currency exposure • the ownership graph • valuation
 history • source documents • material filings • alerts • transactions •
 related families • board relationships. A professional product.
+
+### The three publication surfaces
+
+The same graph feeds three deliberately different surfaces:
+
+1. **Public publication** — narrative, approved facts only, ranges,
+   accessible methodology.
+2. **Intelligence product** — deeper ownership trees, historical
+   estimates, valuation components, sources, confidence dimensions,
+   downloadable data.
+3. **Analyst environment** — claims, source and extraction IDs, evidence
+   paths, rejected/superseded claims, unresolved leads, provenance,
+   internal notes, the research queue.
+
+The analyst environment is allowed to be technical; the public surface
+never is. An internal preview is an analyst-surface artifact and is
+labeled as such.
 
 ### The two-product rule
 

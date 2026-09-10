@@ -10,11 +10,14 @@ Default: reads ./data, writes ./explorer.html
 """
 from __future__ import annotations
 
+import datetime
 import html
 import sys
 
-from schema import evidence_path_gaps
+from schema import evidence_path_gaps, freshness
 from store import Ledger
+
+TODAY = datetime.date.today().isoformat()
 
 CSS = """
 :root{--paper:#FBF9F4;--panel:#F5F2E9;--ink:#1A1A18;--muted:#6E6A60;
@@ -95,8 +98,12 @@ def render_object(led, obj):
     return esc(obj)
 
 
+FRESH_COLOR = {"current": "var(--ok)", "aging": "var(--navy)",
+               "stale": "var(--burgundy)", "superseded": "var(--muted)"}
+
+
 def claim_card(led, c) -> str:
-    gaps = evidence_path_gaps(c, led.sources)
+    gaps = evidence_path_gaps(c, led.sources, led.extractions)
     path = ('<span class="path-ok">complete</span>' if not gaps else
             '<span class="path-gap">incomplete — ' +
             "; ".join(esc(g) for g in gaps) + "</span>")
@@ -116,7 +123,16 @@ def claim_card(led, c) -> str:
          f'<a href="#c-{esc(c.superseded_by)}">{esc(c.superseded_by)}</a>'
          if c.superseded_by else '<span class="muted">—</span>'),
         ("Evidence path", path),
+        ("Freshness", (lambda f: f'<span style="color:'
+                       f'{FRESH_COLOR[f]}">{f}</span>')(
+            freshness(c, TODAY))),
     ]
+    if c.extractions:
+        rows.insert(5, ("Extractions", " · ".join(
+            f'<a href="#x-{esc(x)}">{esc(x)}</a>'
+            for x in c.extractions)))
+    if c.block_id:
+        rows.insert(3, ("Block", esc(c.block_id)))
     if c.registry_verbatim:
         rows.insert(3, ("Registry verbatim", esc(c.registry_verbatim)))
     if c.statutory_basis:
@@ -364,6 +380,72 @@ def dossier(led, fam) -> str:
             f'margin:16px 0 8px">Timeline</h3><dl>{tl}</dl></div>')
 
 
+def research_queue(led) -> str:
+    """Materiality-ordered blockers: impact x confidence gap x ease.
+    v1 uses explicit rules; scores get quantitative as valuation
+    coverage grows."""
+    items = []
+    block_value = ""
+    try:
+        from valuation import decompose_family
+        fams = [e.id for e in led.entities.values()
+                if e.type == "family"]
+        for f in fams:
+            for d in decompose_family(led, f):
+                if "error" not in d and d.get("value_usd"):
+                    block_value = (f"gates ≈USD {d['value_usd']/1e6:,.0f}M "
+                                   f"(mark-to-model)")
+    except Exception:
+        pass
+    for c in led.claims.values():
+        if c.status in ("SUPERSEDED", "RETRACTED", "REJECTED"):
+            continue
+        f = freshness(c, TODAY)
+        if c.predicate.endswith("_unresolved"):
+            subj = led.entities.get(c.subject)
+            if subj and subj.type == "family":
+                items.append(("H", f"{esc(c.id)} — beneficial ownership "
+                              f"of {link_entity(led, c.object) if isinstance(c.object, str) else '?'}",
+                              f"Primary blocker; {esc(block_value)}"
+                              if block_value else "Primary blocker",
+                              "COJ reverse search + BO registry"))
+            else:
+                items.append(("M", f"{esc(c.id)} — who is behind "
+                              f"{link_entity(led, c.subject)}?",
+                              "Unidentified holder of a tracked listed "
+                              "company", "Registry record (COJ/CAIPO)"))
+        elif c.predicate == "member_of" and c.status == "LEAD":
+            items.append(("M", f"{esc(c.id)} — kinship: "
+                          f"{link_entity(led, c.subject)}",
+                          "Quick win: cheap to resolve, unlocks family "
+                          "membership edges", "RGD / AR bios / on-record"))
+        elif "acquirer" in c.predicate and c.status == "LEAD":
+            items.append(("L", f"{esc(c.id)} — "
+                          f"{link_entity(led, c.subject)} stake in "
+                          f"{render_object(led, c.object)}",
+                          "Confirm legal name + materiality",
+                          "COJ + press retrieval"))
+        elif c.predicate in ("reported_price", "reported_market_stats") \
+                and f == "stale" and c.status != "LEAD":
+            items.append(("M", f"{esc(c.id)} — refresh "
+                          f"{esc(c.predicate.replace('_', ' '))} for "
+                          f"{link_entity(led, c.subject)}",
+                          "Stale market input gates a live mark",
+                          "JSE close / current quote"))
+    order = {"H": 0, "M": 1, "L": 2}
+    items.sort(key=lambda t: order[t[0]])
+    if not items:
+        return '<p class="muted">Queue empty.</p>'
+    rows = "".join(
+        f'<tr><td><span class="pill" style="color:'
+        f'{"var(--burgundy)" if p == "H" else "var(--navy)" if p == "M" else "var(--muted)"}">'
+        f'{p}</span></td><td>{item}</td><td>{why}</td><td>{route}</td>'
+        f"</tr>" for p, item, why, route in items)
+    return ('<div class="tablewrap"><table><tr><th></th><th>Item</th>'
+            '<th>Why it matters</th><th>Route</th></tr>' + rows +
+            "</table></div>")
+
+
 def main() -> None:
     data_dir = sys.argv[1] if len(sys.argv) > 1 else "data"
     out_file = sys.argv[2] if len(sys.argv) > 2 else "explorer.html"
@@ -392,6 +474,9 @@ def main() -> None:
         parts.append(f'<a class="chip" href="#e-{esc(e.id)}">{esc(e.name)} '
                      f'<small>{esc(e.type)} · {n}</small></a>')
     parts.append("</div>")
+
+    parts.append("<h2>Research queue (materiality-ordered)</h2>")
+    parts.append(research_queue(led))
 
     parts.append("<h2>Family dossiers</h2>")
     fams = [e for e in led.entities.values() if e.type == "family"]
@@ -425,6 +510,29 @@ def main() -> None:
             f'<div class="card" id="e-{esc(e.id)}"><div class="cardhead">'
             f'<b>{esc(e.name)}</b><span class="muted">{meta}</span></div>'
             f'<dl><dt>Claims</dt><dd>{links}</dd>{notes}</dl></div>')
+
+    parts.append("<h2>Extractions</h2>")
+    for x in sorted(led.extractions.values(), key=lambda x: x.id):
+        cites = " · ".join(f'<a href="#c-{esc(c.id)}">{esc(c.id)}</a>'
+                           for c in sorted(led.claims.values(),
+                                           key=lambda c: c.id)
+                           if x.id in c.extractions) or \
+            '<span class="muted">—</span>'
+        rows = [("Source", f'<a href="#s-{esc(x.source_id)}">'
+                 f'{esc(x.source_id)}</a>'),
+                ("Passage", esc(x.passage)),
+                ("Locator", esc(x.locator) or
+                 '<span class="muted">—</span>'),
+                ("Method", esc(x.method)),
+                ("Analyst", esc(x.analyst) or
+                 '<span class="muted">—</span>'),
+                ("Supports", cites)]
+        if x.notes:
+            rows.append(("Notes", esc(x.notes)))
+        dl = "".join(f"<dt>{k}</dt><dd>{v}</dd>" for k, v in rows)
+        parts.append(f'<div class="card" id="x-{esc(x.id)}">'
+                     f'<div class="cardhead"><span class="cid">'
+                     f'{esc(x.id)}</span></div><dl>{dl}</dl></div>')
 
     parts.append("<h2>Sources</h2>")
     for s in sorted(led.sources.values(), key=lambda s: s.id):

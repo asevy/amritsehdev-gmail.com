@@ -21,7 +21,8 @@ import json
 import pathlib
 from typing import Optional
 
-from schema import (Claim, Entity, Source, evidence_path_gaps,  # noqa: F401
+from schema import (Claim, Entity, Extraction, Source,  # noqa: F401
+                    evidence_path_gaps, freshness, no_double_count,
                     publishable)
 
 
@@ -31,6 +32,7 @@ class Ledger:
         self.dir.mkdir(parents=True, exist_ok=True)
         self.entities: dict[str, Entity] = {}
         self.sources: dict[str, Source] = {}
+        self.extractions: dict[str, Extraction] = {}
         self.claims: dict[str, Claim] = {}
         self._load()
 
@@ -41,6 +43,8 @@ class Ledger:
     def _load(self) -> None:
         for kind, cls, target in (("entities", Entity, self.entities),
                                   ("sources", Source, self.sources),
+                                  ("extractions", Extraction,
+                                   self.extractions),
                                   ("claims", Claim, self.claims)):
             f = self._file(kind)
             if not f.exists():
@@ -69,11 +73,22 @@ class Ledger:
         self._append("sources", s)
         return s
 
+    def add_extraction(self, x: Extraction) -> Extraction:
+        x.validate()
+        if x.source_id not in self.sources:
+            raise ValueError(f"{x.id}: unknown source {x.source_id}")
+        self.extractions[x.id] = x
+        self._append("extractions", x)
+        return x
+
     def add_claim(self, c: Claim) -> Claim:
         c.validate()
         for sid in c.sources:
             if sid not in self.sources:
                 raise ValueError(f"{c.id}: unknown source {sid}")
+        for xid in c.extractions:
+            if xid not in self.extractions:
+                raise ValueError(f"{c.id}: unknown extraction {xid}")
         if c.subject not in self.entities:
             raise ValueError(f"{c.id}: unknown subject {c.subject}")
         self.claims[c.id] = c
@@ -86,7 +101,7 @@ class Ledger:
         c = dataclasses.replace(self.claims[claim_id], status="APPROVED",
                                 analyst=analyst, verified_date=date,
                                 methodology_version=methodology_version)
-        gaps = evidence_path_gaps(c, self.sources)
+        gaps = evidence_path_gaps(c, self.sources, self.extractions)
         if gaps:
             raise ValueError(
                 f"{claim_id}: cannot approve — evidence path incomplete: "
@@ -107,7 +122,7 @@ class Ledger:
         for c in list(self.claims.values()):
             if c.status != "APPROVED":
                 continue
-            gaps = evidence_path_gaps(c, self.sources)
+            gaps = evidence_path_gaps(c, self.sources, self.extractions)
             if gaps:
                 d = dataclasses.replace(
                     c, status="PROPOSED",

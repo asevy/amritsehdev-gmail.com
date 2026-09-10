@@ -82,6 +82,26 @@ class Source:
 
 
 @dataclass
+class Extraction:
+    """The bridge between a Source and a Claim: one source supports many
+    claims, and the exact fragment supporting each claim is preserved
+    separately, so a challenge jumps to the fragment, never back into a
+    180-page report."""
+    id: str
+    source_id: str
+    passage: str                  # exact passage
+    locator: str = ""             # page/section; table row/cell
+    method: str = "manual"        # manual | manual-relay | ocr | ai
+    analyst: str = ""             # verifying analyst
+    confidence: str = ""          # for OCR/AI extractions
+    notes: str = ""
+
+    def validate(self) -> None:
+        if not self.passage:
+            raise ValueError(f"{self.id}: extraction without a passage")
+
+
+@dataclass
 class Claim:
     id: str
     subject: str                 # entity id
@@ -100,6 +120,12 @@ class Claim:
     #  "regime_version": str, "as_of": ISO date}
     methodology_version: str = ""  # required for APPROVED
     jurisdiction: str = ""         # market whose playbook governed this
+    extractions: list = field(default_factory=list)  # Extraction ids
+    block_id: str = ""  # unique underlying economic block. THE
+    # DEDUPLICATION INVARIANT: the same block can never be counted twice
+    # merely because an issuer attributes it to multiple connected
+    # persons - aggregation requires unique block_ids (see
+    # no_double_count)
     notes: str = ""
 
     def validate(self) -> None:
@@ -140,28 +166,115 @@ def publishable(claim: Claim, sources_by_id: dict) -> bool:
                for s in claim.sources if s in sources_by_id)
 
 
-def evidence_path_gaps(claim: Claim, sources_by_id: dict) -> list:
+FRESHNESS_DAYS = {
+    # claim-type prefix: (aging_after, stale_after) in days
+    "reported_market_stats": (1, 7),
+    "reported_price": (1, 7),
+    "reported_fx": (1, 7),
+    "reported_shareholder": (90, 365),
+    "registry_": (90, 365),
+    "bo_": (180, 540),
+    "role_": (365, 730),
+}
+FRESHNESS_DEFAULT = (365, 730)
+
+
+def freshness(claim: Claim, today: str) -> str:
+    """current / aging / stale / superseded — computed, never stored.
+
+    Facts can be true as of a date without being currently verified: a
+    point-in-time disclosure is 'current as of' its date, and this state
+    tracks how far verification has drifted from today.
+    """
+    if claim.status in ("SUPERSEDED", "RETRACTED"):
+        return "superseded"
+    basis = None
+    if isinstance(claim.object, dict):
+        basis = claim.object.get("as_of")
+    basis = (basis or claim.valid_from or claim.verified_date)
+    if not basis:
+        return "stale"  # undated evidence is stale by definition
+    import datetime as _dt
+    s = str(basis)
+    try:
+        if len(s) >= 10:
+            b = _dt.date.fromisoformat(s[:10])
+        elif len(s) == 7:            # YYYY-MM
+            b = _dt.date(int(s[:4]), int(s[5:7]), 1)
+        elif len(s) == 4:            # YYYY -> mid-year
+            b = _dt.date(int(s), 7, 1)
+        else:
+            return "stale"
+    except ValueError:
+        return "stale"
+    t = _dt.date.fromisoformat(today)
+    age = (t - b).days
+    aging, stale = FRESHNESS_DEFAULT
+    for prefix, (a, s) in FRESHNESS_DAYS.items():
+        if claim.predicate.startswith(prefix):
+            aging, stale = a, s
+            break
+    if age > stale:
+        return "stale"
+    if age > aging:
+        return "aging"
+    return "current"
+
+
+def no_double_count(claims: list) -> list:
+    """Deduplication invariant: aggregation input must not contain two
+    live claims sharing a block_id. Returns the deduplicated list (one
+    claim per block, the newest); raises if a blank block_id would be
+    aggregated alongside others - aggregation requires explicit blocks.
+    """
+    seen, out = {}, []
+    for c in claims:
+        if not c.block_id:
+            raise ValueError(
+                f"{c.id}: aggregation requires a block_id — the engine "
+                f"refuses to sum holdings without unique underlying "
+                f"economic blocks")
+        if c.block_id in seen:
+            continue  # same underlying block: counted once
+        seen[c.block_id] = c
+        out.append(c)
+    return out
+
+
+def evidence_path_gaps(claim: Claim, sources_by_id: dict,
+                       extractions_by_id: dict = None) -> list:
     """The reproducible-evidence-path invariant.
 
     An APPROVED claim must always answer: which document, which page/
     passage, which analyst, which methodology version, which approval.
-    Returns a list of human-readable gaps; empty means the path is
-    complete. Enforced at approval time and re-checked by Ledger.audit(),
-    which demotes any approved claim whose path has broken.
+    A verified Extraction linking the claim to a source satisfies the
+    passage requirement for that source (Source -> Extraction -> Claim);
+    otherwise the source's own passage field must carry it. Returns a
+    list of human-readable gaps; empty means the path is complete.
+    Enforced at approval time and re-checked by Ledger.audit(), which
+    demotes any approved claim whose path has broken.
     """
     gaps = []
+    xs = extractions_by_id or {}
     if not claim.sources:
         gaps.append("no sources")
+    claim_x = [xs[i] for i in claim.extractions if i in xs]
+    for xid in claim.extractions:
+        if xid not in xs:
+            gaps.append(f"extraction {xid} missing from ledger")
     for sid in claim.sources:
         s = sources_by_id.get(sid)
         if s is None:
             gaps.append(f"source {sid} missing from ledger")
             continue
-        if not s.passage:
-            gaps.append(f"{sid}: no passage/page recorded")
+        x_ok = any(x.source_id == sid and x.passage and x.analyst
+                   for x in claim_x)
+        if not (s.passage or x_ok):
+            gaps.append(f"{sid}: no passage — neither on the source nor "
+                        f"via a verified extraction")
         if not (s.preserved and s.archive_ref):
             gaps.append(f"{sid}: document not preserved (archive)")
-        if not s.analyst:
+        if not (s.analyst or x_ok):
             gaps.append(f"{sid}: no reviewing analyst recorded")
     if not claim.analyst:
         gaps.append("no approving analyst")

@@ -283,6 +283,28 @@ approval gated on archiving the PDFs — the invariant held):
   the graph traverses into a defensible Mahfood family stake — the
   listed component then prices mechanically.
 
+**2026-09-10 — First valuation decomposition executed (internal,
+mark-to-model, unapproved inputs).** The engine priced the WGCL block
+without attributing it: **2,400,058,736 shares × JMD 20.83 = JMD 49.99B
+≈ USD 316.6M** (USD/JMD 157.89), with every input dated and
+freshness-flagged by the new engine — holding *stale* (as-of 2025-06-30;
+FY2026 disclosures exist), price *stale* (last search-visible close
+2026-06-21 under the 7-day rule), fx *aging* (2026-09-07) — and
+family-attributable portion rendered **UNRESOLVED** against blocker
+C-2026-0024. The mechanics are proven without violating the attribution
+invariant. Extraction objects (X-2026-0001…0004) now carry the exact AR
+fragments; block IDs enforce the deduplication invariant in code.
+
+**THE NAMED MILESTONE:** one chain fully approved, end to end —
+**source → extraction → claim → ownership edge → valuation → family
+attribution → daily wealth calculation — on Mahfood / WGCL / Wisynco.**
+Requirements outstanding: (1) archive the FY2024/FY2025 annual report
+PDFs (completes evidence paths → approvals); (2) a current JSE close
+(un-stales the price); (3) the WGCL ownership answer from COJ/BO
+(dissolves the blocker → attribution). When those three land, the
+company crosses from architecture into a functioning wealth-intelligence
+product.
+
 - **Goddard research plan upgraded to the Barbados escalation ladder:**
   BSE disclosures → 2025 annual report and proxy circular (shareholder
   analysis, directors' interests) → statutory shareholder-list request

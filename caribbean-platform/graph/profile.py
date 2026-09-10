@@ -97,6 +97,38 @@ def main() -> None:
         '<p class="muted">No approved estimate. The graph does not yet '
         'support one — evidence pending, and the page says so rather '
         'than pretending.</p>')
+    if include_research:
+        try:
+            from valuation import decompose_family
+            for d in decompose_family(led, fam_id):
+                if "error" in d or not d.get("value_usd"):
+                    continue
+                chips = " · ".join(
+                    f"{esc(i['label'])}: {esc(str(i['as_of']))} "
+                    f"<b>[{esc(i['freshness'])}]</b>"
+                    for i in d["inputs"])
+                fortune += (
+                    '<div style="border:1px solid var(--rule);'
+                    'border-radius:4px;padding:12px 16px;margin-top:10px">'
+                    '<div style="font:600 10.5px/1 Inter;'
+                    'letter-spacing:.14em;text-transform:uppercase;'
+                    'color:var(--muted);margin-bottom:8px">Valuation '
+                    'decomposition — mark-to-model, internal</div>'
+                    f'<p style="margin:.2em 0"><b>{esc(d["holder"])}</b> '
+                    f'— {esc(d["pct"])} of {esc(d["company"])} '
+                    f'({esc(d["shares"])} sh)<br>'
+                    f'Block {esc(d["block_id"])}: <b>JMD '
+                    f'{d["value_jmd"]/1e9:,.2f}B ≈ USD '
+                    f'{d["value_usd"]/1e6:,.1f}M</b></p>'
+                    f'<p class="muted" style="margin:.2em 0;'
+                    f'font-size:12.5px">Inputs: {chips}</p>'
+                    f'<p style="margin:.2em 0;font-size:13px;'
+                    f'color:var(--burgundy)">Family-attributable '
+                    f'portion: {esc(d["family_attributable"])}</p>'
+                    f'<p class="muted" style="margin:.2em 0;'
+                    f'font-size:12px">{esc(d["basis"])}</p></div>')
+        except Exception:
+            pass
 
     blockers = [c for c in live
                 if c.predicate == "beneficial_ownership_unresolved"
@@ -187,7 +219,7 @@ def main() -> None:
 
     meth_rows = []
     for c in all_claims:
-        gaps = evidence_path_gaps(c, led.sources)
+        gaps = evidence_path_gaps(c, led.sources, led.extractions)
         pub = publishable(c, led.sources)
         meth_rows.append(
             f"<tr><td>{esc(c.id)}</td><td>{esc(c.status)}</td>"
