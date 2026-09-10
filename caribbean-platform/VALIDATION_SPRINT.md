@@ -371,6 +371,37 @@ FY2025 sell-down. Outstanding for the milestone: (1) archive the
 FY2023–FY2025 AR PDFs; (2) a current JSE close; (3) Cayman/COJ answers
 on Evesam and the Evesam↔WGCL path.
 
+**2026-09-10 — Methodology hardened; Profile #4 (Sabga/ANSA McAL)
+opened as the control case.** The attribution stop rule is now
+methodology rule 17 (non-negotiable): attribution stops at the first
+unresolved control/beneficial-ownership edge; valuation continues below
+it; the three layers (asset / control / family attribution) are never
+conflated. The Known-vs-Attributable state card is implemented in the
+engine and rendered on the profile — Mahfood currently reads: known
+underlying value ≈US$315M · attributable unresolved · control chain
+partial (ultimate controller stated, path unverified) · BO confidence
+moderate-on-existence/low-on-quantum · ownership verified 2025-06-30 ·
+mark stale. **The twofold milestone stands: resolve
+Evesam→WGCL→Mahfood, and in parallel test whether that opacity is the
+norm.**
+
+**Profile #4 first pass (search-mediated, C-2026-0034…0039):** the
+pyramid replicates in Trinidad — per ANSA McAL's own 2021 AR
+substantial-interests page, three ANSA Group vehicles (ANSA Investments,
+MASA Investments, Norman Finance Development) collectively hold ~103M
+shares ≈ 58% of the listed company, and Andrew N. Sabga's beneficial
+interest in ANSA Investments is issuer-disclosed exactly as the
+Mahfoods' in WGCL (plus a small 401,629-share ESOP interest). Early
+answer to the founder's question: **the pyramid pattern generalizes,
+but the offshore layer may not** — all three Sabga vehicles appear
+domestic (TT) on this pass, no Cayman-style ultimate parent revealed
+yet. The three-vehicle collective block carries ONE block_id
+(BLK-ANSAGROUP-AMCL) until per-vehicle figures arrive — the dedup
+invariant counting a multi-vehicle block once, by construction. Next
+for #4: latest AR substantial-interests (2021 figures are stale by the
+freshness engine), TTSE price for the mark, T&T Companies Registry on
+the three vehicles.
+
 - **Goddard research plan upgraded to the Barbados escalation ladder:**
   BSE disclosures → 2025 annual report and proxy circular (shareholder
   analysis, directors' interests) → statutory shareholder-list request

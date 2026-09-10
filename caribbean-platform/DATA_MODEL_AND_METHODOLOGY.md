@@ -311,6 +311,21 @@ what separates the institution from a magazine making guesses.
     approval and mark freshness are independent — the block can be
     APPROVED while its daily valuation waits on a current price.
 
+17. **The attribution stop rule (non-negotiable).** Fortune attribution
+    stops at the first unresolved control or beneficial-ownership edge.
+    Asset valuation may continue below that point — a holdco's listed
+    block can be priced precisely — but **no amount traverses upward
+    into a person, branch or family until the chain is sufficiently
+    evidenced.** The richest profiles have three layers that are never
+    conflated: the **economic asset layer** (the operating/listed
+    company whose value is observable), the **control layer** (holdcos
+    and offshore entities determining who controls it), and the
+    **family attribution layer** (which people/branches are
+    economically entitled to the control vehicle). "Asset value known ·
+    control path partly known · family attribution unresolved" is a
+    valid, useful state — the engine states it explicitly rather than
+    forcing a number.
+
 ### Influence is never derived from wealth
 
 Stated now, before either index exists: **net worth is not an input that
@@ -351,6 +366,13 @@ geographically, in two tiers:
   Capital product. But a purely Panamanian fortune with no Caribbean
   connection does not enter the flagship Caribbean Wealth 100 — the
   definition of "Caribbean" is never distorted to admit it.
+- **The database is jurisdiction-agnostic even though the editorial
+  ranking is Caribbean-specific.** The Cayman problem is not an
+  exception but a recurring structural feature: onshore operating
+  businesses with control preserved through Cayman, BVI, Panama,
+  trusts, foundations or private vehicles elsewhere. The graph follows
+  the chain wherever it goes; eligibility rules apply only at the
+  ranking layer.
 - **Bermuda:** Atlantic, not Caribbean; proposed treatment — excluded from
   core rankings, covered under Caribbean-linked/diaspora franchises and the
   Capital Network where relevant.
@@ -621,6 +643,27 @@ Ownership Changes — plus alerts: *"WEALTH WATCH — Jamaica: the estimated
 fortune of Family X rose approximately $86M today after shares in its
 principal listed holding gained 7.2%,"* with the calculation one click
 away. Habit-forming in a way an annual rich list is not.
+
+### Known Value vs Attributable Value — the honest readout
+
+A first-class Intelligence feature born from the Mahfood case: instead
+of one net-worth number, every family carries an explicit state card —
+
+> Known underlying value (e.g., a listed block ≈ US$315M) · attributable
+> to family: unresolved · live-priced portion · control-chain confidence
+> · beneficial-ownership confidence · last ownership verification · last
+> market mark.
+
+And the public surface can be more honest than a Forbes-style list:
+
+> *"Publicly traceable assets associated with the family's control
+> structure exceed US$X, but the exact attributable family interest
+> remains unresolved."*
+
+Useful, defensible, and truthful about where the map stops — which is
+the product's real moat: **a dated map of how ownership and control
+actually move through the Caribbean and offshore jurisdictions, with
+enough evidence to know where the map stops.**
 
 ### What Intelligence subscribers get
 

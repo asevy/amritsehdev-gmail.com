@@ -107,6 +107,82 @@ def decompose_family(led, fam_id: str, today: str = None):
     return out
 
 
+def state_card(led, fam_id: str, today: str = None):
+    """Known Value vs Attributable Value — the honest readout.
+
+    'Asset value known / control path partly known / family attribution
+    unresolved' is a valid, useful state; the card states it explicitly
+    instead of forcing a net-worth number. The attribution stop rule
+    applies: nothing traverses upward past the first unresolved control
+    or beneficial-ownership edge.
+    """
+    today = today or datetime.date.today().isoformat()
+    decs = [d for d in decompose_family(led, fam_id, today)
+            if "error" not in d and d.get("value_usd")]
+    if not decs:
+        return None
+    seen_blocks = set()
+    total = 0.0
+    for d in decs:
+        if d["block_id"] in seen_blocks:
+            continue
+        seen_blocks.add(d["block_id"])
+        total += d["value_usd"]
+    holders = {d["holder"] for d in decs}
+    own_asof = max((str(i["as_of"]) for d in decs for i in d["inputs"]
+                    if i["label"] == "holding"), default="—")
+    marks = [(str(i["as_of"]), i["freshness"]) for d in decs
+             for i in d["inputs"] if i["label"] == "price"]
+    live = all(f in ("current",) for _, f in marks) if marks else False
+    ctrl_stated = any("ultimate_controlling" in c.predicate
+                      and c.status in ("PROPOSED", "APPROVED")
+                      for c in led.claims.values())
+    ctrl_open = any(c.predicate == "control_path_unresolved"
+                    and c.status in ("LEAD", "PROPOSED")
+                    for c in led.claims.values())
+    control = ("partial — ultimate controller stated, path unverified"
+               if ctrl_stated and ctrl_open else
+               "stated" if ctrl_stated else "unknown")
+    members = {c.subject for c in led.claims.values()
+               if c.predicate == "member_of" and c.object == fam_id
+               and c.status not in ("SUPERSEDED", "RETRACTED",
+                                    "REJECTED")}
+    bo_ack = any(c.predicate == "beneficial_interest_in"
+                 and c.subject in members
+                 and c.status in ("PROPOSED", "APPROVED")
+                 for c in led.claims.values())
+    bo_conf = ("moderate on existence (issuer-acknowledged), low on "
+               "quantum" if bo_ack else "low")
+    blockers = sorted({c.id for c in led.claims.values()
+                       if c.predicate.endswith("_unresolved")
+                       and c.status in ("LEAD", "PROPOSED")
+                       and (c.subject == fam_id or
+                            (isinstance(c.object, str) and
+                             led.entities.get(c.object) and
+                             led.entities[c.object].name in holders)
+                            or led.entities.get(c.subject, None) and
+                            led.entities[c.subject].name in holders)})
+    return {
+        "family": led.entities[fam_id].name,
+        "known_value_usd": total,
+        "known_value_label": f"US${total/1e6:,.0f}M",
+        "attributable": "unresolved — " + ", ".join(blockers)
+        if blockers else "resolved",
+        "live_priced_portion": "100% of the known block(s)"
+        if marks else "0%",
+        "control_chain": control,
+        "bo_confidence": bo_conf,
+        "last_ownership_verification": own_asof,
+        "last_market_mark": (f"{marks[-1][0]} [{marks[-1][1]}]"
+                             if marks else "none"),
+        "public_form": (
+            f"Publicly traceable assets associated with the family's "
+            f"control structure exceed US${total/1e6:,.0f}M, but the "
+            f"exact attributable family interest remains unresolved."),
+        "today": today,
+    }
+
+
 if __name__ == "__main__":
     led = Ledger("data")
     for d in decompose_family(led, "mahfood_family"):
@@ -123,3 +199,12 @@ if __name__ == "__main__":
                   f"{i['as_of']} [{i['freshness']}] ({i['status']})")
         print(f"  family-attributable portion: {d['family_attributable']}")
         print(f"  basis: {d['basis']}")
+    card = state_card(led, "mahfood_family")
+    if card:
+        print("\nKNOWN vs ATTRIBUTABLE —", card["family"])
+        for k in ("known_value_label", "attributable",
+                  "live_priced_portion", "control_chain",
+                  "bo_confidence", "last_ownership_verification",
+                  "last_market_mark"):
+            print(f"  {k.replace('_', ' ')}: {card[k]}")
+        print(f"  public form: {card['public_form']}")

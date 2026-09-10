@@ -99,7 +99,34 @@ def main() -> None:
         'than pretending.</p>')
     if include_research:
         try:
-            from valuation import decompose_family
+            from valuation import decompose_family, state_card
+            card = state_card(led, fam_id)
+            if card:
+                rows = [
+                    ("Known underlying value", card["known_value_label"]),
+                    ("Attributable to family", card["attributable"]),
+                    ("Live-priced portion", card["live_priced_portion"]),
+                    ("Control chain", card["control_chain"]),
+                    ("Beneficial-ownership confidence",
+                     card["bo_confidence"]),
+                    ("Last ownership verification",
+                     card["last_ownership_verification"]),
+                    ("Last market mark", card["last_market_mark"]),
+                ]
+                dl = "".join(f"<dt>{esc(k)}</dt><dd>{esc(v)}</dd>"
+                             for k, v in rows)
+                fortune += (
+                    '<div style="border:1px solid var(--rule);'
+                    'border-radius:4px;padding:12px 16px;margin-top:10px">'
+                    '<div style="font:600 10.5px/1 Inter;'
+                    'letter-spacing:.14em;text-transform:uppercase;'
+                    'color:var(--muted);margin-bottom:8px">Known value '
+                    'vs attributable value</div>'
+                    f'<dl>{dl}</dl>'
+                    f'<p style="margin:.6em 0 .2em;font-size:13.5px;'
+                    f'border-left:2px solid var(--green);'
+                    f'padding-left:10px"><b>Public form:</b> '
+                    f'{esc(card["public_form"])}</p></div>')
             for d in decompose_family(led, fam_id):
                 if "error" in d or not d.get("value_usd"):
                     continue
