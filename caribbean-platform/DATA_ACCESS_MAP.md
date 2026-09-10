@@ -61,14 +61,22 @@ Every source entry in this map must eventually capture:
 ## The standard escalation ladder (per listed/large company)
 
 1. Exchange disclosures (substantial holders, insider filings)
-2. Annual report / proxy circular (shareholder analyses, directors'
+2. **Listing documents — IPO prospectuses, rights-issue circulars.**
+   Rank these extremely high whenever a listed company emerged from a
+   family-controlled private group: the issuer must explain pre-IPO
+   ownership, related parties, corporate structure and principal
+   shareholders to investors at the listing event, so a prospectus
+   often contains a richer ownership snapshot than any later annual
+   report. (The Wisynco 2017 prospectus is the type case: one document
+   may collapse the WGCL/Evesam/family unknowns at once.)
+3. Annual report / proxy circular (shareholder analyses, directors'
    interests)
-3. Statutory shareholder-list routes (e.g., Barbados Companies Act s.176)
-4. Registry company search (officers, filings, charges)
-5. Intermediary/holding-company identification
-6. Beneficial-ownership tracing (or a precise record of why access is
+4. Statutory shareholder-list routes (e.g., Barbados Companies Act s.176)
+5. Registry company search (officers, filings, charges)
+6. Intermediary/holding-company identification
+7. Beneficial-ownership tracing (or a precise record of why access is
    restricted)
-7. Land, charges, courts, probate, gazettes, procurement, planning
+8. Land, charges, courts, probate, gazettes, procurement, planning
 
 ## The intermediary workflow (mandatory)
 

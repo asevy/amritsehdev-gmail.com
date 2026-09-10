@@ -324,7 +324,13 @@ what separates the institution from a magazine making guesses.
     economically entitled to the control vehicle). "Asset value known ·
     control path partly known · family attribution unresolved" is a
     valid, useful state — the engine states it explicitly rather than
-    forcing a number.
+    forcing a number. And a nuance the Evesam case makes concrete: an
+    issuer's "ultimate controlling party" disclosure establishes
+    **control, not economic quantum** — control can run through voting
+    rights, shareholder agreements, an upstream entity, or a majority
+    economic stake, so the control edge is recorded as reported while
+    economic attribution still stops until the percentage AND the
+    mechanism are evidenced.
 
 ### Influence is never derived from wealth
 

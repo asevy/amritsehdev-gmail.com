@@ -415,6 +415,31 @@ material correction:
   aggregator under the name variant "Evesam Investment Holdings Ltd"
   (locator lead only).
 
+**2026-09-10 — Profile #3 research order fixed (founder):**
+
+1. **The 2017 IPO prospectus** — archive first; if it discloses pre-IPO
+   ownership, related parties, structure and principal shareholders it
+   may collapse several unknowns at once (Joseph/William/Andrew
+   attribution, WGCL ownership, Evesam's position, the original 93.93%
+   block). Prospectus-priority is now a standing rung of the escalation
+   ladder in the Data Access Map, and named archival targets surface as
+   H items in the research queue automatically.
+2. **Barbados CAIPO on WGCL** (post-IBC-reform corporate form, members,
+   returns, charges).
+3. **Cayman records on Evesam** (directors at minimum; name-variant
+   "Evesam Investment Holdings Ltd" noted).
+4. **The FY2026 shareholder table** to refresh the current stake (press
+   already references FY2026 movements).
+
+The chain reads, cleanly separated: family attribution unresolved →
+Evesam control established at issuer level (control ≠ economic quantum:
+mechanism and percentage still required — rule 17 nuance) → Evesam↔WGCL
+path unresolved → WGCL 63.11% established → Wisynco live-priceable.
+Once transaction dates and counterparties of the 2017–2025 sell-down are
+reconstructed, the series supports both the wealth-history engine and a
+narrative feature on how the controlling structure progressively reduced
+its listed-company concentration.
+
 **Profile #4 first pass (search-mediated, C-2026-0034…0039):** the
 pyramid replicates in Trinidad — per ANSA McAL's own 2021 AR
 substantial-interests page, three ANSA Group vehicles (ANSA Investments,

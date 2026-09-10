@@ -450,6 +450,17 @@ def research_queue(led) -> str:
                           f"{link_entity(led, c.subject)}",
                           "Stale market input gates a live mark",
                           "JSE close / current quote"))
+    for s in led.sources.values():
+        if not s.preserved and "archival target" in s.notes.lower():
+            items.append(("H", f'<a href="#s-{esc(s.id)}">{esc(s.id)}'
+                          f"</a> — archive: {esc(s.description[:70])}",
+                          "Named archival target — one document may "
+                          "collapse several unresolved claims at once "
+                          "(listing documents especially: issuers must "
+                          "explain pre-IPO ownership at the listing "
+                          "event)",
+                          "Download + archive.add() → evidence paths "
+                          "complete"))
     order = {"H": 0, "M": 1, "L": 2}
     items.sort(key=lambda t: order[t[0]])
     if not items:
