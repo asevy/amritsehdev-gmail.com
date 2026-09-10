@@ -385,6 +385,36 @@ mark stale. **The twofold milestone stands: resolve
 Evesam→WGCL→Mahfood, and in parallel test whether that opacity is the
 norm.**
 
+**2026-09-10 — Profile #3 fourth pass: the chain is THREE
+jurisdictions, and the sell-down is an eight-year arc
+(C-2026-0040…0047).** The Evesam search produced four new facts and one
+material correction:
+
+- **Correction: WGCL is a Barbados International Business Company**, not
+  Jamaican (IPO-era disclosures/broker research). The chain reads
+  **Evesam (Cayman) → WGCL (Barbados) → Wisynco (Jamaica)** — and the
+  WGCL ownership route moves to **CAIPO / the Barbados playbook**, not
+  COJ. (Barbados abolished the IBC regime in its 2019–2021 reform;
+  current corporate form to verify.) The blocker's route note is
+  corrected in place, history preserved.
+- **A third disclosed beneficial holder: Joseph Mahfood** (IPO-era),
+  alongside William and Andrew — with an identity-resolution task:
+  founder "Joe" vs holder "Joseph," same person to verify, never
+  assumed.
+- **The full sell-down arc:** WGCL held **93.93% at the December 2017
+  IPO** → 73.91% (FY2023) → 73.8101% (FY2024) → 63.11% (FY2025). An
+  eight-year institutionalization story, now a four-point dated series
+  under one block ID.
+- **The founding generation is on record:** Wisynco created by the four
+  Mahfood brothers — Ferdinand, Sam (Jnr.), Joe and Robin — first
+  business established 1965. Heritage edges recorded for all four.
+- **Archival target #1 is now the 2017 IPO prospectus** (JSE-hosted PDF
+  located): pre-IPO structure sections likely specify WGCL, Evesam and
+  the family holdings precisely — one document may collapse most of the
+  control-layer unknowns. Evesam also surfaces on a Cayman data
+  aggregator under the name variant "Evesam Investment Holdings Ltd"
+  (locator lead only).
+
 **Profile #4 first pass (search-mediated, C-2026-0034…0039):** the
 pyramid replicates in Trinidad — per ANSA McAL's own 2021 AR
 substantial-interests page, three ANSA Group vehicles (ANSA Investments,
