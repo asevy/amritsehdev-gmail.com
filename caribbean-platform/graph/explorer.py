@@ -131,7 +131,7 @@ def claim_card(led, c) -> str:
 
 
 EDGE_WORDS = ("shareholder", "owner", "owns", "controlling_interest",
-              "heritage", "founder")
+              "heritage", "founder", "beneficial_interest")
 
 
 def _entity_refs(led, obj):
@@ -143,35 +143,100 @@ def _entity_refs(led, obj):
     return []
 
 
-def ownership_edges(led, scope=None):
-    """(holder, held, label, tentative) tuples for 'what owns what'."""
+def _abbr_shares(s):
+    try:
+        n = float(str(s).replace(",", ""))
+    except ValueError:
+        return str(s)
+    if n >= 1e9:
+        return f"{n/1e9:.3f}B sh"
+    if n >= 1e6:
+        return f"{n/1e6:.1f}M sh"
+    return f"{n:,.0f} sh"
+
+
+def ownership_view(led, scope=None):
+    """Edges for the default graph: WHO OWNS WHAT *NOW*, in three
+    layers — family attribution (incl. the explicit unresolved
+    blocker), current ownership, and events as annotations on the
+    ownership edge they changed. History (valid_to set) stays in the
+    timeline; ordinary LEADs stay off the graph; transactions are never
+    nodes."""
+    events = [c for c in led.claims.values()
+              if c.predicate == "material_ownership_change"
+              and c.status in ("PROPOSED", "APPROVED")]
     edges = []
     for c in led.claims.values():
         if c.status in ("SUPERSEDED", "RETRACTED", "REJECTED"):
             continue
         if not any(w in c.predicate for w in EDGE_WORDS):
             continue
+        subj = led.entities.get(c.subject)
+        if subj is None or subj.type == "transaction":
+            continue
+        blocker = c.predicate.endswith("_unresolved")
+        if c.status == "LEAD" and not blocker:
+            continue
+        if c.valid_to and not blocker:
+            continue  # historical point — timeline's job
         for held in _entity_refs(led, c.object):
+            if led.entities[held].type == "transaction":
+                continue
             if scope and not (c.subject in scope and held in scope):
                 continue
-            label = c.predicate.replace("registry_", "").replace(
-                "_", " ")
-            if isinstance(c.object, dict) and c.object.get("shares"):
-                label = f"{c.object['shares']} sh"
-            tentative = (c.status == "LEAD"
-                         or "possible" in c.predicate
-                         or "heritage" in c.predicate)
-            edges.append((c.subject, held, label, tentative))
+            sub = ""
+            if blocker:
+                label, sub, kind = ("BENEFICIAL OWNERSHIP",
+                                    "UNRESOLVED", "blocker")
+            elif "beneficial_interest" in c.predicate:
+                label, sub, kind = ("beneficial interest",
+                                    "% unresolved", "acknowledged")
+            elif isinstance(c.object, dict) and (
+                    c.object.get("pct") or c.object.get("shares")):
+                bits = [b for b in (
+                    c.object.get("pct"),
+                    _abbr_shares(c.object["shares"])
+                    if c.object.get("shares") else None) if b]
+                label = " · ".join(bits)
+                if c.object.get("as_of"):
+                    sub = f"as of {c.object['as_of']}"
+                kind = "solid"
+            else:
+                label = c.predicate.replace("registry_", "").replace(
+                    "_", " ")
+                kind = ("tentative" if "heritage" in c.predicate
+                        else "solid")
+            note = ""
+            for ev in events:
+                o = ev.object if isinstance(ev.object, dict) else {}
+                if o.get("holder") == c.subject and \
+                        o.get("company") == held:
+                    note = "↓ " + str(o.get("delta", "changed")).replace(
+                        "-376,125,000 shares", "−376.1M sh").replace(
+                        "-10.70pp / ", "10.70pp since 2024 · ")
+            edges.append({"a": c.subject, "b": held, "label": label,
+                          "sub": sub, "note": note, "kind": kind})
     return edges
 
 
+EDGE_STYLE = {
+    "solid": ('style="stroke:var(--muted)"', "var(--ink)"),
+    "acknowledged": ('style="stroke:var(--muted)" '
+                     'stroke-dasharray="7 4"', "var(--muted)"),
+    "tentative": ('style="stroke:var(--muted)" stroke-dasharray="4 4"',
+                  "var(--muted)"),
+    "blocker": ('style="stroke:var(--burgundy)" stroke-dasharray="5 4"',
+                "var(--burgundy)"),
+}
+
+
 def graph_svg(led, edges) -> str:
-    """Boxes and lines. Nothing fancy. Answers: what owns what?"""
+    """Boxes and lines. Nothing fancy. Answers: what owns what now?"""
     if not edges:
-        return '<p class="muted">No ownership edges yet.</p>'
-    nodes = sorted({n for e in edges for n in e[:2]})
-    holders = {e[0] for e in edges}
-    helds = {e[1] for e in edges}
+        return '<p class="muted">No current ownership edges.</p>'
+    nodes = sorted({e["a"] for e in edges} | {e["b"] for e in edges})
+    holders = {e["a"] for e in edges}
+    helds = {e["b"] for e in edges}
 
     def row(n):
         t = led.entities[n].type
@@ -184,7 +249,7 @@ def graph_svg(led, edges) -> str:
     rows = {}
     for n in nodes:
         rows.setdefault(row(n), []).append(n)
-    bw, bh, gx, gy, pad = 190, 40, 26, 90, 20
+    bw, bh, gx, gy, pad = 190, 40, 30, 104, 20
     pos = {}
     width = max((len(v) * (bw + gx)) for v in rows.values()) + pad * 2
     for r, ns in sorted(rows.items()):
@@ -195,18 +260,26 @@ def graph_svg(led, edges) -> str:
     height = pad * 2 + (max(rows) + 1) * (bh + gy) - gy
     out = [f'<svg viewBox="0 0 {width:.0f} {height:.0f}" '
            f'style="max-width:100%;font:12px Inter,sans-serif">']
-    for a, b, label, tent in edges:
-        x1, y1 = pos[a][0] + bw / 2, pos[a][1] + bh
-        x2, y2 = pos[b][0] + bw / 2, pos[b][1]
-        if pos[a][1] == pos[b][1]:
-            y1 = pos[a][1] + bh / 2; y2 = y1
-            x1 = pos[a][0] + bw; x2 = pos[b][0]
-        dash = ' stroke-dasharray="5 4"' if tent else ""
+    for e in edges:
+        (x1, y1), (x2, y2) = pos[e["a"]], pos[e["b"]]
+        x1 += bw / 2; y1 += bh; x2 += bw / 2
+        if pos[e["a"]][1] == pos[e["b"]][1]:
+            y1 = pos[e["a"]][1] + bh / 2; y2 = y1
+            x1 = pos[e["a"]][0] + bw; x2 = pos[e["b"]][0]
+        line_style, text_fill = EDGE_STYLE[e["kind"]]
         out.append(f'<line x1="{x1:.0f}" y1="{y1:.0f}" x2="{x2:.0f}" '
-                   f'y2="{y2:.0f}" style="stroke:var(--muted)"{dash}/>')
-        out.append(f'<text x="{(x1+x2)/2:.0f}" y="{(y1+y2)/2-4:.0f}" '
-                   f'text-anchor="middle" style="fill:var(--muted);'
-                   f'font-size:10px">{esc(label)}</text>')
+                   f'y2="{y2:.0f}" {line_style}/>')
+        mx, my = (x1 + x2) / 2, (y1 + y2) / 2
+        lines = [(e["label"], text_fill, -6)]
+        if e["sub"]:
+            lines.append((e["sub"], "var(--muted)", 6))
+        if e["note"]:
+            lines.append((e["note"], "var(--burgundy)",
+                          18 if e["sub"] else 6))
+        for txt, fill, dy in lines:
+            out.append(f'<text x="{mx:.0f}" y="{my+dy:.0f}" '
+                       f'text-anchor="middle" style="fill:{fill};'
+                       f'font-size:10px">{esc(txt)}</text>')
     for n, (x, y) in pos.items():
         name = led.entities[n].name
         name = name if len(name) <= 26 else name[:25] + "…"
@@ -218,6 +291,11 @@ def graph_svg(led, edges) -> str:
                    f'{esc(name)}</text>')
     out.append("</svg>")
     return "".join(out)
+
+
+def ownership_edges(led, scope=None):
+    """Back-compat alias for older callers."""
+    return ownership_view(led, scope)
 
 
 def connected(led, root, hops=2):

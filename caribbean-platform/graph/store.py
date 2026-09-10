@@ -121,11 +121,18 @@ class Ledger:
     def supersede(self, old_id: str, new_claim: Claim) -> Claim:
         """Corrections chain; they never erase."""
         self.add_claim(new_claim)
+        self.mark_superseded(old_id, new_claim.id)
+        return new_claim
+
+    def mark_superseded(self, old_id: str, by_id: str) -> None:
+        """Point an existing claim at its successor (which must already
+        be in the ledger) - used when several claims collapse into one."""
+        if by_id not in self.claims:
+            raise ValueError(f"unknown successor claim {by_id}")
         old = dataclasses.replace(self.claims[old_id], status="SUPERSEDED",
-                                  superseded_by=new_claim.id)
+                                  superseded_by=by_id)
         self.claims[old.id] = old
         self._append("claims", old)
-        return new_claim
 
     # -- reads ----------------------------------------------------------
     def query(self, subject: Optional[str] = None,

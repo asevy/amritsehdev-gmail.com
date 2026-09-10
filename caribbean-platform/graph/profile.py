@@ -1,13 +1,14 @@
 """Generated family profile - the Phase 2 pipeline seed.
 
 A family page is generated from the graph, never manually written:
-narrative slot -> fortune block -> ownership graph -> companies ->
-properties -> timeline -> methodology & evidence. By default only
-APPROVED claims render (the public rule); --include-research produces an
-internal preview with the research layer clearly labeled.
+narrative slot -> fortune block -> PRIMARY RESEARCH BLOCKER -> current
+ownership graph -> companies (family-linked only) -> other significant
+shareholders under review -> transactions & investments under review ->
+properties -> timeline (where history lives) -> methodology & evidence.
 
-The first-milestone test: one complete family, raw documents -> approved
-claims -> this page, with zero manual copy-paste.
+By default only APPROVED claims render (the public rule);
+--include-research produces an internal preview with the research layer
+clearly labeled.
 
 Usage: python3 profile.py <family_entity_id> <out.html>
                           [--include-research]
@@ -17,8 +18,8 @@ from __future__ import annotations
 import datetime
 import sys
 
-from explorer import (CSS, connected, dossier, esc, graph_svg,
-                      link_entity, ownership_edges, render_object)
+from explorer import (CSS, _entity_refs, connected, esc, graph_svg,
+                      link_entity, ownership_view, render_object)
 from schema import evidence_path_gaps, publishable
 from store import Ledger
 
@@ -31,24 +32,57 @@ def main() -> None:
     fam = led.entities[fam_id]
 
     scope = connected(led, fam_id)
+    statuses = (("APPROVED", "PROPOSED", "LEAD") if include_research
+                else ("APPROVED",))
     all_claims = sorted(
         [c for c in led.claims.values()
-         if (c.subject in scope) and
-         c.status in (("APPROVED", "PROPOSED", "LEAD")
-                      if include_research else ("APPROVED",))],
+         if c.subject in scope and c.status in statuses],
         key=lambda c: c.id)
     approved = [c for c in all_claims if c.status == "APPROVED"]
+    live = all_claims
+    strong = [c for c in live
+              if c.status != "LEAD" and not c.valid_to]
 
-    edges = [e for e in ownership_edges(led, scope=scope)]
-    companies = sorted([led.entities[e] for e in scope
-                        if led.entities[e].type == "company"],
-                       key=lambda e: e.name)
-    props = sorted([led.entities[e] for e in scope
-                    if led.entities[e].type in ("property", "asset")],
+    # -- family linkage buckets ------------------------------------------
+    members = {c.subject for c in live
+               if c.predicate == "member_of" and c.object == fam_id}
+    core = {fam_id} | members
+    linked = set()
+    for c in strong:
+        if c.subject in core and ("beneficial_interest" in c.predicate
+                                  or "heritage" in c.predicate
+                                  or c.predicate.startswith("owns")):
+            linked |= set(_entity_refs(led, c.object))
+    for c in strong:
+        if c.subject in linked and "shareholder" in c.predicate:
+            linked |= set(_entity_refs(led, c.object))
+
+    fam_companies = sorted([led.entities[e] for e in linked
+                            if led.entities[e].type == "company"],
+                           key=lambda e: e.name)
+    review_holders = []
+    for c in strong:
+        if ("shareholder" in c.predicate and c.subject not in linked
+                and c.subject not in core
+                and set(_entity_refs(led, c.object)) & linked):
+            pct = (c.object.get("pct", "")
+                   if isinstance(c.object, dict) else "")
+            review_holders.append((led.entities[c.subject], pct))
+    review_holders.sort(key=lambda t: t[0].name)
+    review_txn = []
+    for c in live:
+        if c.predicate == "material_ownership_change":
+            review_txn.append(("event", c))
+        elif c.status == "LEAD" and "acquirer" in c.predicate and \
+                c.subject in linked:
+            review_txn.append(("lead", c))
+    props = sorted([led.entities[e] for e in linked | scope
+                    if led.entities[e].type in ("property",)],
                    key=lambda e: e.name)
     dated = sorted([c for c in all_claims if c.valid_from],
                    key=lambda c: (str(c.valid_from), c.id))
 
+    # -- blocks ----------------------------------------------------------
     banner = ("" if not include_research else
               '<p style="border:1px solid var(--burgundy);'
               'color:var(--burgundy);padding:8px 12px;border-radius:4px;'
@@ -64,14 +98,82 @@ def main() -> None:
         'support one — evidence pending, and the page says so rather '
         'than pretending.</p>')
 
+    blockers = [c for c in live
+                if c.predicate == "beneficial_ownership_unresolved"
+                and c.subject == fam_id]
+    blocker_html = ""
+    for b in blockers:
+        for target in _entity_refs(led, b.object):
+            tname = led.entities[target].name
+            stake = ""
+            for c in strong:
+                if c.subject == target and "shareholder" in c.predicate \
+                        and isinstance(c.object, dict):
+                    held = _entity_refs(led, c.object)
+                    if held:
+                        stake = (f"{c.object.get('pct', '?')} of "
+                                 f"{led.entities[held[0]].name}"
+                                 f" (as of {c.object.get('as_of', '?')})")
+            blocker_html += (
+                '<div style="border:1px solid var(--burgundy);'
+                'border-radius:4px;padding:14px 18px;margin:8px 0">'
+                '<div style="font:600 10.5px/1 Inter;'
+                'letter-spacing:.16em;text-transform:uppercase;'
+                'color:var(--burgundy);margin-bottom:8px">Primary '
+                'research blocker</div>'
+                f'<p style="margin:.3em 0">Who owns <b>{esc(tname)}</b>, '
+                'in what proportions, and through what legal/beneficial '
+                'structure? Until resolved, the listed-company fortune '
+                'cannot traverse to the family.</p>'
+                f'<p class="muted" style="margin:.3em 0;font-size:13px">'
+                f'When resolved: attributable interest × {esc(stake)} × '
+                'current market value = the first live wealth '
+                'calculation.</p></div>')
+
     def sec(title, body):
         return f"<h2>{esc(title)}</h2>{body}"
 
+    def company_note(e):
+        if any(b for b in blockers
+               if e.id in _entity_refs(led, b.object)):
+            return (' — <span style="color:var(--burgundy)">beneficial '
+                    'ownership unresolved (primary blocker)</span>')
+        for c in strong:
+            if c.subject in linked and "shareholder" in c.predicate \
+                    and isinstance(c.object, dict) \
+                    and e.id in _entity_refs(led, c.object):
+                return (f' — <span class="muted">'
+                        f'{esc(c.object.get("pct", ""))} held by '
+                        f'{esc(led.entities[c.subject].name)}</span>')
+        return ""
+
     comp_list = ("<ul>" + "".join(
-        f"<li>{link_entity(led, c.id)}"
-        f'{" — <span class=muted>" + esc(c.notes) + "</span>" if c.notes else ""}</li>'
-        for c in companies) + "</ul>") if companies else \
-        '<p class="muted">None linked yet.</p>'
+        f"<li>{link_entity(led, e.id)}{company_note(e)}</li>"
+        for e in fam_companies) + "</ul>") if fam_companies else \
+        '<p class="muted">None established yet.</p>'
+    holders_list = ("<ul>" + "".join(
+        f"<li>{link_entity(led, e.id)}"
+        f'{" — <span class=muted>" + esc(p) + "</span>" if p else ""}'
+        f'{" — <span class=muted>ownership unresolved</span>" if e.status == "unknown" else ""}'
+        f"</li>" for e, p in review_holders) + "</ul>") \
+        if review_holders else '<p class="muted">None recorded.</p>'
+    txn_items = []
+    for kind, c in review_txn:
+        if kind == "event":
+            o = c.object if isinstance(c.object, dict) else {}
+            txn_items.append(
+                f"<li><b>Material ownership change</b> — "
+                f"{esc(o.get('from', ''))} → {esc(o.get('to', ''))} "
+                f"({esc(o.get('window', ''))}) "
+                f'<span class="muted">[{esc(c.status)}]</span></li>')
+        else:
+            txn_items.append(
+                f"<li>{link_entity(led, c.subject)} "
+                f"{esc(c.predicate.replace('_', ' '))} "
+                f"{render_object(led, c.object)} "
+                f'<span class="muted">[LEAD — under review]</span></li>')
+    txn_list = ("<ul>" + "".join(txn_items) + "</ul>") if txn_items \
+        else '<p class="muted">None recorded.</p>'
     prop_list = ("<ul>" + "".join(
         f"<li>{link_entity(led, p.id)}</li>" for p in props) + "</ul>") \
         if props else '<p class="muted">None linked yet.</p>'
@@ -103,6 +205,7 @@ def main() -> None:
     meta = " · ".join(filter(None, [
         (fam.jurisdiction or "").upper(), "FAMILY"]))
     stamp = datetime.date.today().isoformat()
+    edges = ownership_view(led, scope=scope)
     html = f"""<title>{esc(fam.name)}</title><style>{CSS}
 h1{{font:600 34px/1.15 Georgia,serif;margin:.2em 0 .1em}}
 .meta{{font:500 11px/1 Inter;letter-spacing:.16em;color:var(--muted)}}
@@ -118,8 +221,12 @@ vertical-align:top}}</style>
 <p class="muted"><em>[Narrative — written by a journalist; the database
 supplies the facts. {esc(fam.notes)}]</em></p>
 {sec("The fortune", fortune)}
-{sec("Ownership graph", graph_svg(led, edges))}
+{blocker_html}
+{sec("Current ownership", graph_svg(led, edges))}
 {sec("Companies", comp_list)}
+{sec("Other significant shareholders / related entities under review",
+     holders_list)}
+{sec("Transactions & investments under review", txn_list)}
 {sec("Properties", prop_list)}
 {sec("Timeline", tl)}
 {sec("Methodology & evidence", meth)}
@@ -130,8 +237,10 @@ Regenerate: <code>python3 graph/profile.py {esc(fam_id)} …</code>
     with open(out_file, "w") as f:
         f.write(html)
     print(f"wrote {out_file}: {len(approved)} approved / "
-          f"{len(all_claims)} rendered claims, {len(companies)} "
-          f"companies, {len(edges)} edges")
+          f"{len(all_claims)} rendered claims; "
+          f"{len(fam_companies)} family companies, "
+          f"{len(review_holders)} holders under review, "
+          f"{len(review_txn)} txn items, {len(edges)} edges")
 
 
 if __name__ == "__main__":
