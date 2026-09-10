@@ -295,15 +295,33 @@ C-2026-0024. The mechanics are proven without violating the attribution
 invariant. Extraction objects (X-2026-0001…0004) now carry the exact AR
 fragments; block IDs enforce the deduplication invariant in code.
 
-**THE NAMED MILESTONE:** one chain fully approved, end to end —
-**source → extraction → claim → ownership edge → valuation → family
-attribution → daily wealth calculation — on Mahfood / WGCL / Wisynco.**
-Requirements outstanding: (1) archive the FY2024/FY2025 annual report
-PDFs (completes evidence paths → approvals); (2) a current JSE close
-(un-stales the price); (3) the WGCL ownership answer from COJ/BO
-(dissolves the blocker → attribution). When those three land, the
-company crosses from architecture into a functioning wealth-intelligence
-product.
+**THE NAMED MILESTONE (revised 2026-09-10):** one chain fully approved,
+end to end — **source → extraction → WGCL current stake → Evesam control
+chain → family attribution → live market price → daily wealth
+calculation.** Ownership approval and mark freshness are independent:
+the ownership block can be approved while the daily mark stays stale.
+
+**2026-09-10 — Profile #3 third pass: the chain crosses into Cayman.**
+The FY2025 AR states WGCL is the parent company and **the ultimate
+controlling party is Evesam Investments Holdings Limited, incorporated
+in the Cayman Islands** (extraction X-2026-0005; claim C-2026-0029).
+The primary research question therefore moves up a layer: no longer
+just "who owns WGCL?" but **"who owns or controls Evesam, and how does
+that control flow through WGCL into Wisynco?"** — recorded as two new
+unknowns: the Evesam↔WGCL control path (C-2026-0030, to be resolved
+never inferred) and Evesam's own ownership (C-2026-0031, the new top
+blocker, ranked H in the research queue). This is the Jamaica → Cayman
+cross-jurisdictional handoff the methodology anticipated — one real
+family fortune has already forced the graph across two jurisdictions
+and three ownership layers, which is a better test of the thesis than
+the Dart case would have been alone. Cayman's confidential BO regime
+means a precisely documented limitation is a legitimate outcome here.
+Also this pass: FX refreshed (USD/JMD 158.67, 2026-09-08 — the WGCL
+block re-marks to ≈USD 315M) and the FY2023 point added to the series
+(2,776,183,736 sh / 73.91%), confirming the block persisted before the
+FY2025 sell-down. Outstanding for the milestone: (1) archive the
+FY2023–FY2025 AR PDFs; (2) a current JSE close; (3) Cayman/COJ answers
+on Evesam and the Evesam↔WGCL path.
 
 - **Goddard research plan upgraded to the Barbados escalation ladder:**
   BSE disclosures → 2025 annual report and proxy circular (shareholder

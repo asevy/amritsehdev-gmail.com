@@ -286,7 +286,10 @@ what separates the institution from a magazine making guesses.
     go stale in a week; listed shareholdings age after 90 days and go
     stale after 365 unless refreshed by filings; roles are slower).
     Freshness is derived at read time, never stored as fact, and the
-    Daily Wealth Engine displays it on every input it uses.
+    Daily Wealth Engine displays it on every input it uses. **A stale
+    mark never invalidates an approved ownership chain**: ownership
+    approval and mark freshness are independent — the block can be
+    APPROVED while its daily valuation waits on a current price.
 
 ### Influence is never derived from wealth
 

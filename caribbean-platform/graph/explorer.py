@@ -146,7 +146,7 @@ def claim_card(led, c) -> str:
             f'</div><dl>{dl}</dl></div>')
 
 
-EDGE_WORDS = ("shareholder", "owner", "owns", "controlling_interest",
+EDGE_WORDS = ("shareholder", "owner", "owns", "control",
               "heritage", "founder", "beneficial_interest")
 
 
@@ -202,8 +202,12 @@ def ownership_view(led, scope=None):
                 continue
             sub = ""
             if blocker:
-                label, sub, kind = ("BENEFICIAL OWNERSHIP",
-                                    "UNRESOLVED", "blocker")
+                what = c.predicate.replace("_unresolved", "").replace(
+                    "_", " ").upper()
+                label, sub, kind = (what, "UNRESOLVED", "blocker")
+            elif "ultimate_controlling" in c.predicate:
+                label, sub, kind = ("ultimate controlling party",
+                                    "per FY2025 AR", "solid")
             elif "beneficial_interest" in c.predicate:
                 label, sub, kind = ("beneficial interest",
                                     "% unresolved", "acknowledged")
@@ -397,13 +401,27 @@ def research_queue(led) -> str:
                                    f"(mark-to-model)")
     except Exception:
         pass
+    controllers = {c.subject for c in led.claims.values()
+                   if "ultimate_controlling" in c.predicate
+                   and c.status in ("PROPOSED", "APPROVED")}
     for c in led.claims.values():
         if c.status in ("SUPERSEDED", "RETRACTED", "REJECTED"):
             continue
         f = freshness(c, TODAY)
         if c.predicate.endswith("_unresolved"):
             subj = led.entities.get(c.subject)
-            if subj and subj.type == "family":
+            if subj and subj.id in controllers:
+                items.append(("H", f"{esc(c.id)} — "
+                              f"{esc(c.predicate.replace('_', ' '))}: "
+                              f"{link_entity(led, c.subject)}",
+                              "Ultimate controlling party of a tracked "
+                              "listed company — the top of the chain; "
+                              f"{esc(block_value)}" if block_value else
+                              "Ultimate controlling party — top of the "
+                              "chain",
+                              "Cayman General Registry + Jamaican "
+                              "disclosures + press"))
+            elif subj and subj.type == "family":
                 items.append(("H", f"{esc(c.id)} — beneficial ownership "
                               f"of {link_entity(led, c.object) if isinstance(c.object, str) else '?'}",
                               f"Primary blocker; {esc(block_value)}"
