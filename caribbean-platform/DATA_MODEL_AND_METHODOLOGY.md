@@ -195,6 +195,26 @@ family-structured); Hurun's family lists sit between. Our Option C is
 designed to support Forbes-style outputs without Forbes-style ambiguity,
 because the membership rule is explicit per family.
 
+### The pyramid pattern (validated by the first cases)
+
+The recurring shape of Caribbean family wealth, confirmed in the field:
+
+> **Family → family branch/person → trust/foundation/holdco →
+> intermediate entities → operating companies/assets → cash flows and
+> market value.**
+
+The visible company is often only the bottom of the pyramid; the real
+fortune sits above it in private and sometimes offshore control
+structures, and every layer can change the attributable percentage. For
+each link the graph tracks separately: legal ownership, beneficial
+ownership, voting control, economic interest, family membership — all
+dated. Holdcos are capital-allocation vehicles, not wrappers (listed
+shares, private businesses, property, minority stakes, cash, debt,
+offshore subsidiaries, philanthropic structures), so operating-company
+wealth and family wealth are never conflated, and structural changes
+(sell-downs, reorganizations) are events that narrate what the family
+is doing with its wealth.
+
 ## 4. Wealth estimation methodology
 
 Rules set once, applied consistently, versioned when they change. This is

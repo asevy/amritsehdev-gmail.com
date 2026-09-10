@@ -89,6 +89,54 @@ completed map may re-sequence the profile order below.
    applied; expected to produce the most valuable "where it breaks"
    findings.
 
+## Lessons from the first cases (2026-09-10)
+
+Distilled from Goddard and Mahfood/Wisynco — each lesson is anchored in
+specific claims, not impressions:
+
+1. **The visible company is often only the bottom of the pyramid.**
+   Family members rarely hold the listed operating company directly in
+   meaningful size; the real exposure sits in a private holdco, which
+   may itself be owned through an offshore entity, trust, foundation or
+   SPV. Wisynco is the clearest case: William 0.18% / Andrew 0.15%
+   direct, WGCL 63.11%, Evesam (Cayman) above it (C-2026-0011/0012,
+   0017, 0029). The recurring structure: **family / family interests →
+   offshore control vehicle → private holdco → listed operating
+   company** — and every layer can change the attributable percentage.
+2. **Board presence is not ownership.** Goddard is the warning case: a
+   famous founding family can remain on the board long after ownership
+   disperses (C-2026-0006; heritage edge C-2026-0003). Encoded as the
+   role-edge rule and the heritage edge.
+3. **Registered ownership and beneficial ownership are different
+   things.** A registry naming Neptune Investments or WGCL only gives
+   the next node; who owns, who controls and who benefits can each
+   answer differently (legal / voting / economic split in the ownership
+   edge; the Neptune and 4Js unknowns C-2026-0007/0023).
+4. **The holdco is a capital-allocation vehicle, not a wrapper.**
+   WGCL's reported Honey Bun stake (C-2026-0015) means **operating-
+   company wealth ≠ family wealth**: the holdco may hold listed shares,
+   private businesses, property, minority stakes, cash, debt, offshore
+   subsidiaries, philanthropic structures. The fortune is the whole
+   structure, never one stock position multiplied.
+5. **Wealth structures are dynamic, and the changes are the stories.**
+   The 73.8% → 63.1% sell-down (C-2026-0020) may mean liquidity,
+   diversification, estate planning, institutionalization or
+   redeployment — the structure itself narrates what the family is
+   doing with its wealth.
+6. **The Caribbean wealth graph is inherently cross-border.** Jamaica
+   led to Cayman within one profile; DR groups will lead to Panama/BVI;
+   Barbados intermediaries elsewhere. Family wealth architecture is
+   regional and offshore, not contained in one island's registry —
+   which is why the Data Access Map treats Panama (and now Cayman) as
+   infrastructure.
+
+**Why this is the moat, in one line:** a conventional rich list sees
+the visible company; the intelligence product traces the whole pyramid.
+
+(Editorial note: this synthesis is itself the thesis of an eventual
+signature piece — how Caribbean family wealth actually works — written
+from approved claims once the chains resolve.)
+
 ## Per-profile deliverables
 
 1. Profile to schema: persons, branches, companies, stakes recorded as
