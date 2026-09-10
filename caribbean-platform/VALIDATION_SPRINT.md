@@ -245,6 +245,44 @@ the ledger as PROPOSED/LEAD claims C-2026-0009…0015:
   Everything above remains Tier 3 and unapprovable until one of those
   PDFs is archived.
 
+**2026-09-10 — Profile #3 second pass: primary filings read (by the
+founder), and the thesis proves itself.** A current filing changed the
+graph, exposed a major wealth event, generated a story, and identified
+the single missing ownership fact required for valuation. In the ledger
+as C-2026-0016…0023, sources S-2026-0008/0009 (Tier 2, relayed;
+approval gated on archiving the PDFs — the invariant held):
+
+- **Correction:** 73.8101% (2,776,183,736 shares) was the FY2024 figure
+  — the aggregator number was a year stale. **FY2025 (June 30, 2025):
+  WGCL holds 2,400,058,736 shares = 63.11%.** First real supersession
+  executed: the undated claim is SUPERSEDED, both dated points preserved
+  as a series.
+- **Material ownership event:** WGCL cut its Wisynco position by
+  −10.70pp / 376,125,000 shares inside one year. Story lead: *why did
+  Wisynco's controlling vehicle sell down, and who bought?* FY2025
+  clues: National Insurance Fund up to 5.76%; 4Js Investment Limited
+  appears at 4.95% — a second unresolved intermediary (who is behind
+  4Js?), sitting just under the 5% line.
+- **The family→holdco link is now issuer-acknowledged, not press
+  inference:** the ARs state William and Andrew Mahfood have beneficial
+  holdings in WGCL (FY2024 connected-party holdings ~2.781B shares
+  each, footnoted to WGCL). **Deduplication guard: those two ~2.781B
+  figures are the same underlying WGCL block shown per connected
+  person — never additive.**
+- **Aggregation guard:** the engine must NOT attribute the 63.11% to
+  the Mahfood family until WGCL's own ownership is resolved — exact
+  percentages per person, other WGCL shareholders, wider family
+  interests, and WGCL's non-Wisynco assets/liabilities (Honey Bun stake
+  already flagged) all remain open.
+- **Historical series unlocked:** the investor site lists annual
+  audited materials FY2018–FY2026 — enough to reconstruct WGCL's stake,
+  directors' connected holdings and sell-down events year by year. This
+  is exactly the longitudinal depth the Daily Wealth Engine needs.
+- **Next decisive source (unchanged, now singular):** COJ /
+  beneficial-ownership information on WGCL itself. Resolve that, and
+  the graph traverses into a defensible Mahfood family stake — the
+  listed component then prices mechanically.
+
 - **Goddard research plan upgraded to the Barbados escalation ladder:**
   BSE disclosures → 2025 annual report and proxy circular (shareholder
   analysis, directors' interests) → statutory shareholder-list request

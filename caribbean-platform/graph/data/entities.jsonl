@@ -9,3 +9,6 @@
 {"id": "william_mahfood", "name": "William Mahfood", "type": "person", "jurisdiction": "JM", "status": null, "notes": ""}
 {"id": "andrew_mahfood", "name": "Andrew Mahfood", "type": "person", "jurisdiction": "JM", "status": null, "notes": ""}
 {"id": "honey_bun", "name": "Honey Bun (legal name to verify)", "type": "company", "jurisdiction": "JM", "status": null, "notes": ""}
+{"id": "nif_jamaica", "name": "National Insurance Fund (Jamaica)", "type": "institution", "jurisdiction": "JM", "status": null, "notes": "State fund; rose to 5.76% of Wisynco per FY2025 AR"}
+{"id": "fourjs_investment", "name": "4Js Investment Limited", "type": "company", "jurisdiction": "JM", "status": "unknown", "notes": "Appeared with 4.95% of Wisynco in FY2025 AR - just under the 5% line. Intermediary rule applies: who is behind 4Js? COJ lookup is the follow-up task"}
+{"id": "evt_wgcl_selldown_fy2025", "name": "WGCL reduction of Wisynco stake, FY2025", "type": "transaction", "jurisdiction": "JM", "status": null, "notes": "Material ownership change detected by comparing FY2024 and FY2025 annual reports"}
