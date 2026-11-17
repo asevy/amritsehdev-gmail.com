@@ -23,8 +23,8 @@ evidence of current status.
   named IME, medlegal, counsel or workbench). `vision-edge-gateway/ve_auth.py:3`
   and `SECURITY.md:3` refer to "the Counsel Workbench's `wb_auth`" — that module
   is not present anywhere accessible. A code-only Google Drive search for
-  `Counsel Workbench`, `wb_db`, `ime_server` returned nothing. (A broader Drive
-  search returned patient records; none was opened or used, per brief §14.)
+  `Counsel Workbench`, `wb_db`, `ime_server` returned nothing. (Non-code Drive
+  results were not opened or used, per brief §14.)
 * **The MINSA program** — not found in any accessible repository or code search.
 * **The Vision//Edge build pipeline** — `SECURITY.md` documents `build.py --seed`
   and a `server/` directory; neither is in the deploy repo. Four of its test
