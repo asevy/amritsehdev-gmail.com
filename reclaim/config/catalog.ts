@@ -40,6 +40,8 @@ export interface Plan {
     blueprintMinutesOnce: number; // onboarding session, first month only
   };
   creditsPerMonth: number;
+  /** Coach-reviewed form-check videos per month (each review ≈ FORM_CHECK_REVIEW_MINUTES of coach time). */
+  formChecksPerMonth: number;
   eligibility?: string;
   highlight?: boolean;
 }
@@ -55,6 +57,7 @@ export const PLANS: Plan[] = [
     interval: "month",
     audience: "Self-directed people who want a structured, measured plan and a coach to ask.",
     includes: [
+      "1 form-check video review a month: film a lift, get your coach's cues",
       "Personal plan generated from your assessment, reviewed by a coach",
       "Full video movement library and lesson curriculum",
       "Progress tracking and four-weekly re-test prompts",
@@ -66,6 +69,7 @@ export const PLANS: Plan[] = [
     ],
     workload: { liveMinutesPerMonth: 0, asyncMinutesPerMonth: 20, blueprintMinutesOnce: 0 },
     creditsPerMonth: 0,
+    formChecksPerMonth: 1,
   },
   {
     id: "core",
@@ -77,6 +81,7 @@ export const PLANS: Plan[] = [
     interval: "month",
     audience: "Most people starting out: a coach who knows your plan and checks in on it.",
     includes: [
+      "2 form-check video reviews a month: film a lift, get your coach's cues",
       "60-minute Blueprint session with your coach in month one",
       "Two 30-minute video sessions with your coach each month",
       "Plan updates every two weeks based on your logged data",
@@ -88,6 +93,7 @@ export const PLANS: Plan[] = [
     ],
     workload: { liveMinutesPerMonth: 60, asyncMinutesPerMonth: 45, blueprintMinutesOnce: 60 },
     creditsPerMonth: 0,
+    formChecksPerMonth: 2,
     highlight: true,
   },
   {
@@ -100,6 +106,7 @@ export const PLANS: Plan[] = [
     interval: "month",
     audience: "People who train better in person and want sessions at a partner gym or with a trainer.",
     includes: [
+      "4 form-check video reviews a month: film a lift, get your coach's cues",
       "Everything in Core",
       "4 local-network credits each month (about 4 partner gym visits or 1 personal-training session)",
       "Your coach programmes your partner sessions",
@@ -110,6 +117,7 @@ export const PLANS: Plan[] = [
     ],
     workload: { liveMinutesPerMonth: 60, asyncMinutesPerMonth: 60, blueprintMinutesOnce: 60 },
     creditsPerMonth: 4,
+    formChecksPerMonth: 4,
   },
   {
     id: "premium",
@@ -121,6 +129,7 @@ export const PLANS: Plan[] = [
     interval: "month",
     audience: "People who want weekly coaching contact and regular in-person measurement.",
     includes: [
+      "8 form-check video reviews a month: film a lift, get your coach's cues",
       "Everything in Hybrid",
       "Weekly 30-minute video session with your coach",
       "8 local-network credits each month",
@@ -132,6 +141,7 @@ export const PLANS: Plan[] = [
     ],
     workload: { liveMinutesPerMonth: 130, asyncMinutesPerMonth: 90, blueprintMinutesOnce: 60 },
     creditsPerMonth: 8,
+    formChecksPerMonth: 8,
   },
   {
     id: "maintenance",
@@ -143,6 +153,7 @@ export const PLANS: Plan[] = [
     interval: "month",
     audience: "Members who have reached their goals and want to keep them.",
     includes: [
+      "1 form-check video review a month: film a lift, get your coach's cues",
       "Monthly 30-minute check-in with your coach",
       "Plan refresh every 4 weeks",
       "Full library and progress tracking",
@@ -150,6 +161,7 @@ export const PLANS: Plan[] = [
     limits: ["Coach messaging: up to 4 conversations per month, replies within 2 business days"],
     workload: { liveMinutesPerMonth: 30, asyncMinutesPerMonth: 20, blueprintMinutesOnce: 0 },
     creditsPerMonth: 0,
+    formChecksPerMonth: 1,
     eligibility: "Available after 6 months on Core, Hybrid or Premium.",
   },
 ];

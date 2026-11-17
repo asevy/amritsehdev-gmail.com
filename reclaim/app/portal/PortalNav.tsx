@@ -9,10 +9,11 @@ const GROUPS = [
     entity: "platform",
     items: [
       ["/portal", "Today"],
+      ["/portal/record", "My record"],
       ["/portal/blueprint", "Blueprint"],
       ["/portal/plan", "This week"],
       ["/portal/progress", "Progress"],
-      ["/portal/library", "Video library"],
+      ["/portal/form-checks", "Form checks"],
       ["/portal/appointments", "Appointments"],
       ["/portal/messages", "Coach messages"],
       ["/portal/network", "Local network"],
@@ -22,7 +23,7 @@ const GROUPS = [
   { label: "Account", entity: "platform", items: [["/portal/billing", "Billing"], ["/portal/privacy", "Privacy & data"]] },
 ];
 
-const MEMBER_ONLY = new Set(["/portal/plan", "/portal/library", "/portal/messages", "/portal/network", "/portal/progress", "/portal/blueprint", "/portal/appointments"]);
+const MEMBER_ONLY = new Set(["/portal/plan", "/portal/record", "/portal/form-checks", "/portal/messages", "/portal/network", "/portal/progress", "/portal/blueprint", "/portal/appointments"]);
 
 export function PortalNav({ hasMembership }: { hasMembership: boolean }) {
   const path = usePathname();

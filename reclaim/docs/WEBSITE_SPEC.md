@@ -8,7 +8,7 @@ The business plan makes the website do five jobs at once:
 
 1. **Acquisition and assessment engine.** It turns a visitor into a member with a Blueprint.
 2. **Commerce — for the platform company only.** It sells memberships, add-ons and partner credits. It does **not** sell medication or medical care. Those belong to separate legal entities, which are the merchants of record for their own supplies.
-3. **Member portal holding saved information.** Blueprint versions, plan, progress, video progress, bookings, messages, consents and receipts.
+3. **Member portal holding saved information.** Blueprint versions, plan, progress, form-check videos with coach ratings, bookings, messages, consents and receipts, gathered into one growing record so members keep coming back (§4a).
 4. **Front door for the independent medical practice and the pharmacy.** It is operated as their agent or electronic service provider, with separate records, branding, notices and audit trails.
 5. **The cheapest demand-test instrument the business has.** The plan says to test demand, price and attachment before building or hiring. The site measures these first-hand: funnel, willingness to pay, sequential price tests, interest in medical care, waitlist geography, B2B fake doors and coaching workload.
 
@@ -36,7 +36,7 @@ The prototype builds those constraints into structure rather than relying on cop
 | `/network` | Partner types (placeholders), credits, regulated providers as a directory only, "become a partner" form | 3 |
 | `/employers`, `/organisations`, `/research` | Fake-door pages with lead forms. Nothing is sold before it exists | 4, 5 |
 | `/outcomes` | Pre-specified measures and methods, published before any results | Evidence, exit value |
-| `/learn`, `/learn/[slug]`, `/learn/video/[id]` | Referenced articles with reviewer and date (draft banner until signed off); public videos | Acquisition (SEO) |
+| `/learn`, `/learn/[slug]` | Referenced articles with reviewer and date (draft banner until signed off) | Acquisition (SEO) |
 | `/about` | Structure, governance, money flows; founder placeholders flagged for counsel | Trust, diligence |
 | `/legal/*` | Terms and membership agreement, two privacy notices (platform and practice), cancellation, relationships, accessibility, complaints — all drafts | Compliance |
 | `/waitlist` | Non-Ontario demand by province or state plus the first three characters of a postal code; separate opt-in for marketing email | Expansion evidence |
@@ -46,11 +46,12 @@ The prototype builds those constraints into structure rather than relying on cop
 
 | Route | What is saved |
 |---|---|
-| Today | Today's plan items, upcoming sessions, resume-watching, Blueprint targets |
+| Today | Today's plan items, upcoming sessions, latest coach cues and any re-film due, Blueprint targets |
+| My record | One timeline of everything: form checks and reviews, measurements, Blueprint versions, sessions, weeks, personal bests and form-improvement milestones |
 | Blueprint | Versioned plan: goals, capacity, pain limits, nutrition, schedule, sleep, barriers, coaching style, targets. Member edits create a new version |
-| This week | Plan items with completion ticks; videos linked to items tick off automatically |
+| This week | Plan items with completion ticks; a form-check task ticks itself when a clip for that exercise is saved |
 | Progress | Measurements by metric, small-multiple charts with targets, data tables |
-| Video library | Saved videos, resume position, completion; signed streaming |
+| Form checks | The member's own exercise clips (recorded by them or their coach), on-device measurements, coach ratings and cues, first-vs-latest comparison, re-film due dates |
 | Appointments, Coach messages, Local network | Bookings, a coaching thread, credit ledger, partner bookings |
 | **Care** (medical practice branding) | Intake, visits, labs, prescriptions, pharmacy choice, pharmacy fills and payment, clinical messages, side-effect reports, sharing switches |
 | Billing | Membership, two-click cancel, pause, receipts with agreement fingerprints |
@@ -60,7 +61,7 @@ The prototype builds those constraints into structure rather than relying on cop
 
 - `/staff/clinician`: queue, chart, intake red flags, sign visit notes, prescribe from the formulary, care-team summary.
 - `/staff/pharmacy`: fill queue, counselling gate, pricing from the price list, shipping.
-- `/staff/coach`: caseload, Blueprint, messages, and the consented care summary only.
+- `/staff/coach`: form-check review queue, recording a form check with a member, caseload, Blueprint, messages, and the consented care summary only.
 - `/admin`: founder insights — no clinical data.
 
 In production the clinician and pharmacist desks are the practice's certified EMR and the pharmacy's dispensing system. They exist here only to demonstrate the boundaries.
@@ -86,23 +87,45 @@ In production the clinician and pharmacist desks are the practice's certified EM
   6. The pharmacy ships with tracking.
 - **Payments seam.** `lib/payments.ts` is a mock provider. Production uses one account per entity (for example Stripe Connect or separate accounts), with no per-prescription or percentage fee flowing to the platform.
 
-## 4. Video
+## 4. Video: one example, plus form checks
 
-| Type | Access | Hosting (prototype → production) |
+Generic exercise video is abundant and free elsewhere, so RECLAIM does not build a content library. It keeps **one programme explainer** on the home page as an example (captions, chapters, transcript). The video unique to RECLAIM is **each member's own form checks**.
+
+**Form checks:**
+1. The member records a short side-on clip in the browser (phone or laptop camera) or uploads one. A coach can also record or upload a clip *with* the member, for example in a session; it lands in the member's programme and doesn't use their allowance.
+2. On the member's device, an open-source pose model (MediaPipe Pose Landmarker, Apache-2.0, self-hosted) estimates joint angles, reps and lowering time. It also draws the detected skeleton on the deepest rep, so the member can see what was measured. Frames are not sent anywhere for this step.
+3. The member can share the video plus the measurements, or **measurements only**.
+4. The coach rates each criterion (needs work / improving / solid) and writes cues.
+5. Each exercise keeps first-vs-latest clips side by side, a table of every check (ratings, form score, measurements), the latest cues and a re-film due date (every 4 weeks).
+
+| Exercise | Measured on device (estimates) | Coach criteria |
 |---|---|---|
-| Programme explainers, public education | Public | Static MP4 and HLS → Mux or Cloudflare Stream public playback |
-| Movement library, lesson curriculum, assessment tests | Active or paused members | `media/` (not web-public), streamed by `/media-secure` with one-hour HMAC-signed tokens and Range support → host's signed playback IDs |
-| Medication education | Only patients with a matching prescription, owned by the practice or pharmacy | Not built; must sit outside platform marketing |
-| Clinical video visits | Patient and clinician | Buy: the practice's EMR or an Ontario Health-verified virtual-visit vendor. No recording |
+| Goblet squat | Reps, knee angle at deepest point, torso lean at the bottom, lowering time | Depth without pain, knee tracking, chest tall/back neutral |
+| Hip hinge | Reps, hip angle at deepest point, knee bend at the bottom, lowering time | Hips back, neutral back, soft steady knees |
+| Push-up | Reps, elbow angle at deepest point, largest sag/pike of the body line, lowering time | Straight body line, controlled depth, elbow position |
 
-Every video has:
-- captions, on by default, generated from the same cue data as the transcript;
-- chapters;
-- a clickable transcript and playback speed control;
-- resume from the saved position, saved every 10 seconds and on pause or page hide;
-- completion at 90%, which ticks off the matching plan item.
+**Limits and guardrails:**
+- Reviews are capped per plan (Foundation 1, Core 2, Hybrid 4, Premium 8, Maintenance 1 a month) and counted in coach capacity at 6 minutes each (assumption).
+- The measurements are estimates from one camera angle, for tracking change over time. They are **not** a safety guarantee, injury-risk score or clinical assessment, and the copy never says they "ensure" correct lifting.
+- When the body isn't clearly visible or no full reps are found, the result is flagged low-confidence instead of guessed.
+- A coach reviews every clip; symptoms go to the medical practice.
+- **Validation before any claim:** in the pilot, compare device angles and rep counts with coach ratings (and a goniometer on a subset) across lighting, clothing and camera positions. Unit tests cover the angle and rep maths on synthetic data. The model has run end to end in the browser, but it has **not** yet been tested on real lifters.
+- **Hardware sensors** (bar-speed or wearable motion sensors) are a later, optional adapter: the data model records each measurement's source. Phone camera first because it needs no hardware inventory (capital-light).
 
-The linter fails the build if any video lacks captions. Placeholder renders are generated by `npm run media`; produced videos replace the files without code changes.
+**Privacy:** exercise video of a person's body is sensitive personal information.
+- A separate consent is needed before storing video.
+- Clips are stored outside the web root and streamed only through one-hour signed links, after re-checking that the viewer is the member or a coach. Founders, clinicians and pharmacists cannot view them.
+- Members can delete any video (keeping the ratings) or remove a check entirely, or delete all videos from Privacy.
+- Clips are not shared with the medical practice or employers and are never used in marketing.
+
+## 4a. Stickiness: why members keep coming back
+
+Everything a member does is saved into their programme and shown back to them, so the record becomes more valuable every week:
+
+- **My record:** one timeline of form checks, coach reviews, measurements, Blueprint versions, sessions and completed weeks, with personal bests and "form improved" milestones worked out from their own data.
+- **Form history:** first-vs-latest clips and a ratings table per exercise, re-film reminders every 4 weeks, and coach cues on the Today page.
+- **Plan links:** a form-check task in the weekly plan ticks itself when the clip is saved; coach-recorded clips land straight in the member's programme.
+- **Guardrails:** value, not lock-in. Everything is exportable in one click, cancellation stays two clicks, and personal bests avoid body weight. Reminder emails are limited to the member's own programme (counsel to confirm the CASL category); marketing still needs separate consent.
 
 ## 5. Saved information and the data boundary
 
@@ -114,7 +137,8 @@ There are three physically separate stores (`.data/platform.db`, `clinical.db`, 
   - care summary → coach;
   - de-identified research;
   - employer aggregate reporting;
-  - product analytics.
+  - product analytics;
+  - storing form-check videos.
 - **Audit:** hash-chained, append-only logs in each store; database triggers block UPDATE and DELETE. Members see staff access to their medical record.
 - **Rights:**
   - one-click JSON export of platform data, plus a labelled summary of the clinical record;
@@ -161,7 +185,9 @@ These are enforced by server code:
 | Payments and subscriptions | **Buy** (Stripe or similar), one account per entity; keep our own cancel screen | Never build card handling |
 | EMR, clinical notes, e-prescribing, labs | **Buy**: the practice's OntarioMD-certified EMR; PrescribeIT or fax; lab interfaces through the EMR. The portal reads and writes through the EMR's API as agent | Never, unless an EMR blocks integration |
 | Pharmacy dispensing and claims adjudication | **Buy**: the pharmacy's dispensing system; integrate only fill status and price | Never |
-| Video hosting and streaming | **Buy** (Mux or Cloudflare Stream); keep our player | Never |
+| Form-check video storage and playback | Prototype stores clips privately on the server with signed links. Production: **buy** a video host with direct uploads, transcoding, signed playback and a Canadian region | Never build transcoding |
+| Pose estimation | **Use** the open-source on-device model (MediaPipe, Apache-2.0); build only the angle/rep logic and the review workflow | — |
+| Hardware motion sensors | Later, **buy/partner** via an adapter only if pilot data shows the camera is not enough | Never manufacture |
 | Clinical video visits | **Buy** (EMR-integrated or Ontario Health-verified vendor) | Never |
 | Coach and partner booking | Prototype has simple slots; **buy** a scheduler (e.g. Jane App or Acuity) for coaches; partners via their own systems or a credits API | Partner volume justifies a direct integration |
 | Email and SMS | **Buy** a provider with Canadian data residency behind `lib/email.ts` | — |
@@ -176,7 +202,7 @@ Each gate is a condition for **entering** that phase, not a review after it. Not
 | Phase | Ship | Gate to enter this phase |
 |---|---|---|
 | **0. Demand test (weeks 0–6)** | Public pages, assessment, waitlist, willingness-to-pay survey, fake doors, admin insights. **No payments and no health data.** `RECLAIM_DEMO_MODE=false`; noindex removed only after counsel review of copy | Counsel review of public copy |
-| **1. Coaching pilot** | Memberships with the payment provider, portal, video library on the host, coach scheduler, real coaches | **Gate 1:** demand data justifies it (completed assessments and survey responses enough to read the price range and medical-interest share); counsel signs off public copy and the cooling-off and trust questions; coach and partner contracts signed; privacy impact assessment and accessibility audit done |
+| **1. Coaching pilot** | Memberships with the payment provider, portal, form checks with clips on a video host (device measurements labelled as estimates while the validation study runs), coach scheduler, real coaches | **Gate 1:** demand data justifies it (completed assessments and survey responses enough to read the price range and medical-interest share); counsel signs off public copy and the cooling-off and trust questions; coach and partner contracts signed; privacy impact assessment and accessibility audit done |
 | **2. Medical arm** | Care area wired to the practice's EMR; pharmacy integration for fill status; clinical notices live | **Gate 2:** agent/ESP agreements with the practice and pharmacy signed; formulary approved by the medical director; legal opinion on the funnel (O. Reg. 114/94 s.7) and the pharmacy relationship |
 | **3. Scale and expand** | Jurisdiction rows switched on province by province; employer sponsor codes; licensing tools | **Gate 3:** LegitScript before any paid acquisition; per province or state, waitlist density, licensed clinicians, pharmacy permissions and partners in place. The US needs separate entities and a HIPAA programme |
 
@@ -187,7 +213,8 @@ Each gate is a condition for **entering** that phase, not a review after it. Not
 - accounts and sessions, consents, orders and subscriptions with tax;
 - agreement snapshots, cancel, pause and refund;
 - credits and bookings;
-- video streaming with signed URLs, captions and resume;
+- form checks: in-browser recording, upload, on-device pose measurement, coach review, coach-recorded clips, signed streaming, deletion;
+- My record timeline with personal bests and milestones;
 - progress logging and charts;
 - the full prescription → pharmacy choice → fill → pay → ship flow across three stores;
 - audit logs, data export, the admin insights;
@@ -195,6 +222,7 @@ Each gate is a condition for **entering** that phase, not a review after it. Not
 
 **Mocked:**
 - payment provider (test checkout page);
+- demo form-check clips and their measurements (placeholders, labelled demo);
 - email (written to an outbox);
 - EMR, e-prescribing, labs, video visits;
 - scheduling slots;

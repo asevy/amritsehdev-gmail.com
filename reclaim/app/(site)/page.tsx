@@ -102,7 +102,7 @@ export default function Home() {
             </ol>
           </div>
           <div>
-            <VideoPlayer videoId={video.id} title={video.title} playback={publicPlayback(video)} chapters={video.chapters} cues={video.cues} />
+            <VideoPlayer title={video.title} playback={publicPlayback(video)} chapters={video.chapters} cues={video.cues} />
           </div>
         </Container>
       </section>
@@ -187,7 +187,7 @@ export default function Home() {
           </SectionHeading>
           <div className="grid grid-cols-2 gap-4">
             {[
-              ["Strength", "30-s sit-to-stand, grip, push-up progression"],
+              ["Strength & form", "30-s sit-to-stand, push-up progression, and form checks your coach rates over time"],
               ["Body composition", "Waist; partner-facility scans where you choose"],
               ["Habits", "Sessions completed, protein, sleep, steps"],
               ["Safety", "Pain flags and side-effect reports, reviewed by the right professional"],

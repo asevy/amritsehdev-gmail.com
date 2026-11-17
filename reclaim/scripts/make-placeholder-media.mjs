@@ -3,8 +3,8 @@
 // tracks from content/videos.json using ffmpeg. Replace with produced content later;
 // the app only depends on the file layout, not on these renders.
 //
-//   public videos  -> public/media/public/<id>/{video.mp4,poster.jpg,captions.vtt,chapters.vtt[,hls/index.m3u8]}
-//   member videos  -> media/members/<id>/...   (NOT web-public; streamed by an authenticated route)
+//   programme video   -> public/media/public/<id>/{video.mp4,poster.jpg,captions.vtt,chapters.vtt}
+//   demo form checks  -> media/demo-form-checks/<name>.mp4  (NOT web-public; streamed via signed links)
 //
 // Usage: npm run media
 import { execFileSync } from "node:child_process";
@@ -35,7 +35,7 @@ const ts = (s) => {
 const CATEGORY_LABEL = { programme: "PROGRAMME", movement: "MOVEMENT LIBRARY", lesson: "LESSON", assessment: "ASSESSMENT" };
 
 for (const v of videos) {
-  const outDir = v.access === "public" ? join(root, "public/media/public", v.id) : join(root, "media/members", v.id);
+  const outDir = join(root, "public/media/public", v.id);
   mkdirSync(outDir, { recursive: true });
   const tmp = mkdtempSync(join(tmpdir(), "reclaim-media-"));
   const tf = (name, text) => { const p = join(tmp, name); writeFileSync(p, text); return p; };
@@ -73,13 +73,6 @@ for (const v of videos) {
   ]);
   execFileSync("ffmpeg", ["-y", "-loglevel", "error", "-ss", "1", "-i", mp4, "-frames:v", "1", "-q:v", "4", join(outDir, "poster.jpg")]);
 
-  if (v.hls) {
-    const hlsDir = join(outDir, "hls");
-    mkdirSync(hlsDir, { recursive: true });
-    execFileSync("ffmpeg", ["-y", "-loglevel", "error", "-i", mp4, "-c", "copy", "-hls_time", "6", "-hls_playlist_type", "vod",
-      "-hls_segment_filename", join(hlsDir, "seg%03d.ts"), join(hlsDir, "index.m3u8")]);
-  }
-
   const captions = ["WEBVTT", "", ...v.cues.flatMap((c, i) => [`${i + 1}`, `${ts(c.start)} --> ${ts(c.end)}`, c.text, ""])].join("\n");
   writeFileSync(join(outDir, "captions.vtt"), captions);
   const chapters = ["WEBVTT", "", ...v.chapters.flatMap((c, i) => {
@@ -90,4 +83,30 @@ for (const v of videos) {
 
   rmSync(tmp, { recursive: true, force: true });
   console.log(`${v.access.padEnd(6)} ${v.id}`);
+}
+
+// Demo form-check clips: portrait, like a phone recording. Stand-ins for a member's own video.
+const FORM_DEMOS = [
+  ["goblet-squat-week1", "Goblet squat", "Week 1 · recorded by coach"],
+  ["goblet-squat-week7", "Goblet squat", "Week 7 · recorded by member"],
+  ["hip-hinge-week9", "Hip hinge", "Week 9 · recorded by member"],
+];
+const demoDir = join(root, "media/demo-form-checks");
+mkdirSync(demoDir, { recursive: true });
+for (const [name, exercise, when] of FORM_DEMOS) {
+  const tmp = mkdtempSync(join(tmpdir(), "reclaim-fc-"));
+  const tf = (n, text) => { const p = join(tmp, n); writeFileSync(p, text); return p; };
+  const vf = [
+    `drawtext=fontfile=${FONT_MONO}:textfile=${tf("a.txt", "FORM CHECK")}:fontcolor=0xD8F26A:fontsize=30:x=48:y=96`,
+    `drawtext=fontfile=${FONT_BOLD}:textfile=${tf("b.txt", exercise)}:fontcolor=0xFAF8F3:fontsize=56:x=48:y=150`,
+    `drawtext=fontfile=${FONT_REG}:textfile=${tf("c.txt", when)}:fontcolor=0x9FB3AC:fontsize=30:x=48:y=230`,
+    `drawtext=fontfile=${FONT_MONO}:textfile=${tf("d.txt", "PLACEHOLDER")}:fontcolor=0x6F837C:fontsize=26:x=48:y=h-180`,
+    `drawtext=fontfile=${FONT_MONO}:textfile=${tf("e.txt", "A member's own phone video")}:fontcolor=0x6F837C:fontsize=26:x=48:y=h-140`,
+    `drawtext=fontfile=${FONT_MONO}:textfile=${tf("f.txt", "appears here.")}:fontcolor=0x6F837C:fontsize=26:x=48:y=h-104`,
+    `drawbox=x=48:y=h-240:w='max(1,624*t/6)':h=4:color=0xD8F26A:t=fill`,
+  ];
+  execFileSync("ffmpeg", ["-y", "-loglevel", "error", "-f", "lavfi", "-i", "color=c=0x0F1F1B:s=720x1280:d=6:r=24", "-vf", vf.join(","), "-t", "6",
+    "-c:v", "libx264", "-preset", "veryfast", "-crf", "32", "-tune", "stillimage", "-pix_fmt", "yuv420p", "-movflags", "+faststart", join(demoDir, `${name}.mp4`)]);
+  rmSync(tmp, { recursive: true, force: true });
+  console.log(`demo   ${name}`);
 }

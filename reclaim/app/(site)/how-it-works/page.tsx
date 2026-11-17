@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Container, EntityTag, SectionHeading } from "@/components/ui";
-import { VideoPlayer } from "@/components/VideoPlayer";
-import { videoById, publicPlayback } from "@/lib/videos";
 import type { EntityId } from "@/config/site";
 
 export const metadata: Metadata = { title: "How it works" };
@@ -21,7 +19,7 @@ const STEPS: { n: string; h: string; who: EntityId; p: string; detail: string[] 
   {
     n: "03", h: "Weekly plan", who: "platform",
     p: "Training at home, a partner gym or with a trainer; nutrition and sleep habits; short lessons. Your coach adjusts it every two weeks.",
-    detail: ["Video library with captions and transcripts", "Message your coach during support hours", "Use credits at partner gyms and studios"],
+    detail: ["Form checks: film a lift, your coach sends cues", "Message your coach during support hours", "Use credits at partner gyms and studios"],
   },
   {
     n: "04", h: "Medical assessment — only if you want one", who: "clinical",
@@ -41,7 +39,6 @@ const STEPS: { n: string; h: string; who: EntityId; p: string; detail: string[] 
 ];
 
 export default function HowItWorksPage() {
-  const v = videoById("blueprint-session")!;
   return (
     <>
       <Container className="py-16">
@@ -66,12 +63,13 @@ export default function HowItWorksPage() {
           ))}
         </ol>
       </Container>
-      <Container className="grid gap-10 py-20 lg:grid-cols-[0.8fr_1.2fr]">
-        <SectionHeading eyebrow="Watch" title="What happens in a Blueprint session.">
-          Thirty seconds on what to expect, with captions and a transcript.
-          <div className="mt-6"><Link href="/assessment" className="btn-primary">Start the free assessment</Link></div>
-        </SectionHeading>
-        <VideoPlayer videoId={v.id} title={v.title} playback={publicPlayback(v)} chapters={v.chapters} cues={v.cues} />
+      <Container className="py-20">
+        <div className="card flex flex-wrap items-center justify-between gap-6 p-8">
+          <SectionHeading eyebrow="Form checks" title="Film a lift. See your form improve.">
+            Record a short clip on your phone; it measures your joint angles and reps on the device, and your coach sends cues. Every check is saved to your record.
+          </SectionHeading>
+          <Link href="/assessment" className="btn-primary">Start the free assessment</Link>
+        </div>
       </Container>
     </>
   );

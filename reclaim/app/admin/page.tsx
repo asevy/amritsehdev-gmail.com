@@ -5,6 +5,7 @@ import { activeVariant } from "@/lib/commerce";
 import { pharmacyRevenueSummary } from "@/lib/pharmacy";
 import { vanWestendorp } from "@/lib/assessment";
 import { PLANS } from "@/config/catalog";
+import { FORM_CHECK_REVIEW_MINUTES } from "@/config/exercises";
 import { JURISDICTIONS } from "@/config/site";
 import { setPriceVariant } from "@/app/actions/staff";
 import { logout } from "@/app/actions/auth";
@@ -63,7 +64,7 @@ export default async function AdminPage({ searchParams }: { searchParams: Promis
   const active = P.prepare("SELECT plan_id, COUNT(*) AS n, SUM(CASE WHEN started_at > ? THEN 1 ELSE 0 END) AS new_n FROM subscriptions WHERE status = 'active' GROUP BY plan_id").all(new Date(Date.now() - 30 * 86400_000).toISOString()) as Array<{ plan_id: string; n: number; new_n: number }>;
   const capacity = active.map((a) => {
     const plan = PLANS.find((p) => p.id === a.plan_id)!;
-    const mins = a.n * (plan.workload.liveMinutesPerMonth + plan.workload.asyncMinutesPerMonth) + a.new_n * plan.workload.blueprintMinutesOnce;
+    const mins = a.n * (plan.workload.liveMinutesPerMonth + plan.workload.asyncMinutesPerMonth + plan.formChecksPerMonth * FORM_CHECK_REVIEW_MINUTES) + a.new_n * plan.workload.blueprintMinutesOnce;
     return { plan: plan.name, members: a.n, minutes: mins };
   });
   const totalMin = capacity.reduce((s, c) => s + c.minutes, 0);
@@ -152,7 +153,7 @@ export default async function AdminPage({ searchParams }: { searchParams: Promis
               <tbody>{capacity.map((c) => <tr key={c.plan} className="border-t border-line"><td className="py-1">{c.plan}</td><td className="text-right tabular-nums">{c.members}</td><td className="text-right tabular-nums">{(c.minutes / 60).toFixed(1)}</td></tr>)}</tbody>
             </table>
             <div className="mt-4 grid grid-cols-2 gap-4">
-              <Stat label="Workload" value={`${(totalMin / 60).toFixed(1)} h`} sub="per month, live + async + onboarding" />
+              <Stat label="Workload" value={`${(totalMin / 60).toFixed(1)} h`} sub={`per month: live, async, onboarding, form-check reviews at ${FORM_CHECK_REVIEW_MINUTES} min (assumption)`} />
               <Stat label="Coach FTE needed" value={(totalMin / COACH_PRODUCTIVE_MIN_PER_FTE_MONTH).toFixed(2)} sub="at 110 productive h/FTE/month (assumption)" />
             </div>
           </Panel>

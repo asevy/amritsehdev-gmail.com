@@ -3,10 +3,11 @@ import type { NextConfig } from "next";
 const isDev = process.env.NODE_ENV !== "production";
 
 // No third-party origins anywhere: no ad pixels, tag managers or external fonts.
+// 'wasm-unsafe-eval' lets the self-hosted pose model (WebAssembly) run on the member's device.
 // TODO before launch: move to nonce-based script-src (see docs/WEBSITE_SPEC.md §Security).
 const csp = [
   "default-src 'self'",
-  `script-src 'self' 'unsafe-inline'${isDev ? " 'unsafe-eval'" : ""}`,
+  `script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval'${isDev ? " 'unsafe-eval'" : ""}`,
   "style-src 'self' 'unsafe-inline'",
   "img-src 'self' data: blob:",
   "media-src 'self' blob:",
@@ -22,6 +23,11 @@ const csp = [
 const nextConfig: NextConfig = {
   poweredByHeader: false,
   devIndicators: false,
+  experimental: {
+    // Form-check video uploads (50 MB cap enforced in lib/form-checks.ts; headroom for multipart overhead).
+    serverActions: { bodySizeLimit: "52mb" },
+    proxyClientMaxBodySize: "52mb",
+  },
   async headers() {
     return [
       {
@@ -31,7 +37,7 @@ const nextConfig: NextConfig = {
           { key: "X-Frame-Options", value: "DENY" },
           { key: "X-Content-Type-Options", value: "nosniff" },
           { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
-          { key: "Permissions-Policy", value: "camera=(), microphone=(), geolocation=(), payment=(), interest-cohort=()" },
+          { key: "Permissions-Policy", value: "camera=(self), microphone=(), geolocation=(), payment=(), interest-cohort=()" },
           ...(isDev ? [] : [{ key: "Strict-Transport-Security", value: "max-age=63072000; includeSubDomains; preload" }]),
         ],
       },

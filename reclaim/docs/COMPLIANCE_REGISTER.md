@@ -34,6 +34,16 @@ Confidence: **H** = primary text read, unambiguous · **M** = primary text read 
 | 14 | US: FTC click-to-cancel rule vacated (8th Cir., 2025-07-08); FTC restored the pre-2024 rule (2026-02-12) and opened new rulemaking (2026-03-13); ROSCA applies; California ARL (AB 2863) requires online at-will cancellation. | ftc.gov negative-option rule page; Cal. Bus. & Prof. Code §17602 (search-only) | H / M | Two-click online cancellation already built; jurisdiction config gates US. | US counsel before any US launch. |
 | 15 | 9-8-8 Suicide Crisis Helpline live nationally (call or text). | 988.ca | H | 911 and 9-8-8 shown in footer, portal sidebar, Care and coach messaging. | — |
 
+## Form checks: design assumptions, not yet researched
+
+These rows are the build's own analysis, added after the research above. They need the same counsel review.
+
+| Topic | Design choice in the build | Question for counsel |
+|---|---|---|
+| Exercise video of members is sensitive personal information (PIPEDA) | Separate opt-in consent; private storage outside the web root; one-hour signed links re-checked against the viewer; member and coaches only; delete per clip or all at once; never shared with the practice or employers or used in marketing; "measurements only" option | Retention period after membership ends; whether coach-recorded clips need consent at the session as well; Canadian residency for the production video host |
+| On-device pose measurements (software and the medical-device boundary) | Fitness feedback only: joint angles, reps, tempo for tracking change; labelled as estimates; flagged low-confidence rather than guessed; a coach reviews every clip; no injury-risk, rehab or "ensures safe lifting" claims; never used for clinical decisions | Confirm this stays general wellness under Health Canada's SaMD guidance, and which future features (pain-related or rehab use) would change that |
+| Programme reminders (re-film due, coach cues ready) | Shown in the portal; any email limited to the member's own programme; marketing still needs `marketing_email` consent | Which reminder emails fall under CASL's transactional/relationship exemptions |
+
 ## Items not yet researched (validation backlog)
 
 - Quebec Law 25 and Charter of the French Language for any Quebec launch.

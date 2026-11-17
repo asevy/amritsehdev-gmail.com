@@ -15,7 +15,8 @@ export type ConsentKind =
   | "clinical_summary_to_coach"
   | "research_deidentified"
   | "employer_aggregate"
-  | "product_analytics";
+  | "product_analytics"
+  | "form_check_video";
 
 export interface ConsentDef {
   kind: ConsentKind;
@@ -97,6 +98,15 @@ export const CONSENTS: Record<ConsentKind, ConsentDef> = {
     entity: "platform",
     label: "Product analytics",
     text: "Allow RECLAIM to use first-party analytics about how I use the site (pages and features, never health details) to improve the service. No third-party advertising trackers are used.",
+    required: false,
+    version: "2026-11-draft",
+    withdrawable: true,
+  },
+  form_check_video: {
+    kind: "form_check_video",
+    entity: "platform",
+    label: "Form-check videos",
+    text: "Store the exercise videos I choose to upload so my coach can review my form. Only my coach and I can watch them. They are never shared with the medical practice, my employer or anyone else, never used in marketing, and I can delete any of them at any time.",
     required: false,
     version: "2026-11-draft",
     withdrawable: true,

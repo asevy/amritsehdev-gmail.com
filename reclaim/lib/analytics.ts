@@ -21,11 +21,11 @@ export const EVENT_NAMES = [
   "fake_door_clicked",
   "subscription_cancelled",
   "subscription_paused",
-  "video_completed",
+  "form_check_submitted",
 ] as const;
 export type EventName = (typeof EVENT_NAMES)[number];
 
-const ALLOWED_PROPS = new Set(["plan", "variant", "path", "jurisdiction", "source", "kind", "door", "step", "reason", "video", "medical_interest"]);
+const ALLOWED_PROPS = new Set(["plan", "variant", "path", "jurisdiction", "source", "kind", "door", "step", "reason", "medical_interest"]);
 
 export async function track(name: EventName, props: Record<string, string | number | boolean | null> = {}, userId?: string | null): Promise<void> {
   const clean: Record<string, unknown> = {};

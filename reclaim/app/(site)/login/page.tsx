@@ -7,8 +7,8 @@ import { DEMO_ACCOUNTS, DEMO_PASSWORD } from "@/lib/db/seed";
 export const metadata: Metadata = { title: "Log in" };
 
 const ROLE_NOTE: Record<string, string> = {
-  member: "Member portal: Blueprint, plan, progress, videos, care, billing, privacy",
-  coach: "Coach desk: member threads and care summaries (with consent)",
+  member: "Member portal: record, Blueprint, plan, progress, form checks, care, billing, privacy",
+  coach: "Coach desk: review and record form checks, messages, consented care summary",
   clinician: "Clinician desk: queue, chart, prescribe from formulary",
   pharmacist: "Pharmacy desk: verify, counsel, price, ship",
   admin: "Founder insights: funnel, price test, capacity, outbox, audit",

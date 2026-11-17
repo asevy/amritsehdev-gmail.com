@@ -2,18 +2,21 @@ import { requireUser } from "@/lib/auth";
 import { currentConsents, consentHistory } from "@/lib/consent";
 import { getEnrolment, accessLog } from "@/lib/clinical";
 import { setConsent, requestDataAction } from "@/app/actions/portal";
+import { deleteAllFormCheckVideosAction } from "@/app/actions/form-checks";
+import { listForMember } from "@/lib/form-checks";
 import { CONSENTS, type ConsentKind } from "@/config/consents";
 import { PageHeader, Panel, Flash } from "@/components/portal";
 import { EntityTag } from "@/components/ui";
 import { fmtDateTime } from "@/lib/money";
 
-export default async function PrivacyPage({ searchParams }: { searchParams: Promise<{ requested?: string }> }) {
+export default async function PrivacyPage({ searchParams }: { searchParams: Promise<{ requested?: string; videos?: string }> }) {
   const user = await requireUser(["member"]);
   const sp = await searchParams;
   const state = currentConsents(user.id);
   const history = consentHistory(user.id);
   const enrolled = !!getEnrolment(user);
   const log = enrolled ? accessLog(user) : [];
+  const storedVideos = listForMember(user.id).filter((c) => c.file_path).length;
   const kinds = (Object.keys(CONSENTS) as ConsentKind[]).filter((k) => CONSENTS[k].withdrawable && (k !== "employer_aggregate" || user.sponsor_code));
 
   return (
@@ -22,6 +25,7 @@ export default async function PrivacyPage({ searchParams }: { searchParams: Prom
         Every choice here is separate, can be changed any time, and is recorded with the exact wording you agreed to.
       </PageHeader>
       {sp.requested && <Flash>Request received. We&apos;ll respond within 30 days.</Flash>}
+      {sp.videos && <Flash>All your form-check videos have been deleted. Your coach&apos;s ratings and your measurements stay in your record.</Flash>}
 
       <Panel title="Your choices">
         <ul className="divide-y divide-line">
@@ -51,11 +55,16 @@ export default async function PrivacyPage({ searchParams }: { searchParams: Prom
         <Panel title="Your data">
           <div className="space-y-3 text-sm">
             <a href="/api/export" className="btn-primary btn-sm">Download my RECLAIM data (JSON)</a>
-            <p className="text-ink-2">Includes account, Blueprint versions, measurements, plan, video progress, bookings, coach messages, orders and consent history. {enrolled && "A summary of your medical-practice record is included, labelled separately."}</p>
+            <p className="text-ink-2">Includes account, Blueprint versions, measurements, plan, form checks (ratings and measurements), bookings, coach messages, orders and consent history. {enrolled && "A summary of your medical-practice record is included, labelled separately."}</p>
             <div className="flex flex-wrap gap-2 pt-2">
               <form action={requestDataAction}><input type="hidden" name="kind" value="correction" /><input type="hidden" name="entity" value="platform" /><button className="btn-ghost btn-sm">Request a correction</button></form>
               <form action={requestDataAction}><input type="hidden" name="kind" value="deletion" /><input type="hidden" name="entity" value="platform" /><button className="btn-danger btn-sm">Request deletion</button></form>
               {enrolled && <form action={requestDataAction}><input type="hidden" name="kind" value="access" /><input type="hidden" name="entity" value="clinical" /><button className="btn-ghost btn-sm">Full copy of medical record (to the practice)</button></form>}
+            </div>
+            <div className="rounded-xl border border-line p-3">
+              <p className="font-medium">Form-check videos: {storedVideos} stored</p>
+              <p className="mt-1 text-xs text-muted">Visible only to you and your coach. Deleting removes the video files; ratings and measurements stay unless you remove a check entirely in Form checks.</p>
+              {storedVideos > 0 && <form action={deleteAllFormCheckVideosAction} className="mt-2"><button className="btn-danger btn-sm">Delete all my form-check videos</button></form>}
             </div>
             <p className="text-xs text-muted">Deletion removes RECLAIM data except records we must keep (financial records for tax, proof of consent). Medical records are kept by the practice as required by law; you can ask it to correct them.</p>
           </div>

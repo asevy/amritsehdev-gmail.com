@@ -5,7 +5,6 @@ import { redirect } from "next/navigation";
 import { requireUser } from "@/lib/auth";
 import { db, newId, nowIso, audit } from "@/lib/db";
 import { recordConsent } from "@/lib/consent";
-import { toggleSaved } from "@/lib/media-auth";
 import { creditBalance, activeSubscription } from "@/lib/commerce";
 import { partnerById, CREDIT_RULES } from "@/config/partners";
 import { CONSENTS, type ConsentKind } from "@/config/consents";
@@ -96,12 +95,6 @@ export async function cancelBooking(form: FormData) {
   }
   revalidatePath("/portal/network");
   revalidatePath("/portal/appointments");
-}
-
-export async function toggleSaveVideo(form: FormData) {
-  const u = await memberWithPlan();
-  toggleSaved(u.id, String(form.get("videoId")));
-  revalidatePath("/portal/library");
 }
 
 export async function updateBlueprintPreferences(form: FormData) {

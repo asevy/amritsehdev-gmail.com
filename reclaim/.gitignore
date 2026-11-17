@@ -5,3 +5,6 @@ next-env.d.ts
 *.tsbuildinfo
 .env*
 !.env.example
+# fetched/copied by scripts/setup-pose.mjs
+public/mediapipe/
+public/models/

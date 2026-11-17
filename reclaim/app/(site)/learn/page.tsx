@@ -2,12 +2,10 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Container, DraftBadge } from "@/components/ui";
 import { ARTICLES } from "@/content/articles";
-import { VIDEOS } from "@/lib/videos";
 
 export const metadata: Metadata = { title: "Learn" };
 
 export default function LearnPage() {
-  const publicVideos = VIDEOS.filter((v) => v.access === "public");
   return (
     <Container className="py-16">
       <p className="eyebrow">Learn</p>
@@ -29,21 +27,6 @@ export default function LearnPage() {
           </Link>
         ))}
       </div>
-      <h2 className="mt-16 text-3xl">Videos</h2>
-      <div className="mt-6 grid gap-5 md:grid-cols-2">
-        {publicVideos.map((v) => (
-          <Link key={v.id} href={`/learn/video/${v.id}`} className="card group overflow-hidden">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={`/media/public/${v.id}/poster.jpg`} alt="" className="aspect-video w-full object-cover" />
-            <div className="p-5">
-              <p className="font-semibold group-hover:underline">{v.title}</p>
-              <p className="mt-1 text-sm text-ink-2">{v.summary}</p>
-              <p className="mt-2 font-mono text-[11px] text-muted">{Math.round(v.durationS)} s · captions · transcript</p>
-            </div>
-          </Link>
-        ))}
-      </div>
-      <p className="mt-10 text-sm text-muted">Members get the full movement library and lesson curriculum in their portal.</p>
     </Container>
   );
 }

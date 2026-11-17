@@ -3,7 +3,7 @@ import { requireUser } from "@/lib/auth";
 import { activeSubscription } from "@/lib/commerce";
 import { currentWeekItems, DAY_NAMES } from "@/lib/portal-data";
 import { togglePlanItem } from "@/app/actions/portal";
-import { videoById } from "@/lib/videos";
+import { formExerciseById } from "@/config/exercises";
 import { PageHeader, MembershipRequired } from "@/components/portal";
 
 const KIND_STYLE: Record<string, string> = {
@@ -36,7 +36,7 @@ export default async function PlanPage() {
                     <span className={`chip border-transparent ${KIND_STYLE[i.kind]}`}>{i.kind}</span>
                     <p className={`mt-1 text-sm font-medium ${i.done_at ? "text-muted line-through" : ""}`}>{i.title}</p>
                     {i.detail && <p className="text-xs leading-5 text-ink-2">{i.detail}</p>}
-                    {i.video_id && <Link className="text-xs underline" href={`/portal/library/${i.video_id}`}>{videoById(i.video_id)?.title}</Link>}
+                    {i.form_exercise && <Link className="text-xs underline" href={`/portal/form-checks?exercise=${i.form_exercise}`}>{i.done_at ? "Saved to your form checks" : `Film your ${formExerciseById(i.form_exercise)?.name.toLowerCase()} →`}</Link>}
                   </div>
                 </li>
               ))}

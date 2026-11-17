@@ -18,7 +18,7 @@ export default async function WelcomePage({ searchParams }: { searchParams: Prom
       <div className="mx-auto mt-12 grid max-w-4xl gap-4 md:grid-cols-3">
         {[
           ["1", "Book your Blueprint session", "/portal/appointments", "Pick a 60-minute slot with your coach."],
-          ["2", "Run your baseline test", "/portal/library/sit-to-stand", "The 30-second sit-to-stand takes two minutes."],
+          ["2", "Film your first form check", "/portal/form-checks", "A short clip of a goblet squat; your coach sends cues."],
           ["3", "Medical assessment (optional)", "/portal/care", "Request one from the independent practice — separate and optional."],
         ].map(([n, h, href, p]) => (
           <Link key={n} href={href} className="card group p-6 hover:border-line-2">

@@ -50,7 +50,9 @@ const CLAIMS = [
   [/\bclinically proven\b/i, "clinically proven"], [/#1\b/, "#1"], [/\b(the )?best\b/i, "superlative 'best'"],
   [/\bleading\b/i, "superlative 'leading'"], [/\btop[- ]rated\b/i, "superlative 'top-rated'"],
   [/\blose \d+\s?(lb|lbs|pounds|kg|kilos)\b/i, "numeric weight-loss promise"], [/\bdetox\b/i, "detox"], [/\bmelt (away )?fat\b/i, "melt fat"],
-  [/★★★★★/, "star-rating testimonial"], [/\bstack(s)?\b/i, "'stack' (experimental combinations)"], [/research use only/i, "'research use only'"],
+  [/★★★★★/, "star-rating testimonial"],
+  [/\bensures? (that )?(you|they|members?)?\s*(are )?(lift|lifting|move|moving|exercise|exercising)\b|\bensures? (safe|correct|proper) (lifting|form|technique)\b/i, "promise that measurement ensures safe/correct lifting"],
+  [/\b(prevents?|eliminates?) injur(y|ies)\b|\binjury[- ]proof\b/i, "injury-prevention claim"], [/\bstack(s)?\b/i, "'stack' (experimental combinations)"], [/research use only/i, "'research use only'"],
 ];
 // Rule 3 — no treatment/cure claims for Schedule A.1 conditions (Food and Drugs Act s.3).
 const SCHED_A1 = /(obesity|obese|diabetes|diabetic|hypertension|depression|cancer|asthma|arthritis|dementia|thyroid disease)/i;

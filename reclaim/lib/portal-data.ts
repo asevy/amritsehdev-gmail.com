@@ -1,7 +1,7 @@
 import "server-only";
 import { db } from "./db";
 
-export interface PlanItem { id: number; week_start: string; day: number; kind: string; title: string; detail: string | null; video_id: string | null; done_at: string | null }
+export interface PlanItem { id: number; week_start: string; day: number; kind: string; title: string; detail: string | null; form_exercise: string | null; done_at: string | null }
 export interface Booking { id: string; kind: string; partner_id: string | null; title: string; starts_at: string; duration_min: number; status: string; credits_used: number }
 export interface Measurement { metric: string; value: number; unit: string; source: string; measured_at: string; note: string | null }
 

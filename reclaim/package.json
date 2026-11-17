@@ -5,19 +5,22 @@
   "type": "module",
   "scripts": {
     "dev": "next dev",
+    "predev": "node scripts/setup-pose.mjs",
     "build": "next build",
-    "prebuild": "node scripts/compliance-lint.mjs",
+    "prebuild": "node scripts/setup-pose.mjs && node scripts/compliance-lint.mjs",
     "start": "next start",
     "typecheck": "tsc --noEmit",
+    "test": "node --test scripts/mechanics.test.ts",
     "compliance": "node scripts/compliance-lint.mjs",
-    "db:reset": "node -e \"require('fs').rmSync('.data',{recursive:true,force:true});console.log('Deleted .data — demo data reseeds on next request')\"",
+    "check": "npm run typecheck && npm test && npm run compliance",
+    "setup:pose": "node scripts/setup-pose.mjs",
     "media": "node scripts/make-placeholder-media.mjs",
-    "check": "npm run typecheck && npm run compliance"
+    "db:reset": "node -e \"require('fs').rmSync('.data',{recursive:true,force:true});console.log('Deleted .data \u2014 demo data reseeds on next request')\""
   },
   "dependencies": {
     "@fontsource-variable/fraunces": "^5.3.0",
+    "@mediapipe/tasks-vision": "^1.2.3",
     "geist": "^1.9.2",
-    "hls.js": "^1.7.4",
     "next": "^16.4.6",
     "react": "^19.3.1",
     "react-dom": "^19.3.1",

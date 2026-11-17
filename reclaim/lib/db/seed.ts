@@ -70,6 +70,7 @@ export function seedDemoData(): void {
   grant("product_analytics", true, ago(70));
   grant("coaching_to_clinical", true, ago(56));
   grant("clinical_summary_to_coach", true, ago(56));
+  grant("form_check_video", true, ago(64));
 
   // Orders + subscription (Core, control price)
   const orderId = newId("ord");
@@ -141,28 +142,37 @@ export function seedDemoData(): void {
   m.run(member, "body_fat_pct", 36.4, "%", "partner_scan", ago(66));
   m.run(member, "body_fat_pct", 34.6, "%", "partner_scan", ago(10));
 
-  // This week's plan
+  // This week's plan (a form-check task ticks itself when a clip for that exercise is saved)
   const wk = mondayOfThisWeek();
-  const pi = P.prepare("INSERT INTO plan_items (user_id, week_start, day, kind, title, detail, video_id, done_at) VALUES (?,?,?,?,?,?,?,?)");
-  pi.run(member, wk, 0, "training", "Strength A — 40 min", "Goblet squat 3×10 · Incline push-up 3×10 · Dowel hinge 3×12 · Carry 3×30 m", "goblet-squat", ago(0.5));
+  const pi = P.prepare("INSERT INTO plan_items (user_id, week_start, day, kind, title, detail, form_exercise, done_at) VALUES (?,?,?,?,?,?,?,?)");
+  pi.run(member, wk, 0, "training", "Strength A — 40 min", "Goblet squat 3×10 · Incline push-up 3×10 · Dowel hinge 3×12 · Carry 3×30 m", null, ago(0.5));
   pi.run(member, wk, 1, "habit", "Walk 30 minutes", "Aim for 7,500 steps today", null, null);
-  pi.run(member, wk, 2, "lesson", "Lesson 2: Sleep and appetite", "8-minute lesson", "sleep-appetite", null);
-  pi.run(member, wk, 3, "training", "Strength B — 40 min", "Box squat 3×8 · Incline push-up 3×12 · Hip hinge drill 3×12", "hip-hinge", null);
-  pi.run(member, wk, 4, "nutrition", "Protein at breakfast", "Five breakfasts this week with a palm-sized protein portion", "protein-basics", null);
+  pi.run(member, wk, 2, "lesson", "Read: Sleep and appetite", "Learn → Sleep and appetite (4 min)", null, null);
+  pi.run(member, wk, 3, "training", "Strength B — 40 min", "Box squat 3×8 · Incline push-up 3×12 · Hip hinge drill 3×12", null, null);
+  pi.run(member, wk, 3, "test", "Film a push-up form check", "Three reps at your current incline, side-on", "push-up", null);
+  pi.run(member, wk, 4, "nutrition", "Protein at breakfast", "Five breakfasts this week with a palm-sized protein portion", null, null);
   pi.run(member, wk, 5, "training", "Partner session", "Open gym at [Partner gym] — your coach has loaded the session", null, null);
-  pi.run(member, wk, 6, "test", "Weekly check-in", "Weigh-in, waist, and a 2-line note to your coach", "sit-to-stand", null);
+  pi.run(member, wk, 6, "test", "Weekly check-in", "Weigh-in, waist, and a 2-line note to your coach", null, null);
 
-  // Video progress
-  const vp = P.prepare("INSERT INTO video_progress (user_id, video_id, position_s, duration_s, completed_at, saved, updated_at) VALUES (?,?,?,?,?,?,?)");
-  vp.run(member, "how-it-works", 40, 40, ago(69), 0, ago(69));
-  vp.run(member, "goblet-squat", 30, 30, ago(60), 1, ago(1));
-  vp.run(member, "protein-basics", 40, 40, ago(40), 0, ago(40));
-  vp.run(member, "hip-hinge", 12, 30, null, 0, ago(2));
-  vp.run(member, "plateaus", 0, 40, null, 1, ago(5));
+  // Form checks (demo clips are placeholders; their measurements are illustrative values, flagged demo)
+  const fc = P.prepare(
+    `INSERT INTO form_checks (id, user_id, exercise, file_path, mime, size_bytes, member_note, recorded_by, recorded_by_id, mechanics_json, status, created_at, reviewer_id, reviewed_at, scores_json, cues)
+     VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`,
+  );
+  const mech = (exercise: string, metrics: Record<string, number>) =>
+    JSON.stringify({ source: "camera-pose", model: "demo", exercise, side: "left", framesAnalysed: 60, detectedPct: 0.95, quality: "ok", notes: [], metrics, deepest: null, trace: [], demo: true });
+  fc.run("fc_demo_1", member, "goblet-squat", "demo:goblet-squat-week1.mp4", "video/mp4", 0, "First go — felt wobbly", "coach", ids.coach,
+    mech("goblet-squat", { reps: 3, deepestKneeDeg: 118, torsoLeanAtBottomDeg: 41, descentSec: 1.2 }), "reviewed", ago(67, 12), ids.coach, ago(67, 15),
+    JSON.stringify({ depth: 1, knees: 2, torso: 1 }), "Recorded in your Blueprint session. Hold the weight closer so your elbows point down, and think 'chest proud'. Squat to a box at knee height for two weeks.");
+  fc.run("fc_demo_2", member, "goblet-squat", "demo:goblet-squat-week7.mp4", "video/mp4", 0, "Box squats are feeling solid now", "member", member,
+    mech("goblet-squat", { reps: 3, deepestKneeDeg: 97, torsoLeanAtBottomDeg: 29, descentSec: 2.1 }), "reviewed", ago(22, 18), ids.coach, ago(21, 10),
+    JSON.stringify({ depth: 2, knees: 3, torso: 3 }), "Big change — far more upright and a controlled two-second lowering. Keep depth to your pain-free range; we'll re-test full depth in four weeks.");
+  fc.run("fc_demo_3", member, "hip-hinge", "demo:hip-hinge-week9.mp4", "video/mp4", 0, "Is my back staying flat?", "member", member,
+    mech("hip-hinge", { reps: 3, deepestHipDeg: 92, kneeBendAtBottomDeg: 22, descentSec: 1.8 }), "submitted", ago(2, 19), null, null, null, null);
 
   // Coaching messages
   const msg = P.prepare("INSERT INTO messages (user_id, sender_id, sender_role, sender_name, body, created_at) VALUES (?,?,?,?,?,?)");
-  msg.run(member, ids.coach, "coach", "Riley Morgan", "Welcome, Jordan! Your Blueprint is live. Start with Strength A on Monday — the goblet squat video is linked in your plan.", ago(67));
+  msg.run(member, ids.coach, "coach", "Riley Morgan", "Welcome, Jordan! Your Blueprint is live. I recorded your first goblet-squat form check in our session; my cues are in Form checks. Start with Strength A on Monday.", ago(67));
   msg.run(member, member, "member", "Jordan Lee", "Did Strength A. Knee felt fine on the box squat but not the full squat.", ago(9));
   msg.run(member, ids.coach, "coach", "Riley Morgan", "Good call stopping there. I've switched you to box squats for two weeks and we'll re-test depth after. Your sit-to-stand went from 11 to 14 — nice work.", ago(9, 14));
 

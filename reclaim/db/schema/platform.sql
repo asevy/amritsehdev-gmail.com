@@ -1,5 +1,5 @@
 -- RECLAIM platform store (commercial company; PIPEDA).
--- Holds accounts, memberships, coaching data, video progress, partner credits,
+-- Holds accounts, memberships, coaching data, form checks, partner credits,
 -- marketing/demand-test data. It never holds clinical records or dispensing records:
 -- those live in clinical.db and pharmacy.db, linked only by users.patient_ref.
 
@@ -133,19 +133,30 @@ CREATE TABLE IF NOT EXISTS plan_items (
   kind TEXT NOT NULL CHECK (kind IN ('training','nutrition','habit','lesson','test')),
   title TEXT NOT NULL,
   detail TEXT,
-  video_id TEXT,
+  form_exercise TEXT,                  -- a form-check task: ticks when a clip for this exercise arrives
   done_at TEXT
 );
 
-CREATE TABLE IF NOT EXISTS video_progress (
+-- Form-check videos: the member's own clips, reviewed by their coach. Videos are sensitive personal
+-- information: stored privately (never under /public), streamed only via short-lived signed links,
+-- visible only to the member and coaches, deletable by the member at any time.
+CREATE TABLE IF NOT EXISTS form_checks (
+  id TEXT PRIMARY KEY,
   user_id TEXT NOT NULL,
-  video_id TEXT NOT NULL,
-  position_s REAL NOT NULL DEFAULT 0,
-  duration_s REAL NOT NULL DEFAULT 0,
-  completed_at TEXT,
-  saved INTEGER NOT NULL DEFAULT 0,
-  updated_at TEXT NOT NULL DEFAULT (datetime('now')),
-  PRIMARY KEY (user_id, video_id)
+  exercise TEXT NOT NULL,
+  file_path TEXT,                      -- NULL when the member shared measurements only, or deleted the video
+  mime TEXT,
+  size_bytes INTEGER,
+  member_note TEXT,
+  recorded_by TEXT NOT NULL DEFAULT 'member' CHECK (recorded_by IN ('member','coach')),
+  recorded_by_id TEXT NOT NULL,
+  mechanics_json TEXT,                 -- on-device pose estimates (angles, reps, tempo)
+  status TEXT NOT NULL CHECK (status IN ('submitted','reviewed','deleted')),
+  created_at TEXT NOT NULL,
+  reviewer_id TEXT,
+  reviewed_at TEXT,
+  scores_json TEXT,                    -- coach rating per criterion: 1 needs work, 2 improving, 3 solid
+  cues TEXT
 );
 
 -- Coach and partner bookings. Clinical visits are booked in clinical.db.
@@ -266,5 +277,6 @@ CREATE TRIGGER IF NOT EXISTS audit_no_update BEFORE UPDATE ON audit_log BEGIN SE
 CREATE TRIGGER IF NOT EXISTS audit_no_delete BEFORE DELETE ON audit_log BEGIN SELECT RAISE(ABORT, 'audit_log is append-only'); END;
 
 CREATE INDEX IF NOT EXISTS idx_measurements_user ON measurements(user_id, metric, measured_at);
+CREATE INDEX IF NOT EXISTS idx_form_checks_user ON form_checks(user_id, exercise, created_at);
 CREATE INDEX IF NOT EXISTS idx_events_name ON events(name, created_at);
 CREATE INDEX IF NOT EXISTS idx_consents_user ON consents(user_id, kind, id);

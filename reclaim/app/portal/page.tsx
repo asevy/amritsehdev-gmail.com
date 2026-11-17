@@ -2,8 +2,8 @@ import Link from "next/link";
 import { requireUser } from "@/lib/auth";
 import { activeSubscription, creditBalance } from "@/lib/commerce";
 import { currentWeekItems, bookings, measurements, METRIC_META, DAY_NAMES, latestBlueprint } from "@/lib/portal-data";
-import { progressFor } from "@/lib/media-auth";
-import { videoById } from "@/lib/videos";
+import { listForMember, nextDue, formScore } from "@/lib/form-checks";
+import { FORM_EXERCISES, formExerciseById } from "@/config/exercises";
 import { getEnrolment, listPrescriptions } from "@/lib/clinical";
 import { togglePlanItem } from "@/app/actions/portal";
 import { PageHeader, Panel } from "@/components/portal";
@@ -39,9 +39,10 @@ export default async function PortalHome() {
   const todays = items.filter((i) => i.day === today);
   const done = items.filter((i) => i.done_at).length;
   const upcoming = bookings(user.id).filter((b) => b.status === "booked" && Date.parse(b.starts_at) > Date.now()).slice(0, 3);
-  const prog = progressFor(user.id);
-  const resume = [...prog.values()].filter((p) => !p.completed_at && p.position_s > 2).sort((a, b) => b.updated_at.localeCompare(a.updated_at))[0];
-  const resumeVideo = resume ? videoById(resume.video_id) : null;
+  const checks = listForMember(user.id);
+  const lastReviewed = [...checks].reverse().find((c) => c.reviewed_at);
+  const awaiting = checks.filter((c) => c.status === "submitted").length;
+  const dueNow = FORM_EXERCISES.filter((e) => { const d = nextDue(checks, e.id); return d && d.getTime() <= Date.now(); });
   const ms = measurements(user.id);
   const bp = latestBlueprint(user.id);
   const targets: Array<{ metric: string; label: string; baseline: number; target: number }> = bp ? JSON.parse(bp.data_json).targets ?? [] : [];
@@ -70,7 +71,7 @@ export default async function PortalHome() {
                   <div className="min-w-0">
                     <p className={`font-medium ${i.done_at ? "text-muted line-through" : ""}`}>{i.title}</p>
                     {i.detail && <p className="text-sm text-ink-2">{i.detail}</p>}
-                    {i.video_id && <Link href={`/portal/library/${i.video_id}`} className="text-sm underline">Watch: {videoById(i.video_id)?.title}</Link>}
+                    {i.form_exercise && !i.done_at && <Link href={`/portal/form-checks?exercise=${i.form_exercise}`} className="text-sm underline">Film your {formExerciseById(i.form_exercise)?.name.toLowerCase()} →</Link>}
                   </div>
                 </li>
               ))}
@@ -87,15 +88,19 @@ export default async function PortalHome() {
             )}
             <p className="mt-3 text-xs text-muted">{creditBalance(user.id)} local-network credits available</p>
           </Panel>
-          {resumeVideo && resume && (
-            <Panel title="Continue watching">
-              <Link href={`/portal/library/${resumeVideo.id}`} className="group block">
-                <p className="font-medium group-hover:underline">{resumeVideo.title}</p>
-                <div className="mt-2 h-1.5 rounded-full bg-line"><div className="h-1.5 rounded-full bg-series" style={{ width: `${(resume.position_s / resume.duration_s) * 100}%` }} /></div>
-                <p className="mt-1 text-xs text-muted">Resume at {Math.floor(resume.position_s / 60)}:{String(Math.floor(resume.position_s % 60)).padStart(2, "0")}</p>
-              </Link>
-            </Panel>
-          )}
+          <Panel title="Form checks" action={<Link href="/portal/form-checks" className="text-sm underline">Open</Link>}>
+            {lastReviewed ? (
+              <div className="text-sm">
+                <p className="text-xs text-muted">Latest coach cues · {formExerciseById(lastReviewed.exercise)?.name}{formScore(lastReviewed) != null ? ` · form score ${formScore(lastReviewed)}%` : ""}</p>
+                <p className="mt-1 line-clamp-3">{lastReviewed.cues}</p>
+              </div>
+            ) : <p className="text-sm text-ink-2">Film a lift and your coach will send cues.</p>}
+            <p className="mt-3 text-xs text-muted">
+              {awaiting > 0 ? `${awaiting} awaiting your coach · ` : ""}
+              {dueNow.length ? `Re-film due: ${dueNow.map((e) => e.name).join(", ")}` : "Nothing due"}
+            </p>
+            <Link href="/portal/record" className="mt-3 inline-block text-sm underline">See your full record →</Link>
+          </Panel>
         </div>
       </div>
 
