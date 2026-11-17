@@ -11,7 +11,7 @@ export default function OrganisationsPage() {
         <p className="eyebrow">For clinics, gyms and allied-health groups</p>
         <h1 className="mt-4 max-w-3xl text-5xl font-medium leading-[1.05]">License the Blueprint method and software.</h1>
         <p className="mt-5 max-w-2xl text-lg leading-8 text-ink-2">
-          Run the RECLAIM assessment-to-action method in your own setting: the assessment and Blueprint tools, the coaching curriculum and video library,
+          Run the RECLAIM assessment-to-action method in your own setting: the assessment and Blueprint tools, the coaching curriculum and form-check review workflow,
           and outcome reporting on your own clients.
         </p>
       </Container>

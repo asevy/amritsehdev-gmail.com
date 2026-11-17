@@ -17,7 +17,7 @@ export default function EmployersPage() {
       </Container>
       <Container className="grid gap-5 md:grid-cols-3">
         {[
-          ["What employees get", "A sponsored Core membership: Blueprint session, coach, video library, progress tracking. Optional local-network credits."],
+          ["What employees get", "A sponsored Core membership: Blueprint session, coach, form checks, progress tracking. Optional local-network credits."],
           ["What you see", "Enrolment counts and de-identified, aggregate engagement and outcome measures, only for groups of 10 or more. Medical care is never reported."],
           ["How it's priced", "Per enrolled employee per month, invoiced monthly, with no minimum during the pilot. [Pricing to be set after pilot cost data.]"],
         ].map(([h, p]) => (

@@ -59,7 +59,7 @@ export const PLANS: Plan[] = [
     includes: [
       "1 form-check video review a month: film a lift, get your coach's cues",
       "Personal plan generated from your assessment, reviewed by a coach",
-      "Full video movement library and lesson curriculum",
+      "Your saved record: every form check, measurement and Blueprint version",
       "Progress tracking and four-weekly re-test prompts",
       "Monthly live group Q&A with a coach",
     ],

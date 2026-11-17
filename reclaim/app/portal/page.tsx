@@ -26,7 +26,7 @@ export default async function PortalHome() {
             <Link href="/portal/care" className="btn-primary btn-sm mt-4">Go to Care</Link>
           </Panel>
           <Panel title="Add coaching">
-            <p className="text-sm text-ink-2">A membership adds your Blueprint, a coach, weekly plan, progress tracking and the video library.</p>
+            <p className="text-sm text-ink-2">A membership adds your Blueprint, a coach, weekly plan, progress tracking and form checks your coach reviews.</p>
             <Link href="/programmes" className="btn-ghost btn-sm mt-4">See programmes</Link>
           </Panel>
         </div>

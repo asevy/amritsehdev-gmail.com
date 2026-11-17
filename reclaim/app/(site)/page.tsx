@@ -50,7 +50,7 @@ export default function Home() {
               {
                 e: "platform" as const,
                 h: "RECLAIM",
-                p: "Your assessment, Blueprint, coaching, video library, progress tracking and the local partner network. We do not practise medicine or dispense medication.",
+                p: "Your assessment, Blueprint, coaching, form checks, progress record and the local partner network. We do not practise medicine or dispense medication.",
               },
               {
                 e: "clinical" as const,

@@ -32,7 +32,7 @@ export function MembershipRequired() {
     <div className="card p-8 text-center">
       <p className="eyebrow">Members only</p>
       <h2 className="mt-3 text-3xl">This part of RECLAIM comes with a membership.</h2>
-      <p className="mx-auto mt-3 max-w-md text-ink-2">Your free account still includes Care (medical practice) and Privacy. A membership adds your Blueprint, coach, plan, progress and the video library.</p>
+      <p className="mx-auto mt-3 max-w-md text-ink-2">Your free account still includes Care (medical practice) and Privacy. A membership adds your Blueprint, coach, plan, progress, form checks and your record.</p>
       <Link href="/programmes" className="btn-primary mt-6">See programmes</Link>
     </div>
   );
