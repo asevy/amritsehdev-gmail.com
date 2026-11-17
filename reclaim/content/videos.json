@@ -1,0 +1,163 @@
+[
+  {
+    "id": "how-it-works",
+    "title": "How RECLAIM works",
+    "summary": "Assess, build your Blueprint, train and eat to it, add clinician-led care only where appropriate, and measure what changes.",
+    "category": "programme",
+    "access": "public",
+    "durationS": 40,
+    "hls": true,
+    "chapters": [
+      { "t": 0, "title": "Assess" },
+      { "t": 8, "title": "Your Blueprint" },
+      { "t": 16, "title": "Train, eat, recover" },
+      { "t": 24, "title": "Clinician review, if appropriate" },
+      { "t": 32, "title": "Measure and adjust" }
+    ],
+    "cues": [
+      { "start": 0.5, "end": 7.5, "text": "RECLAIM starts with an assessment of your goals, your schedule, how you move today and what has got in the way before." },
+      { "start": 8, "end": 15.5, "text": "That becomes your Blueprint: a written plan for training, nutrition, sleep and habits that fits the week you actually have." },
+      { "start": 16, "end": 23.5, "text": "Your coach turns the Blueprint into weekly sessions you can do at home, in a partner gym or with a trainer." },
+      { "start": 24, "end": 31.5, "text": "If you ask for it, an independent clinician reviews whether medical care is appropriate. The clinician decides, not the programme." },
+      { "start": 32, "end": 39.5, "text": "We re-measure strength, body composition and habits on a schedule, and adjust the plan to what the data shows." }
+    ]
+  },
+  {
+    "id": "blueprint-session",
+    "title": "What happens in a Blueprint session",
+    "summary": "A 60-minute session with a coach that turns your assessment into a plan with measurable targets.",
+    "category": "programme",
+    "access": "public",
+    "durationS": 30,
+    "chapters": [
+      { "t": 0, "title": "Before the session" },
+      { "t": 10, "title": "Baseline tests" },
+      { "t": 20, "title": "Your first four weeks" }
+    ],
+    "cues": [
+      { "start": 0.5, "end": 9.5, "text": "Before your session you complete a short questionnaire. Nothing you enter is shared with anyone until you create an account." },
+      { "start": 10, "end": 19.5, "text": "Your coach walks you through simple baseline tests, such as a 30-second sit-to-stand and a timed walk, adapted to any pain or limits." },
+      { "start": 20, "end": 29.5, "text": "You leave with a four-week plan, three measurable targets and a date for your first re-check." }
+    ]
+  },
+  {
+    "id": "sit-to-stand",
+    "title": "30-second sit-to-stand test",
+    "summary": "How to run the baseline leg-strength test safely at home.",
+    "category": "assessment",
+    "access": "member",
+    "durationS": 30,
+    "chapters": [
+      { "t": 0, "title": "Set up" },
+      { "t": 12, "title": "The test" },
+      { "t": 24, "title": "Log your result" }
+    ],
+    "cues": [
+      { "start": 0.5, "end": 11.5, "text": "Use a sturdy chair against a wall. Sit in the middle of the seat, feet flat, arms crossed over your chest." },
+      { "start": 12, "end": 23.5, "text": "On go, stand fully and sit fully as many times as you can in 30 seconds. Stop if you feel pain or dizziness." },
+      { "start": 24, "end": 29.5, "text": "Log the number of full stands in Progress. We repeat this test every four weeks." }
+    ]
+  },
+  {
+    "id": "goblet-squat",
+    "title": "Goblet squat: technique",
+    "summary": "The foundation lower-body pattern in most RECLAIM plans, with regressions.",
+    "category": "movement",
+    "access": "member",
+    "durationS": 30,
+    "chapters": [
+      { "t": 0, "title": "Hold and stance" },
+      { "t": 10, "title": "The descent" },
+      { "t": 20, "title": "Regressions" }
+    ],
+    "cues": [
+      { "start": 0.5, "end": 9.5, "text": "Hold one weight at your chest with elbows pointing down. Feet a little wider than hips, toes slightly out." },
+      { "start": 10, "end": 19.5, "text": "Sit down between your heels, keeping your chest tall. Go only as deep as you can without pain, then drive up." },
+      { "start": 20, "end": 29.5, "text": "If this is too much today, squat to a chair or a box. Depth comes with practice." }
+    ]
+  },
+  {
+    "id": "hip-hinge",
+    "title": "Hip hinge: dowel drill",
+    "summary": "Learn to bend from the hips, the basis of deadlifts and safe lifting at home.",
+    "category": "movement",
+    "access": "member",
+    "durationS": 30,
+    "chapters": [
+      { "t": 0, "title": "Three points of contact" },
+      { "t": 15, "title": "Push the hips back" }
+    ],
+    "cues": [
+      { "start": 0.5, "end": 14.5, "text": "Hold a broomstick along your spine so it touches the back of your head, upper back and tailbone." },
+      { "start": 15, "end": 29.5, "text": "Soften the knees and push your hips back. Keep all three points touching the stick as you bend and return." }
+    ]
+  },
+  {
+    "id": "incline-pushup",
+    "title": "Incline push-up progression",
+    "summary": "Build upper-body strength from wall push-ups to the floor.",
+    "category": "movement",
+    "access": "member",
+    "durationS": 30,
+    "chapters": [
+      { "t": 0, "title": "Start at the wall" },
+      { "t": 10, "title": "Counter height" },
+      { "t": 20, "title": "When to progress" }
+    ],
+    "cues": [
+      { "start": 0.5, "end": 9.5, "text": "Hands on the wall at shoulder height. Keep a straight line from head to heels as you lower and press away." },
+      { "start": 10, "end": 19.5, "text": "When three sets of twelve feel easy, move your hands to a kitchen counter and repeat." },
+      { "start": 20, "end": 29.5, "text": "Progress one step lower at a time. Your coach will update your plan when you log the reps." }
+    ]
+  },
+  {
+    "id": "protein-basics",
+    "title": "Lesson 1: Protein, simply",
+    "summary": "Why protein matters when you are trying to change body composition, and how to spread it across the day.",
+    "category": "lesson",
+    "access": "member",
+    "durationS": 40,
+    "chapters": [
+      { "t": 0, "title": "Why it matters" },
+      { "t": 14, "title": "How much" },
+      { "t": 28, "title": "Spread it out" }
+    ],
+    "cues": [
+      { "start": 0.5, "end": 13.5, "text": "When you eat less, some of the weight you lose can be muscle. Enough protein and regular strength training help you keep it." },
+      { "start": 14, "end": 27.5, "text": "Your Blueprint sets a daily protein target based on your body size and your clinician's guidance where relevant." },
+      { "start": 28, "end": 39.5, "text": "Aim to include a palm-sized protein portion at each meal rather than saving it all for dinner." }
+    ]
+  },
+  {
+    "id": "sleep-appetite",
+    "title": "Lesson 2: Sleep and appetite",
+    "summary": "How short sleep changes hunger, and three changes that make the biggest difference.",
+    "category": "lesson",
+    "access": "member",
+    "durationS": 40,
+    "chapters": [
+      { "t": 0, "title": "What the research shows" },
+      { "t": 20, "title": "Three changes" }
+    ],
+    "cues": [
+      { "start": 0.5, "end": 19.5, "text": "In controlled studies, restricting sleep increased hunger and, during dieting, shifted weight loss away from fat and toward lean tissue." },
+      { "start": 20, "end": 39.5, "text": "Keep a consistent wake time, dim screens for the last hour, and log your sleep so your coach can see the pattern." }
+    ]
+  },
+  {
+    "id": "plateaus",
+    "title": "Lesson 3: Plateaus are data",
+    "summary": "What a stall on the scale does and does not mean, and what we look at instead.",
+    "category": "lesson",
+    "access": "member",
+    "durationS": 40,
+    "chapters": [
+      { "t": 0, "title": "The scale is one signal" },
+      { "t": 20, "title": "What we check" }
+    ],
+    "cues": [
+      { "start": 0.5, "end": 19.5, "text": "Day-to-day weight moves with water, salt and digestion. A flat week is common and rarely means the plan has failed." },
+      { "start": 20, "end": 39.5, "text": "We look at the trend, your waist measurement, your strength tests and your adherence before changing anything." }
+    ]
+  }
+]

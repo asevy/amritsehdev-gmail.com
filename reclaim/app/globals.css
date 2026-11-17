@@ -1,0 +1,101 @@
+@import "tailwindcss";
+
+@theme {
+  --color-ink: #0f1f1b;
+  --color-ink-2: #2b3b36;
+  --color-muted: #56645f;
+  --color-line: #e2ddd1;
+  --color-line-2: #cfc8b9;
+  --color-bone: #f1ede3;
+  --color-paper: #faf8f3;
+  --color-card: #ffffff;
+  --color-lime: #d8f26a;
+  --color-lime-2: #c3e04a;
+  --color-moss: #2e6b5e;
+  --color-moss-soft: #dcebe6;
+  /* data-series color: validated (dataviz validate_palette.js) for lightness, chroma and contrast on #fff */
+  --color-series: #1f8a70;
+  --color-ember: #b9461f;
+  --color-ember-soft: #f6e1d7;
+  --color-clinic: #2f4f8a;
+  --color-clinic-soft: #e2e9f5;
+  --color-rx: #6b3f8f;
+  --color-rx-soft: #ece3f3;
+  --color-warn: #8a5a00;
+  --color-warn-soft: #fbefd2;
+
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+  --font-display: "Fraunces Variable", Georgia, "Times New Roman", serif;
+}
+
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  body {
+    @apply bg-paper text-ink;
+    font-feature-settings: "ss01", "cv11";
+  }
+  h1, h2, h3 {
+    font-family: var(--font-display);
+    font-optical-sizing: auto;
+    letter-spacing: -0.02em;
+    text-wrap: balance;
+  }
+  p { text-wrap: pretty; }
+  :focus-visible {
+    outline: 3px solid var(--color-moss);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+  ::selection { background: var(--color-lime); color: var(--color-ink); }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+  }
+}
+
+@utility btn {
+  @apply inline-flex cursor-pointer items-center justify-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold transition-colors disabled:cursor-not-allowed disabled:opacity-50;
+}
+@utility btn-primary { @apply btn bg-ink text-paper hover:bg-ink-2; }
+@utility btn-lime { @apply btn bg-lime text-ink hover:bg-lime-2; }
+@utility btn-ghost { @apply btn border border-line-2 bg-transparent text-ink hover:bg-bone; }
+@utility btn-danger { @apply btn border border-ember/40 bg-transparent text-ember hover:bg-ember-soft; }
+@utility btn-sm { @apply px-3.5 py-1.5 text-[13px]; }
+@utility eyebrow {
+  @apply font-mono text-[11px] font-medium uppercase tracking-[0.14em] text-muted;
+}
+
+@layer components {
+  .card { @apply rounded-2xl border border-line bg-card; }
+  .field-label { @apply mb-1.5 block text-sm font-medium text-ink; }
+  .field-hint { @apply mt-1 text-xs text-muted; }
+  .input {
+    @apply w-full rounded-xl border border-line-2 bg-card px-3.5 py-2.5 text-[15px] text-ink placeholder:text-muted/70 focus:border-moss focus:outline-none focus:ring-2 focus:ring-moss/30;
+  }
+  .chip {
+    @apply inline-flex items-center gap-1.5 rounded-full border px-2.5 py-0.5 font-mono text-[11px] font-medium uppercase tracking-wider;
+  }
+  .prose-legal h2 { @apply mt-10 mb-3 text-2xl; }
+  .prose-legal h3 { @apply mt-6 mb-2 text-lg font-semibold; font-family: var(--font-sans); letter-spacing: 0; }
+  .prose-legal p, .prose-legal li { @apply text-[15px] leading-7 text-ink-2; }
+  .prose-legal ul { @apply my-3 list-disc pl-6; }
+  .prose-legal a { @apply underline decoration-line-2 underline-offset-4 hover:decoration-ink; }
+  .grid-paper {
+    background-image:
+      linear-gradient(to right, rgb(15 31 27 / 0.05) 1px, transparent 1px),
+      linear-gradient(to bottom, rgb(15 31 27 / 0.05) 1px, transparent 1px);
+    background-size: 28px 28px;
+  }
+}
+
+/* Video captions */
+video::cue {
+  background: rgb(15 31 27 / 0.85);
+  color: #faf8f3;
+  font-family: var(--font-sans);
+  font-size: 0.95em;
+  line-height: 1.4;
+}

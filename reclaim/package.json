@@ -1,0 +1,35 @@
+{
+  "name": "reclaim-web",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "prebuild": "node scripts/compliance-lint.mjs",
+    "start": "next start",
+    "typecheck": "tsc --noEmit",
+    "compliance": "node scripts/compliance-lint.mjs",
+    "db:reset": "node -e \"require('fs').rmSync('.data',{recursive:true,force:true});console.log('Deleted .data — demo data reseeds on next request')\"",
+    "media": "node scripts/make-placeholder-media.mjs",
+    "check": "npm run typecheck && npm run compliance"
+  },
+  "dependencies": {
+    "@fontsource-variable/fraunces": "^5.3.0",
+    "geist": "^1.9.2",
+    "hls.js": "^1.7.4",
+    "next": "^16.4.6",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
+    "server-only": "^0.0.1"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.3.5",
+    "@types/node": "^22.20.5",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "postcss": "^8.5.33",
+    "tailwindcss": "^4.3.5",
+    "typescript": "5.9"
+  }
+}
