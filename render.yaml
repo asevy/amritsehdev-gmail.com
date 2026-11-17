@@ -8,7 +8,7 @@ services:
     plan: free
     buildCommand: npm ci && npm run build
     startCommand: npm start
-    healthCheckPath: /login
+    healthCheckPath: /api/health
     envVars:
       - key: SITE_PASSWORD        # shared password for the whole site; Render asks you for it
         sync: false

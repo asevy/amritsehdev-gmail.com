@@ -29,7 +29,8 @@ function passwordOk(request: NextRequest, expected: string): boolean {
 
 export function proxy(request: NextRequest) {
   const sitePassword = process.env.SITE_PASSWORD;
-  if (sitePassword && !passwordOk(request, sitePassword)) {
+  // The host's health check must reach /api/health without the password (it returns only "ok").
+  if (sitePassword && request.nextUrl.pathname !== "/api/health" && !passwordOk(request, sitePassword)) {
     return new NextResponse("RECLAIM prototype — password required.", {
       status: 401,
       headers: { "WWW-Authenticate": 'Basic realm="RECLAIM prototype", charset="UTF-8"', "Cache-Control": "no-store" },
