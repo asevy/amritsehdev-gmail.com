@@ -9,7 +9,7 @@ inspection).
 ```bash
 cd junior_mining
 pip install -r requirements.txt
-python -m pytest                                   # 116 tests
+python -m pytest                                   # 144 tests
 python scripts/demo.py                             # end-to-end over HTTP; writes docs/DEMO_TRANSCRIPT.md
 python -m jmi.bench benchmark/dev_synthetic_questions.jsonl
 JMI_DATA_DIR=./data python -m jmi seed-demo && JMI_DATA_DIR=./data python -m jmi serve
@@ -17,13 +17,13 @@ python scripts/export_contracts.py                 # regenerate docs/contracts/*
 ```
 
 ## Files added
-- `jmi/` — 30 Python modules (≈8,700 lines): see the module map in ARCHITECTURE.md
-- `jmi/migrations/001_core.sql` — canonical schema
+- `jmi/` — 32 Python modules (≈9,800 lines): see the module map in ARCHITECTURE.md
+- `jmi/migrations/001_core.sql` — canonical schema; `002_api_tokens.sql` — connector tokens (hash only)
 - `fixtures/synthetic.py` — deterministic SYNTHETIC document generator
-- `tests/` — 18 test files, 116 tests (`test_01`…`test_16` = brief §17 cases)
+- `tests/` — 21 test files, 144 tests (`test_01`…`test_16` = brief §17 cases; 3 files for the Claude integration)
 - `scripts/demo.py`, `scripts/export_contracts.py`
 - `benchmark/PROPOSAL.md`, `benchmark/dev_synthetic_questions.jsonl`
-- `docs/` — REUSE_INVENTORY, ARCHITECTURE, PRODUCT_SPEC, DATA_CONTRACTS (+ `contracts/`),
+- `docs/` — CLAUDE_INTEGRATION, REUSE_INVENTORY, ARCHITECTURE, PRODUCT_SPEC, DATA_CONTRACTS (+ `contracts/`),
   CALCULATIONS, DATA_SOURCES, TEST_RESULTS, DEMO_TRANSCRIPT, FEATURE_MATRIX, RUNBOOK,
   DEPLOY, HANDOFF, `screenshots/`
 - `README.md`, `pyproject.toml`, `requirements.txt`, `.env.example`, `.gitignore`
@@ -38,7 +38,7 @@ python scripts/export_contracts.py                 # regenerate docs/contracts/*
    specialist; not a compliance opinion.
 4. **No live connectors** (SEDAR+, EDGAR, market data, registries); market data
    enters only as uploaded files.
-5. **No model provider**; the model boundary is tested with a fake model only.
+5. **Claude API features are untested against the live API** (no key here; fake client only) and off by default. The Claude connector is tested over real stdio.
 6. **Single-node SQLite**, requests serialised; no MFA/SSO; not penetration-tested;
    not deployed.
 7. Q&A intent matching is keyword-based; questions outside the metric list get
@@ -49,6 +49,7 @@ python scripts/export_contracts.py                 # regenerate docs/contracts/*
 9. Competitor capability recheck blocked by network policy.
 
 ## Next concrete integration tasks
+0. Claude: live smoke test with a firm's Anthropic API key; measure Claude proposals against the rule baseline on real documents; decide on a hosted claude.ai connector (HTTPS + OAuth). See CLAUDE_INTEGRATION.md.
 1. Attach the IME / Counsel Workbench and MINSA repositories if they exist, and
    extend the reuse inventory (e.g. compare `wb_auth` with `jmi/auth.py`).
 2. Obtain 5–10 real, lawfully obtained technical reports and MD&As; run
@@ -60,9 +61,9 @@ python scripts/export_contracts.py                 # regenerate docs/contracts/*
    terms before any automation.
 6. OCR engine for scanned pages, with OCR text marked as such and always
    routed to review.
-7. Choose and configure a model provider for candidate proposal behind
-   `extract.ModelProposer`; document retention settings; compare against the
-   deterministic baseline on the benchmark.
+7. Record each firm's Anthropic data-retention configuration before enabling
+   Claude features for it; compare Claude proposals against the deterministic
+   baseline on the benchmark (task 0).
 8. TLS reverse proxy, off-host backups, MFA/SSO, security review, then a
    closed pilot with one tenant.
 9. Extract a shared auth/audit library only if Vision//Edge and this product

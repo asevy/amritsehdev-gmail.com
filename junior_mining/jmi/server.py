@@ -217,6 +217,8 @@ class Handler(BaseHTTPRequestHandler):
         except Exception as exc:
             return self._error(exc, is_json, actor)
         nxt = payload.get("_next", "")
+        if not is_json and isinstance(result, dict) and result.get("show_once"):
+            return self._send(200, ui.page(result["title"], result["html"], actor))
         if not is_json and nxt:
             nxt = nxt.replace("{id}", str((result or {}).get("id", "")))
             return self._redirect(nxt)
@@ -434,6 +436,13 @@ class Handler(BaseHTTPRequestHandler):
                 body += f"<h3>Table {t['table_index'] + 1}: {esc(t['title'])}</h3>" + \
                         ("<table>" + "".join("<tr>" + "".join(f"<td>{c}</td>" for c in r) + "</tr>" for r in rws) + "</table>") + \
                         ("<p class=\"note\">Footnotes: " + esc(" | ".join(t["footnotes"])) + "</p>" if t["footnotes"] else "")
+        from . import claude
+        if a.can("write") and d["company_id"] and claude.get_config(st, a)["enabled"] and not v["mirror_of_version_id"]:
+            body += ("<h2>Claude</h2><p class=\"note\">Claude proposes candidates the rules may have missed. Each "
+                     "must quote this document exactly, is re-checked like any other candidate, and waits for "
+                     "reviewer approval.</p>" +
+                     ui.form("/api/claude.propose", ui.hid("version_id", vid), csrf,
+                             "Ask Claude to propose additional candidates", "/inbox"))
         if a.can("write"):
             body += "<h2>Cite a passage</h2>" + ui.form("/api/cite", ui.hid("version_id", vid) +
                                                        ui.inp("page_no", "Page", "1", size=4) + ui.ta("quote", "Exact text"),
@@ -871,6 +880,14 @@ class Handler(BaseHTTPRequestHandler):
                 ui.ta("text", "Claim text") + ui.inp("fact_ids", "Fact ids (comma separated)", size=60) +
                 ui.inp("calc_ids", "Calculation ids", size=60) + ui.inp("risk_ids", "Risk ids", size=60),
                 csrf, "Add claim (validated immediately)", f"/memo/{mid}?v={v['id']}")
+            from . import claude
+            if claude.get_config(st, a)["enabled"]:
+                body += ("<h2>Draft with Claude</h2><p class=\"note\">Claude drafts claims from reviewer-approved "
+                         "records only. Each draft cites its records, is validated like any claim (unsupported drafts "
+                         "are withheld) and needs reviewer approval.</p>" +
+                         ui.form("/api/claude.draft", ui.hid("version_id", v["id"]) +
+                                 ui.inp("focus", "Focus (optional)", "", size=60), csrf,
+                                 "Draft summary claims with Claude", f"/memo/{mid}?v={v['id']}"))
             body += ui.form("/api/memo.submit", ui.hid("version_id", v["id"]), csrf, "Submit for review", f"/memo/{mid}?v={v['id']}")
         if v["status"] in ("draft", "in_review") and a.can("review") and v["author"] != a.user_id:
             body += ui.form("/api/memo.review_supported", ui.hid("version_id", v["id"]) +
@@ -902,6 +919,8 @@ class Handler(BaseHTTPRequestHandler):
         if question:
             ans = answers.ask(st, a, cid, question)
             body += f"<p><b>{esc(ans['status'].replace('_', ' '))}</b> — {esc(ans.get('message', ''))}</p>"
+            if ans.get("router"):
+                body += f'<p class="note">Question routing: {esc(ans["router"])}</p>'
             for ln in ans.get("answer", []):
                 body += f"<p>{esc(ln['statement'])}</p><blockquote>{esc(ln['quote'])}</blockquote>" \
                         f'<p class="note"><a href="/fact/{esc(ln["fact_id"])}">record</a></p>'
@@ -993,6 +1012,69 @@ class Handler(BaseHTTPRequestHandler):
             [esc(r["kind"]), esc(r["unit"]), str(r["n"]), esc(r["q"]), str(r["ti"]), str(r["tout"])] for r in rows])
         body += '<p class="note">No model provider is configured; model calls and cost are zero. Prices and limits are configuration, not validated market pricing. No payment is collected.</p>'
         return self._send(200, ui.page("Usage and subscription", body, a))
+
+    def v_account(self, a, **_):
+        csrf = self._csrf()
+        toks = self.app.auth.list_api_tokens(a)
+        rows = [[esc(t["label"]), esc(t["created_at"]), esc(t["last_used_at"] or "never"),
+                 esc(t["revoked_at"] or "active"),
+                 "" if t["revoked_at"] else ui.form("/api/token.revoke", ui.hid("token_id", t["id"]), csrf, "Revoke",
+                                                   "/account", inline=True)] for t in toks]
+        data_dir = str(self.st.data_dir.resolve())
+        body = (f"<p>Signed in as <b>{esc(a.user_id)}</b> ({esc(a.role)}, workspace {esc(a.tenant_id)}).</p>"
+                "<h2>Use this workspace from Claude</h2>"
+                "<p>The Claude connector lets you ask about your firm's evidence records from Claude Desktop or Claude "
+                "Code, under your firm's Claude plan. It is <b>read-only</b>: Claude can read approved, cited records "
+                "and use the same constrained question answering as this app; it cannot change, approve or export "
+                "anything, and it never sees another firm's data.</p>")
+        body += ui.form("/api/token.create", ui.inp("label", "Token label", "Claude Desktop", size=30), csrf,
+                        "Create connector token (shown once)", "/account")
+        body += ui.table(["Token", "Created", "Last used", "Status", ""], rows, "No connector tokens yet.")
+        body += ("<h3>Claude Desktop</h3><p class=\"note\">Settings → Developer → Edit config, then add:</p>"
+                 f"<pre class=\"page\">{esc(json.dumps({'mcpServers': {'junior-mining': {'command': 'python', 'args': ['-m', 'jmi', 'mcp'], 'cwd': str(Path(__file__).resolve().parent.parent), 'env': {'JMI_DATA_DIR': data_dir, 'JMI_API_TOKEN': '<your token>'}}}}, indent=2))}</pre>"
+                 "<h3>Claude Code</h3>"
+                 f"<pre class=\"page\">claude mcp add junior-mining --env JMI_DATA_DIR={esc(data_dir)} --env JMI_API_TOKEN=&lt;your token&gt; -- python -m jmi mcp</pre>"
+                 "<p class=\"note\">The connector runs where the data directory is reachable. Use on claude.ai in a "
+                 "browser needs a hosted HTTPS connector with sign-in, which is not set up in this pilot.</p>")
+        return self._send(200, ui.page("Account and Claude connector", body, a))
+
+    def v_admin_claude(self, a, **_):
+        if not a.can("admin"):
+            raise AccessDenied("administrative")
+        from . import claude
+        csrf = self._csrf()
+        cfg = claude.get_config(self.st, a)
+        calls = self.st.db.all("SELECT COUNT(*) n, SUM(COALESCE(tokens_in,0)) ti, SUM(COALESCE(tokens_out,0)) tout, "
+                               "SUM(CAST(COALESCE(cost_usd,'0') AS REAL)) c FROM usage_ledger WHERE tenant_id=? AND "
+                               "kind='model_call'", (a.tenant_id,))[0]
+        body = ("<p>Claude can, when enabled for your firm: propose extra fact candidates from documents (each one "
+                "re-checked against the source and approved by a reviewer), route analyst questions to the right "
+                "records (answers still come only from stored, cited records), and draft memo claims (validated "
+                "claim by claim, and approved by a reviewer). It cannot approve, change or delete anything.</p>"
+                "<p><b>Data handling.</b> When enabled, document text and approved records are sent to Anthropic's "
+                "API under the API key you name below — use your firm's own Anthropic organization so your firm's "
+                "agreement and settings apply. A claude.ai Pro/Team/Enterprise seat is not API access; API keys come "
+                "from the Anthropic Console and are billed separately. The key itself is never stored here: enter "
+                "the NAME of the server environment variable that holds it.</p>")
+        body += ui.table(["Setting", "Value"], [
+            ["Enabled", esc(cfg["enabled"])], ["Model", esc(cfg["model"])],
+            ["API key source", esc(claude.credential_status(self.st, a))],
+            ["Propose candidates automatically after each upload", esc(cfg["auto_extract"])],
+            ["Route analyst questions through Claude", esc(cfg["route_questions"])],
+            ["Model calls so far", esc(f"{calls['n']} calls · {calls['ti'] or 0} input / {calls['tout'] or 0} output "
+                                       f"tokens · est. US${(calls['c'] or 0):.4f} at list price")]])
+        body += ui.form("/api/claude.settings",
+                        ui.sel("enabled", "Claude for this firm", [("1", "enabled"), ("0", "disabled")],
+                               "1" if cfg["enabled"] else "0") +
+                        ui.inp("api_key_env", "Environment variable NAME holding the firm's Anthropic API key "
+                                              "(blank = server default credential)", cfg["api_key_env"] or "", size=40) +
+                        ui.sel("model", "Model", [(m, m) for m in claude.PRICES], cfg["model"]) +
+                        ui.sel("auto_extract", "Propose candidates after each upload", [("0", "no"), ("1", "yes")],
+                               "1" if cfg["auto_extract"] else "0") +
+                        ui.sel("route_questions", "Route questions through Claude", [("1", "yes"), ("0", "no")],
+                               "1" if cfg["route_questions"] else "0"),
+                        csrf, "Save Claude settings", "/admin/claude")
+        return self._send(200, ui.page("Claude settings", body, a))
 
     def v_admin_users(self, a, **_):
         if not a.can("admin"):
@@ -1087,7 +1169,8 @@ GET_ROUTES = [
     (r"/snapshot/" + ID, "v_snapshot"), (r"/calcs/" + ID, "v_calcs"), (r"/calc/" + ID, "v_calc"),
     (r"/memos/" + ID, "v_memos"), (r"/memo/" + ID, "v_memo"), (r"/ask/" + ID, "v_ask"), (r"/inbox", "v_inbox"),
     (r"/portfolio", "v_portfolio"), (r"/definitions", "v_definitions"), (r"/admin/audit", "v_admin_audit"),
-    (r"/admin/usage", "v_admin_usage"), (r"/admin/users", "v_admin_users"),
+    (r"/admin/usage", "v_admin_usage"), (r"/admin/users", "v_admin_users"), (r"/admin/claude", "v_admin_claude"),
+    (r"/account", "v_account"),
     (r"/export/memo/" + ID + r"\.(pdf|csv|json)", "v_export_memo"), (r"/export/facts/" + ID + r"\.csv", "v_export_facts"),
     (r"/export/snapshot/" + ID + r"\.csv", "v_export_snapshot"),
     (r"/api/whoami", "v_whoami"), (r"/api/companies", "api_companies"), (r"/api/company/" + ID, "api_company"),
@@ -1199,7 +1282,39 @@ ACTIONS = {
                                                               p["as_of_date"]),
     "ask": lambda st, a, p, f: answers.ask(st, a, p["company_id"], p.get("question", ""), p.get("project_id") or None),
     "user.create": _a_user_create,
+    "token.create": lambda st, a, p, f: _a_token_create(st, a, p),
+    "token.revoke": lambda st, a, p, f: st.auth.revoke_api_token(a, p["token_id"]),
+    "claude.settings": lambda st, a, p, f: _a_claude_settings(st, a, p),
+    "claude.propose": lambda st, a, p, f: _a_claude_background(st, a, "propose_candidates",
+                                                               version_id=st.get(a, "document_versions", p["version_id"])["id"]),
+    "claude.draft": lambda st, a, p, f: _a_claude_background(st, a, "draft_memo_claims",
+                                                             version_id=st.get(a, "memo_versions", p["version_id"])["id"],
+                                                             focus=p.get("focus", "")),
 }
+
+
+def _a_token_create(st, a, p):
+    token = st.auth.create_api_token(a.user_id, p.get("label") or "Claude connector")
+    return {"show_once": True, "title": "Connector token created",
+            "html": ("<p>Copy this token into your Claude connector configuration now. It will not be shown again; "
+                     "if you lose it, revoke it and create another.</p>"
+                     f"<pre class=\"page\">{esc(token)}</pre><p><a href=\"/account\">Back to account</a></p>")}
+
+
+def _a_claude_settings(st, a, p):
+    from . import claude
+    return claude.set_config(st, a, enabled=_bool(p.get("enabled")), api_key_env=(p.get("api_key_env") or "").strip() or None,
+                             model=p.get("model") or None, auto_extract=_bool(p.get("auto_extract")),
+                             route_questions=_bool(p.get("route_questions", "1")))
+
+
+def _a_claude_background(st, a, fn, **kw):
+    from . import claude
+    st.require(a, "write")
+    if not claude.get_config(st, a)["enabled"]:
+        raise Invalid("Claude is not enabled for this firm (ask your administrator)")
+    claude.run_in_background(st, fn, a, **kw)
+    return {"queued": fn, "note": "Running in the background; results appear in the change inbox and on this page."}
 
 
 def _upload_form(csrf, company_id, nxt) -> str:

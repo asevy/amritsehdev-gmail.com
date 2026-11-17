@@ -191,6 +191,44 @@ class Auth:
         s = self._session(token)
         return s["csrf"] if s else ""
 
+    # ------------------------------------------------------------ connector tokens
+    def create_api_token(self, user_id: str, label: str = "") -> str:
+        """Personal access token for the Claude (MCP) connector. Returned once;
+        only its SHA-256 is stored. It acts as the user, read-only."""
+        u = self.db.one("SELECT * FROM users WHERE user_id=? AND active=1", (user_id,))
+        if not u:
+            raise ValueError("no such active user")
+        token = "jmit_" + secrets.token_hex(24)
+        self.db.execute("INSERT INTO api_tokens(id,tenant_id,user_id,token_sha,label,created_at) VALUES(?,?,?,?,?,?)",
+                        ("tok_" + secrets.token_hex(8), u["tenant_id"], user_id, _token_sha(token), label[:80],
+                         config.iso_now()))
+        audit.append(self.db, user_id, "api_token_created", user_id, label[:80], tenant_id=u["tenant_id"])
+        return token
+
+    def actor_for_api_token(self, token: str | None) -> Actor | None:
+        if not token or not token.startswith("jmit_"):
+            return None
+        t = self.db.one("SELECT * FROM api_tokens WHERE token_sha=? AND revoked_at IS NULL", (_token_sha(token),))
+        if not t:
+            return None
+        u = self.db.one("SELECT * FROM users WHERE user_id=?", (t["user_id"],))
+        if not u or not u["active"] or u["tenant_id"] != t["tenant_id"]:
+            return None
+        self.db.execute("UPDATE api_tokens SET last_used_at=? WHERE id=?", (config.iso_now(), t["id"]))
+        # Connector access is read-only whatever the user's role.
+        return Actor(u["user_id"], u["role"], u["tenant_id"], frozenset({"read"}))
+
+    def list_api_tokens(self, actor: Actor) -> list[dict]:
+        return self.db.all("SELECT id, label, created_at, last_used_at, revoked_at FROM api_tokens "
+                           "WHERE tenant_id=? AND user_id=? ORDER BY created_at", (actor.tenant_id, actor.user_id))
+
+    def revoke_api_token(self, actor: Actor, token_id: str) -> None:
+        t = self.db.one("SELECT * FROM api_tokens WHERE id=? AND tenant_id=?", (token_id, actor.tenant_id))
+        if not t or (t["user_id"] != actor.user_id and not actor.can("admin")):
+            raise LookupError("no such token")
+        self.db.execute("UPDATE api_tokens SET revoked_at=? WHERE id=?", (config.iso_now(), token_id))
+        audit.append(self.db, actor, "api_token_revoked", token_id)
+
     def logout(self, token: str) -> None:
         s = self._session(token)
         self.db.execute("DELETE FROM sessions WHERE token_sha=?", (_token_sha(token),))

@@ -1,4 +1,81 @@
 {
+ "api_tokens": {
+  "tenant_scoped": false,
+  "columns": [
+   {
+    "name": "id",
+    "type": "TEXT",
+    "not_null": false,
+    "default": null,
+    "primary_key": true,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "tenant_id",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "user_id",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "token_sha",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "label",
+    "type": "TEXT",
+    "not_null": true,
+    "default": "''",
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "created_at",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "last_used_at",
+    "type": "TEXT",
+    "not_null": false,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "revoked_at",
+    "type": "TEXT",
+    "not_null": false,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   }
+  ]
+ },
  "assumptions": {
   "tenant_scoped": true,
   "columns": [

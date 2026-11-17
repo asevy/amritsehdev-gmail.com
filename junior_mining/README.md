@@ -23,8 +23,8 @@ All companies, projects, tickers and figures in `fixtures/` are
 
 ```bash
 cd junior_mining
-pip install -r requirements.txt          # pdfplumber, pypdfium2, openpyxl, reportlab, Pillow, pytest
-python -m pytest                         # 116 tests, ~20 s
+pip install -r requirements.txt          # pdfplumber, pypdfium2, openpyxl, reportlab, Pillow, anthropic, mcp, pytest
+python -m pytest                         # 144 tests, ~30 s
 python scripts/demo.py                   # scripted end-to-end demonstration over HTTP
 ```
 
@@ -53,6 +53,9 @@ documents page to see change detection, restatement and stale outputs.
 | `python -m jmi definitions` | Metric and formula registry (JSON) |
 | `python -m jmi.bench QUESTIONS.jsonl` | Benchmark runner (separate measures, intervals) |
 | `python scripts/export_contracts.py` | Regenerate `docs/contracts/*.json` from code |
+| `python -m jmi create-api-token USER` | Read-only token for the Claude connector (shown once) |
+| `python -m jmi mcp` | Claude connector over stdio (Claude Desktop / Claude Code); needs `JMI_API_TOKEN` |
+| `python -m jmi claude-settings TENANT --enable --api-key-env NAME` | Turn on Claude API features for one firm with its own key |
 
 ## Layout
 
@@ -67,6 +70,7 @@ docs/           reuse inventory, architecture, specification, contracts, runbook
 
 ## Documents
 
+- [Claude integration](docs/CLAUDE_INTEGRATION.md) — connector for Claude Desktop/Code and optional Claude API features
 - [Reuse inventory](docs/REUSE_INVENTORY.md) — what was inspected, run and reused, with paths
 - [Architecture decisions](docs/ARCHITECTURE.md)
 - [Product specification](docs/PRODUCT_SPEC.md)

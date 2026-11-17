@@ -12,6 +12,8 @@ dependencies = [
     "openpyxl>=3.1",
     "reportlab>=4",
     "Pillow>=10",
+    "anthropic>=2.10",      # optional Claude API features (off unless a firm enables them)
+    "mcp>=2.3,<3",          # Claude connector (MCP server)
 ]
 
 [project.optional-dependencies]

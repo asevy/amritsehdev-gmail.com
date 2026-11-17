@@ -49,8 +49,10 @@ def page(title: str, body: str, actor=None, company: dict | None = None, notice:
     if actor:
         links = [("/", "Coverage"), ("/review", "Review queue"), ("/discrepancies", "Discrepancies"),
                  ("/inbox", "Change inbox"), ("/portfolio", "Portfolio"), ("/definitions", "Definitions")]
+        links.append(("/account", "Account & Claude connector"))
         if actor.can("admin"):
-            links += [("/admin/audit", "Audit"), ("/admin/usage", "Usage"), ("/admin/users", "Users")]
+            links += [("/admin/claude", "Claude settings"), ("/admin/audit", "Audit"), ("/admin/usage", "Usage"),
+                      ("/admin/users", "Users")]
         nav = "<nav>" + "".join(f'<a href="{h}">{esc(t)}</a>' for h, t in links) + "</nav>"
         nav += (f'<span class="who">{esc(actor.user_id)} · {esc(actor.role)} · tenant {esc(actor.tenant_id)} · '
                 f'<a href="/logout">sign out</a></span>')

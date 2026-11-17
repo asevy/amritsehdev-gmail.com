@@ -47,6 +47,17 @@ def main(argv=None) -> int:
     u.add_argument("role", choices=ROLES)
     u.add_argument("tenant_id")
     sub.add_parser("worker")
+    tk = sub.add_parser("create-api-token", help="read-only token for the Claude (MCP) connector; shown once")
+    tk.add_argument("user_id")
+    tk.add_argument("--label", default="Claude connector")
+    sub.add_parser("mcp", help="run the Claude connector over stdio (needs JMI_API_TOKEN)")
+    cs = sub.add_parser("claude-settings", help="show or set a tenant's Claude API settings")
+    cs.add_argument("tenant_id")
+    cs.add_argument("--enable", action="store_true")
+    cs.add_argument("--disable", action="store_true")
+    cs.add_argument("--api-key-env", help="NAME of the environment variable holding the firm's Anthropic API key")
+    cs.add_argument("--model")
+    cs.add_argument("--auto-extract", action="store_true")
     sub.add_parser("integrity")
     b = sub.add_parser("backup")
     b.add_argument("dest")
@@ -106,6 +117,25 @@ def main(argv=None) -> int:
             print(r["id"], res["status"], res["error"][:100])
             n += 1
         print(f"{n} run(s) processed")
+        return 0
+    if args.cmd == "create-api-token":
+        token = auth.create_api_token(args.user_id, args.label)
+        print("Connector token (shown once; store it in Claude's connector config, not in git):")
+        print(token)
+        return 0
+    if args.cmd == "mcp":
+        db.close()
+        from . import mcp_server
+        return mcp_server.main()
+    if args.cmd == "claude-settings":
+        from . import claude
+        from .auth import Actor, CAPS
+        admin = Actor("cli-admin", "admin", args.tenant_id, CAPS["admin"])
+        if args.enable or args.disable:
+            claude.set_config(store, admin, enabled=args.enable and not args.disable, api_key_env=args.api_key_env,
+                              model=args.model, auto_extract=args.auto_extract)
+        print(json.dumps({**claude.get_config(store, admin),
+                          "credential": claude.credential_status(store, admin)}, indent=1))
         return 0
     if args.cmd == "integrity":
         print(json.dumps(db.integrity(), indent=1))

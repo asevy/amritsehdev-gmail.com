@@ -3,7 +3,7 @@
 Environment: Python 3.13.18, SQLite 3.53.1, pdfplumber 0.11.10, openpyxl 3.1.5,
 reportlab 5.0.1, pytest 9.2.0. Command: `python -m pytest` in `junior_mining/`.
 
-**Result: 116 passed, 0 failed, 0 skipped (≈20 s).** All tests use the
+**Result: 144 passed, 0 failed, 0 skipped (≈32 s)** — 116 for the core product plus 28 for the Claude integration (`test_claude_integration.py` 15, `test_mcp_connector.py` 9, `test_claude_http.py` 4; no live Anthropic API call — a fake client records each request). All tests use the
 synthetic fixtures; each test runs on its own copy of a seeded two-tenant
 workspace. Tests assert behaviour on raw payloads (store results, JSON, HTTP
 status codes, export bytes), not only on rendered pages.
@@ -63,6 +63,6 @@ Production validation is pending expert labels (benchmark/PROPOSAL.md).
 [DEMO_TRANSCRIPT.md](DEMO_TRANSCRIPT.md). Screens captured in `docs/screenshots/`.
 
 ## Not tested here
-Real issuer documents; OCR; live connectors; a model provider; concurrent
+Real issuer documents; OCR; live connectors; a live Anthropic API call (the Claude features are tested with a fake client only); concurrent
 multi-user load; TLS deployment; penetration testing; browser accessibility
 audit beyond semantic HTML.

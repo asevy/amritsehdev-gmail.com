@@ -16,7 +16,10 @@ fixtures but needs expert review, real documents or a pilot to validate.
 | Ingestion | Unreadable-page detection; page images; text-layer coordinates | Implemented / tested | OCR blocked (no engine) |
 | Ingestion | Mirrored-release detection | Implemented / tested | Similarity threshold 0.8 not tuned on real data |
 | Extraction | Deterministic rules for ~30 mining/financial metrics, permits, commitments, disclosures | Implemented / awaiting validation | Written against synthetic phrasing; real-document recall unknown |
-| Extraction | Model proposal boundary (schema reduction, verbatim-quote check) | Implemented / tested with fake model | No provider configured |
+| Extraction | Claude candidate proposals (structured output, verbatim-quote check, same validation, reviewer approval) | Implemented / tested with fake client | No live call made; precision/recall vs rules unmeasured |
+| Q&A | Claude question routing (metrics only; answers from records; refusals first) | Implemented / tested with fake client | Same |
+| Memo | Claude claim drafting (validated per claim; withheld if unsupported) | Implemented / tested with fake client | Same |
+| Connector | MCP server for Claude Desktop / Claude Code: 9 read-only, tenant-scoped, audited tools; per-user hashed tokens | Implemented / tested (incl. real stdio round trip) | claude.ai web connector (HTTPS + OAuth) not built |
 | Validation | Independent re-derivation of entity, dates, value/scale, currency, unit, category, basis, study qualifiers, true width, status | Implemented / tested | |
 | Review | Queue, approve/reject/needs-review, corrections as revisions, separation of duties | Implemented / tested | |
 | Reconciliation | Equivalence keys, precision-overlap tolerance, conflicts, discrepancy workspace, explicit restatements | Implemented / tested | |

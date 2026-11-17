@@ -94,24 +94,44 @@ def ask(store: Store, actor: Actor, company_id: str, question: str, project_id: 
     cov = ingest.coverage(store, actor, company_id)
     base["coverage"] = _coverage_text(cov)
     base["evidence_cutoff"] = cov["evidence_cutoff"]
-    metrics = []
-    for pat, ms in INTENTS:
-        if re.search(pat, q, re.I):
-            metrics = ms
-            break
+    metrics, router, routed = [], "keyword rules", None
+    from . import claude
+    cfg = claude.get_config(store, actor)
+    if cfg["enabled"] and cfg["route_questions"]:
+        try:
+            routed = claude.route_question(store, actor, q)
+            router = f"Claude ({cfg['model']}) mapped the question to defined metrics; the answer below is assembled from stored records"
+        except (claude.ClaudeUnavailable, claude.ClaudeRefused, claude.ClaudeBadOutput) as exc:
+            router = f"keyword rules (Claude routing unavailable: {type(exc).__name__})"
+    base["router"] = router
+    if routed:
+        oos = routed.get("out_of_scope")
+        if oos:
+            msg = {"recommendation": REFUSALS[0][1], "probability": REFUSALS[1][1], "score_or_rating": REFUSALS[2][1],
+                   "price_target": REFUSALS[3][1], "misconduct_judgement": REFUSALS[4][1],
+                   "forecast_of_outcome": REFUSALS[5][1]}.get(oos, "This question is outside what this system answers.")
+            return {**base, "status": "declined", "answer": [], "message": msg}
+        metrics = [m for m in routed.get("metric_ids", []) if m in D.METRICS]
+    else:
+        for pat, ms in INTENTS:
+            if re.search(pat, q, re.I):
+                metrics = ms
+                break
     if not metrics:
         return {**base, **_passages(store, actor, company_id, q)}
-    qual = {}
-    if re.search(r"after[- ]tax", q, re.I):
-        qual["tax_basis"] = "after_tax"
-    elif re.search(r"pre[- ]tax", q, re.I):
-        qual["tax_basis"] = "pre_tax"
-    for pat, cat in ((r"measured\s*(?:&|and)\s*indicated|\bm&i\b", "measured_indicated"),
-                     (r"\binferred\b", "inferred"), (r"\bindicated\b", "indicated"), (r"\bmeasured\b", "measured"),
-                     (r"proven\s*(?:&|and)\s*probable|\bp&p\b", "proven_probable")):
-        if re.search(pat, q, re.I):
-            qual["resource_category"] = cat
-            break
+    # Qualifiers named in the question: from Claude's routing when used, else from keywords.
+    qual = {k: routed[k] for k in ("tax_basis", "resource_category") if routed and routed.get(k)}
+    if not routed:
+        if re.search(r"after[- ]tax", q, re.I):
+            qual["tax_basis"] = "after_tax"
+        elif re.search(r"pre[- ]tax", q, re.I):
+            qual["tax_basis"] = "pre_tax"
+        for pat, cat in ((r"measured\s*(?:&|and)\s*indicated|\bm&i\b", "measured_indicated"),
+                         (r"\binferred\b", "inferred"), (r"\bindicated\b", "indicated"),
+                         (r"\bmeasured\b", "measured"), (r"proven\s*(?:&|and)\s*probable|\bp&p\b", "proven_probable")):
+            if re.search(pat, q, re.I):
+                qual["resource_category"] = cat
+                break
     lines, pending, missing = [], [], []
     for mid in metrics:
         rows = F.current(store, actor, company_id, mid, project_id)

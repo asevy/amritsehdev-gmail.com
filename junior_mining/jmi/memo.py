@@ -423,15 +423,17 @@ def _editable(store, actor, version_id) -> dict:
 
 
 def add_claim(store: Store, actor: Actor, version_id: str, section: str, kind: str, text: str,
-              fact_ids=(), calc_ids=(), risk_ids=()) -> dict:
+              fact_ids=(), calc_ids=(), risk_ids=(), origin: str = "analyst") -> dict:
     if section not in dict(SECTIONS):
         raise Invalid("unknown section")
     if kind not in ("factual", "interpretive"):
         raise Invalid("analyst claims are factual or interpretive")
+    if origin not in ("analyst", "claude"):
+        raise Invalid("origin must be analyst or claude")
     v = _editable(store, actor, version_id)
     body = v["body"]
     n = 1 + max((int(c["id"][1:]) for s in body["sections"].values() for c in s), default=0)
-    c = _claim(kind, text, fact_ids, calc_ids, risk_ids)
+    c = _claim(kind, text, fact_ids, calc_ids, risk_ids, origin=origin)
     c["id"] = f"c{n}"
     body["sections"][section].append(c)
     with store.db.tx():
@@ -582,7 +584,7 @@ def new_version(store: Store, actor: Actor, memo_id: str, refresh: bool = False)
         fresh = draft_body(store, actor, memo["company_id"], memo["thesis_id"], memo["peer_set_id"])
         for sec, claims in body["sections"].items():
             for c in claims:
-                if c.get("origin") == "analyst":
+                if c.get("origin") in ("analyst", "claude"):
                     fresh["sections"][sec].append(c)
         n = 0
         for claims in fresh["sections"].values():

@@ -118,6 +118,14 @@
    "handler": "v_admin_users"
   },
   {
+   "pattern": "/admin/claude",
+   "handler": "v_admin_claude"
+  },
+  {
+   "pattern": "/account",
+   "handler": "v_account"
+  },
+  {
    "pattern": "/export/memo/([A-Za-z0-9_]+)\\.(pdf|csv|json)",
    "handler": "v_export_memo"
   },
@@ -187,6 +195,9 @@
   "/api/assumption.set",
   "/api/calc.run",
   "/api/cite",
+  "/api/claude.draft",
+  "/api/claude.propose",
+  "/api/claude.settings",
   "/api/company.create",
   "/api/diligence.build",
   "/api/diligence.question",
@@ -218,6 +229,8 @@
   "/api/risk.status",
   "/api/snapshot.build",
   "/api/thesis.create",
+  "/api/token.create",
+  "/api/token.revoke",
   "/api/user.create",
   "/api/watchlist.add",
   "/api/watchlist.create"

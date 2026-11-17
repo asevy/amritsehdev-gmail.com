@@ -136,6 +136,12 @@ def process(store: Store, tenant_id: str, run_id: str) -> dict:
             "status": "succeeded", "finished_at": config.iso_now(), "candidates": n,
             "extractor": EXTRACTOR, "extractor_version": EXTRACTOR_VERSION})
         _feed(store, sys_actor, ok=True)
+        from . import claude
+        cfg = claude.get_config(store, sys_actor)
+        if cfg["enabled"] and cfg["auto_extract"] and doc["company_id"] and doc["doc_type"] != "market_data":
+            # after the rule-based transaction has committed; off the request thread
+            claude.run_in_background(store, "propose_candidates", system_actor(tenant_id, "claude"),
+                                     version_id=v["id"])
     except Exception as exc:
         msg = f"{type(exc).__name__}: {str(exc)[:300]}"
         store.update(sys_actor, "ingestion_runs", run_id, {"status": "failed", "error": msg,
@@ -255,28 +261,9 @@ def _process(store: Store, actor: Actor, v: dict, doc: dict, run: dict) -> int:
                     table_cells={(t.table_index, ri, ci): cell for t in parsed.tables
                                  for ri, row in enumerate(t.rows) for ci, cell in enumerate(row)})
     n = 0
-    is_pdf = v["filename"].lower().endswith(".pdf")
     for c in cands:
-        val = validate(c, vctx)
-        loc = c.location
-        bbox, note = (None, "coordinates not applicable (not a PDF passage)")
-        if is_pdf and loc.char_start is not None:
-            bbox, note = pdf_bbox(data, loc.page_no, c.quote)
-        elif loc.table_index is not None:
-            note = "table cell reference (no coordinates)"
-        lrow = store.insert(actor, "source_locations", {
-            "version_id": v["id"], "page_no": loc.page_no, "table_index": loc.table_index,
-            "row_index": loc.row_index, "col_index": loc.col_index, "cell_ref": loc.cell_ref,
-            "char_start": loc.char_start, "char_end": loc.char_end, "quote": c.quote, "context": c.context,
-            "row_header": loc.row_header, "col_header": loc.col_header, "footnotes": loc.footnotes,
-            "bbox": bbox, "bbox_note": note})
-        f = facts.insert_fact(store, actor, cand=c, val=val, version=v, location_id=lrow["id"],
-                              run_id=run["id"], extractor=EXTRACTOR, extractor_version=EXTRACTOR_VERSION)
+        record_candidate(store, actor, c, vctx, v, data, run["id"], EXTRACTOR, EXTRACTOR_VERSION)
         n += 1
-        if f["company_id"] and f["workflow_state"] != "rejected":
-            risks.suggest_from_fact(store, actor, f)
-            from . import monitoring
-            monitoring.on_new_fact(store, actor, f)
     for cc in commits:
         if not doc["company_id"]:
             continue
@@ -298,6 +285,55 @@ def _process(store: Store, actor: Actor, v: dict, doc: dict, run: dict) -> int:
                                                         "extractor": EXTRACTOR_VERSION,
                                                         "parser": PARSER_VERSION})
     return n
+
+
+def record_candidate(store: Store, actor: Actor, c, vctx: VContext, v: dict, data: bytes, run_id: str | None,
+                     extractor: str, extractor_version: str) -> dict:
+    """Validate one candidate, store its exact location and the resulting fact.
+
+    Every proposer — deterministic rules or Claude — goes through this one
+    path, so a model-proposed candidate faces exactly the same checks."""
+    val = validate(c, vctx)
+    loc = c.location
+    bbox, note = (None, "coordinates not applicable (not a PDF passage)")
+    if v["filename"].lower().endswith(".pdf") and loc.char_start is not None:
+        bbox, note = pdf_bbox(data, loc.page_no, c.quote)
+    elif loc.table_index is not None:
+        note = "table cell reference (no coordinates)"
+    lrow = store.insert(actor, "source_locations", {
+        "version_id": v["id"], "page_no": loc.page_no, "table_index": loc.table_index,
+        "row_index": loc.row_index, "col_index": loc.col_index, "cell_ref": loc.cell_ref,
+        "char_start": loc.char_start, "char_end": loc.char_end, "quote": c.quote, "context": c.context,
+        "row_header": loc.row_header, "col_header": loc.col_header, "footnotes": loc.footnotes,
+        "bbox": bbox, "bbox_note": note})
+    f = facts.insert_fact(store, actor, cand=c, val=val, version=v, location_id=lrow["id"],
+                          run_id=run_id, extractor=extractor, extractor_version=extractor_version)
+    if f["company_id"] and f["workflow_state"] != "rejected":
+        risks.suggest_from_fact(store, actor, f)
+        from . import monitoring
+        monitoring.on_new_fact(store, actor, f)
+    return f
+
+
+def contexts_from_db(store: Store, actor: Actor, version_id: str) -> tuple:
+    """Rebuild extraction/validation context for an already-parsed version."""
+    v = store.get(actor, "document_versions", version_id)
+    doc = store.get(actor, "documents", v["document_id"])
+    pages = store.find(actor, "pages", version_id=version_id, order="page_no")
+    tables = store.find(actor, "doc_tables", version_id=version_id, order="table_index")
+    aliases = entities.all_aliases(store, actor)
+    company_projects = ({p["id"]: p["name"] for p in entities.projects_of(store, actor, doc["company_id"])}
+                        if doc["company_id"] else {})
+    ctx = ExtractionContext(company_id=doc["company_id"], aliases=aliases, publication_date=v["publication_date"],
+                            reporting_currency=v["reporting_currency"], doc_title=doc["title"],
+                            listing_map=entities.listing_map(store, actor))
+    vctx = VContext(company_id=doc["company_id"], company_projects=company_projects, aliases=aliases,
+                    reporting_currency=v["reporting_currency"],
+                    doc_heading=doc["title"] + "\n" + (pages[0]["text"][:400] if pages else ""),
+                    page_texts={p["page_no"]: p["text"] for p in pages},
+                    table_cells={(t["table_index"], ri, ci): cell for t in tables
+                                 for ri, row in enumerate(t["rows"]) for ci, cell in enumerate(row)})
+    return v, doc, pages, ctx, vctx
 
 
 def cite(store: Store, actor: Actor, version_id: str, page_no: int, quote: str) -> dict:

@@ -14,7 +14,8 @@ pytest; 168 tests pass). See [REUSE_INVENTORY.md](REUSE_INVENTORY.md).
 FTS5 for derived search. Parsing adapters use libraries already present
 (pdfplumber, pypdfium2, openpyxl, reportlab).
 
-*Consequence.* No framework or supply chain beyond four parsing libraries.
+*Consequence.* No web framework; dependencies are the parsing libraries plus the
+Anthropic SDK and MCP SDK used only by the optional Claude features.
 Single node; one SQLite connection serialised by a lock (each HTTP request
 holds it). Adequate for a pilot; a multi-node deployment would move the
 store behind the same `Store` interface to PostgreSQL with row-level security.
@@ -114,6 +115,17 @@ workflow transitions. The model boundary (`extract.ModelProposer`) passes text
 as delimited data and reduces output to a fixed schema; extra keys (workflow
 state, role, "approve") are discarded and reported.
 
+## AD-12 Claude is a proposer and a reader, never an authority
+
+Claude (via the Anthropic API) may propose candidates, map questions to metric
+ids and draft claims; its output enters through the same doors as rule output
+(`ingest.record_candidate`, `answers` assembly from facts, `memo.add_claim`) and
+is validated and reviewer-approved like anything else. Per-firm opt-in with the
+firm's own key (only the env-var name stored). Calls run off the request thread
+with no transaction open. The MCP connector exposes the store to Claude
+read-only through per-user tokens whose actor carries only the `read`
+capability. See CLAUDE_INTEGRATION.md.
+
 ## Module map
 
 | Module | Responsibility |
@@ -132,3 +144,4 @@ state, role, "approve") are discarded and reported.
 | `policy` | no-score guard |
 | `server`, `ui` | HTTP routes, actions, HTML |
 | `seed`, `bench` | synthetic workspace; benchmark runner |
+| `claude`, `mcp_server` | optional Claude API features (opt-in per firm); read-only Claude connector |

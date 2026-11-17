@@ -1,6 +1,6 @@
 # Junior Mining Intelligence — scripted demonstration (SYNTHETIC data)
 
-Server: http://127.0.0.1:39885 · analysis clock pinned to 2026-11-17 15:00 UTC · data dir: (temporary)
+Server: http://127.0.0.1:42291 · analysis clock pinned to 2026-11-17 15:00 UTC · data dir: (temporary)
 
 - [x] analyst, reviewer and other-tenant analyst sign in
 
@@ -63,8 +63,8 @@ Server: http://127.0.0.1:39885 · analysis clock pinned to 2026-11-17 15:00 UTC 
 ## 6. Draft, review and approve a cited memo
 - [x] unsupported claim citing a real source is withheld — the claim states the authorization was issued/approved; the cited status is 'Application accepted for review'; an issuer statement is presented as established fact; attribute it (e.g. 'the company reports')
 - [x] restated claim with correct status and attribution is supported
-- [x] reviewer approves the memo version (author ≠ approver; all register risks included) — {"ok": true, "result": {"approved_at": "2026-11-17T15:00:00Z", "approved_by": "reviewer.a", "author": "analyst.a", "body": {"peer_set_id": "pset_79d3aeda0132fccf", "removed": [{"at": "2026-11-17T15:00
-- [x] evidence-preserving PDF export recorded with its SHA-256 — 3d5bb56358104d2c
+- [x] reviewer approves the memo version (author ≠ approver; all register risks included) — {"ok": true, "result": {"approved_at": "2026-11-17T15:00:00Z", "approved_by": "reviewer.a", "author": "analyst.a", "body": {"peer_set_id": "pset_78d63eeffd249dfa", "removed": [{"at": "2026-11-17T15:00
+- [x] evidence-preserving PDF export recorded with its SHA-256 — 68cdf5da669fd644
 
 ## 7. Ingest an update; show affected assumptions and stale outputs
   inbox: commitment_revised: Target explicitly revised: complete the pre-feasibility study — in Q2 2027 → in Q4 2027
@@ -75,7 +75,7 @@ Server: http://127.0.0.1:39885 · analysis clock pinned to 2026-11-17 15:00 UTC 
   inbox: thesis_assumption_affected: Thesis assumption affected: M&I resource of about 920 koz (effective 2026-04-30) supports scale
   inbox: new_document: New document: Halvard Peak Gold Corp. news release: Halvard Peak Project resource update (2026-11-16)
   inbox: ingestion_failed: Ingestion failed: Corrupt upload (SYNTHETIC failure case) — ParseError: unreadable PDF: PdfminerException
-- [x] approved memo flagged stale, status and content unchanged — source fact fact_10decde496b3db8f restated by fact fact_a994922572f5d934
+- [x] approved memo flagged stale, status and content unchanged — source fact fact_f4c753161143c923 restated by fact fact_d2120d0c14847209
 - [x] thesis assumption marked affected by the restatement — new mineral resource contained metal disclosed (893, 2026-04-30); assumption needs re-review
 - [x] comparison snapshot marked stale
 - [x] PFS target recorded as an explicit issuer revision (not inferred as 'missed')
