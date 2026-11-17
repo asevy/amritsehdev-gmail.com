@@ -1,0 +1,225 @@
+{
+ "auth": "Session cookie 'jmisess' (HttpOnly, SameSite=Strict) from POST /login; every POST also needs the session CSRF token: header X-JMI-CSRF (JSON) or form field csrf.",
+ "errors": {
+  "400": "invalid input / bad_csrf",
+  "401": "not signed in",
+  "403": "role lacks capability",
+  "404": "not found \u2014 including any record belonging to another tenant",
+  "413": "too large",
+  "500": "server error or policy_guard (score-like field blocked)"
+ },
+ "get_routes": [
+  {
+   "pattern": "/",
+   "handler": "v_coverage"
+  },
+  {
+   "pattern": "/company/([A-Za-z0-9_]+)",
+   "handler": "v_company"
+  },
+  {
+   "pattern": "/company/([A-Za-z0-9_]+)/documents",
+   "handler": "v_documents"
+  },
+  {
+   "pattern": "/project/([A-Za-z0-9_]+)",
+   "handler": "v_project"
+  },
+  {
+   "pattern": "/doc/([A-Za-z0-9_]+)",
+   "handler": "v_doc"
+  },
+  {
+   "pattern": "/doc/([A-Za-z0-9_]+)/page/(\\d+)\\.png",
+   "handler": "v_page_png"
+  },
+  {
+   "pattern": "/doc/([A-Za-z0-9_]+)/original",
+   "handler": "v_original"
+  },
+  {
+   "pattern": "/fact/([A-Za-z0-9_]+)",
+   "handler": "v_fact"
+  },
+  {
+   "pattern": "/review",
+   "handler": "v_review"
+  },
+  {
+   "pattern": "/discrepancies",
+   "handler": "v_discrepancies"
+  },
+  {
+   "pattern": "/discrepancy/([A-Za-z0-9_]+)",
+   "handler": "v_discrepancy"
+  },
+  {
+   "pattern": "/risks/([A-Za-z0-9_]+)",
+   "handler": "v_risks"
+  },
+  {
+   "pattern": "/diligence/([A-Za-z0-9_]+)",
+   "handler": "v_diligence"
+  },
+  {
+   "pattern": "/peers/([A-Za-z0-9_]+)",
+   "handler": "v_peers"
+  },
+  {
+   "pattern": "/peerset/([A-Za-z0-9_]+)",
+   "handler": "v_peerset"
+  },
+  {
+   "pattern": "/snapshot/([A-Za-z0-9_]+)",
+   "handler": "v_snapshot"
+  },
+  {
+   "pattern": "/calcs/([A-Za-z0-9_]+)",
+   "handler": "v_calcs"
+  },
+  {
+   "pattern": "/calc/([A-Za-z0-9_]+)",
+   "handler": "v_calc"
+  },
+  {
+   "pattern": "/memos/([A-Za-z0-9_]+)",
+   "handler": "v_memos"
+  },
+  {
+   "pattern": "/memo/([A-Za-z0-9_]+)",
+   "handler": "v_memo"
+  },
+  {
+   "pattern": "/ask/([A-Za-z0-9_]+)",
+   "handler": "v_ask"
+  },
+  {
+   "pattern": "/inbox",
+   "handler": "v_inbox"
+  },
+  {
+   "pattern": "/portfolio",
+   "handler": "v_portfolio"
+  },
+  {
+   "pattern": "/definitions",
+   "handler": "v_definitions"
+  },
+  {
+   "pattern": "/admin/audit",
+   "handler": "v_admin_audit"
+  },
+  {
+   "pattern": "/admin/usage",
+   "handler": "v_admin_usage"
+  },
+  {
+   "pattern": "/admin/users",
+   "handler": "v_admin_users"
+  },
+  {
+   "pattern": "/export/memo/([A-Za-z0-9_]+)\\.(pdf|csv|json)",
+   "handler": "v_export_memo"
+  },
+  {
+   "pattern": "/export/facts/([A-Za-z0-9_]+)\\.csv",
+   "handler": "v_export_facts"
+  },
+  {
+   "pattern": "/export/snapshot/([A-Za-z0-9_]+)\\.csv",
+   "handler": "v_export_snapshot"
+  },
+  {
+   "pattern": "/api/whoami",
+   "handler": "v_whoami"
+  },
+  {
+   "pattern": "/api/companies",
+   "handler": "api_companies"
+  },
+  {
+   "pattern": "/api/company/([A-Za-z0-9_]+)",
+   "handler": "api_company"
+  },
+  {
+   "pattern": "/api/fact/([A-Za-z0-9_]+)",
+   "handler": "api_fact"
+  },
+  {
+   "pattern": "/api/doc/([A-Za-z0-9_]+)",
+   "handler": "api_doc"
+  },
+  {
+   "pattern": "/api/blob/([A-Za-z0-9_]+)",
+   "handler": "api_blob"
+  },
+  {
+   "pattern": "/api/search",
+   "handler": "api_search"
+  },
+  {
+   "pattern": "/api/ask",
+   "handler": "api_ask"
+  },
+  {
+   "pattern": "/api/snapshot/([A-Za-z0-9_]+)",
+   "handler": "api_snapshot"
+  },
+  {
+   "pattern": "/api/memo/([A-Za-z0-9_]+)",
+   "handler": "api_memo"
+  },
+  {
+   "pattern": "/api/inbox",
+   "handler": "api_inbox"
+  },
+  {
+   "pattern": "/api/definitions",
+   "handler": "api_definitions"
+  },
+  {
+   "pattern": "/api/coverage/([A-Za-z0-9_]+)",
+   "handler": "api_coverage"
+  }
+ ],
+ "post_actions": [
+  "/api/ask",
+  "/api/assumption.set",
+  "/api/calc.run",
+  "/api/cite",
+  "/api/company.create",
+  "/api/diligence.build",
+  "/api/diligence.question",
+  "/api/diligence.review_item",
+  "/api/discrepancy.resolve",
+  "/api/document.upload",
+  "/api/event.status",
+  "/api/fact.correct",
+  "/api/fact.review",
+  "/api/holding.add",
+  "/api/ingest.retry",
+  "/api/listing.add",
+  "/api/memo.approve",
+  "/api/memo.claim",
+  "/api/memo.create",
+  "/api/memo.new_version",
+  "/api/memo.remove_claim",
+  "/api/memo.review_claim",
+  "/api/memo.review_supported",
+  "/api/memo.submit",
+  "/api/ownership.change",
+  "/api/peer.decide",
+  "/api/peerset.approve",
+  "/api/peerset.create",
+  "/api/project.create",
+  "/api/risk.attention",
+  "/api/risk.create",
+  "/api/risk.evidence",
+  "/api/risk.status",
+  "/api/snapshot.build",
+  "/api/thesis.create",
+  "/api/user.create",
+  "/api/watchlist.add",
+  "/api/watchlist.create"
+ ]
+}

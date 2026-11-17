@@ -1,0 +1,949 @@
+{
+ "metrics": {
+  "registry_version": "2026-11-17.1",
+  "metrics": {
+   "share_price": {
+    "id": "share_price",
+    "version": 1,
+    "label": "Share price (close)",
+    "dimension": "money",
+    "level": "company",
+    "default_evidence": "observed",
+    "requires": [
+     "as_of_date",
+     "currency"
+    ],
+    "key_fields": [
+     "company_id",
+     "project_id",
+     "metric_id",
+     "as_of_date",
+     "listing"
+    ],
+    "allowed_categories": [],
+    "nonnegative": true,
+    "display_decimals": 2,
+    "display_divisor": "1",
+    "display_suffix": "",
+    "definition": "Closing price of one common share on the stated listing and date.",
+    "caution": ""
+   },
+   "average_daily_volume": {
+    "id": "average_daily_volume",
+    "version": 1,
+    "label": "Average daily traded volume",
+    "dimension": "count",
+    "level": "company",
+    "default_evidence": "observed",
+    "requires": [
+     "as_of_date"
+    ],
+    "key_fields": [
+     "company_id",
+     "project_id",
+     "metric_id",
+     "as_of_date",
+     "window",
+     "listing"
+    ],
+    "allowed_categories": [],
+    "nonnegative": true,
+    "display_decimals": 0,
+    "display_divisor": "1",
+    "display_suffix": "",
+    "definition": "Average shares traded per day over the stated window, as given in the uploaded file.",
+    "caution": ""
+   },
+   "shares_outstanding_basic": {
+    "id": "shares_outstanding_basic",
+    "version": 1,
+    "label": "Basic shares outstanding",
+    "dimension": "count",
+    "level": "company",
+    "default_evidence": "reported",
+    "requires": [
+     "as_of_date"
+    ],
+    "key_fields": [
+     "company_id",
+     "project_id",
+     "metric_id",
+     "as_of_date"
+    ],
+    "allowed_categories": [],
+    "nonnegative": true,
+    "display_decimals": 0,
+    "display_divisor": "1",
+    "display_suffix": "",
+    "definition": "Issued and outstanding common shares on the stated date. Excludes warrants, options and other convertibles.",
+    "caution": ""
+   },
+   "warrants_outstanding": {
+    "id": "warrants_outstanding",
+    "version": 1,
+    "label": "Warrants outstanding (tranche)",
+    "dimension": "count",
+    "level": "company",
+    "default_evidence": "reported",
+    "requires": [
+     "as_of_date"
+    ],
+    "key_fields": [
+     "company_id",
+     "project_id",
+     "metric_id",
+     "as_of_date",
+     "exercise_price",
+     "expiry"
+    ],
+    "allowed_categories": [],
+    "nonnegative": true,
+    "display_decimals": 0,
+    "display_divisor": "1",
+    "display_suffix": "",
+    "definition": "Number of warrants in one tranche, with its exercise price and expiry. Exercise proceeds are hypothetical, not cash held.",
+    "caution": ""
+   },
+   "options_outstanding": {
+    "id": "options_outstanding",
+    "version": 1,
+    "label": "Options outstanding (tranche)",
+    "dimension": "count",
+    "level": "company",
+    "default_evidence": "reported",
+    "requires": [
+     "as_of_date"
+    ],
+    "key_fields": [
+     "company_id",
+     "project_id",
+     "metric_id",
+     "as_of_date",
+     "exercise_price",
+     "expiry"
+    ],
+    "allowed_categories": [],
+    "nonnegative": true,
+    "display_decimals": 0,
+    "display_divisor": "1",
+    "display_suffix": "",
+    "definition": "Number of stock options in one tranche with its exercise price.",
+    "caution": ""
+   },
+   "cash_unrestricted": {
+    "id": "cash_unrestricted",
+    "version": 1,
+    "label": "Cash and cash equivalents (unrestricted)",
+    "dimension": "money",
+    "level": "company",
+    "default_evidence": "reported",
+    "requires": [
+     "as_of_date",
+     "currency"
+    ],
+    "key_fields": [
+     "company_id",
+     "project_id",
+     "metric_id",
+     "as_of_date"
+    ],
+    "allowed_categories": [],
+    "nonnegative": true,
+    "display_decimals": 1,
+    "display_divisor": "1000000",
+    "display_suffix": " million",
+    "definition": "Unrestricted cash and cash equivalents on the stated balance-sheet date. Dated cash is not current cash.",
+    "caution": "Restricted cash is a separate metric and is excluded from enterprise value."
+   },
+   "cash_restricted": {
+    "id": "cash_restricted",
+    "version": 1,
+    "label": "Restricted cash",
+    "dimension": "money",
+    "level": "company",
+    "default_evidence": "reported",
+    "requires": [
+     "as_of_date",
+     "currency"
+    ],
+    "key_fields": [
+     "company_id",
+     "project_id",
+     "metric_id",
+     "as_of_date"
+    ],
+    "allowed_categories": [],
+    "nonnegative": true,
+    "display_decimals": 1,
+    "display_divisor": "1000000",
+    "display_suffix": " million",
+    "definition": "Cash subject to restrictions (e.g. reclamation bonds) on the stated date.",
+    "caution": ""
+   },
+   "total_debt": {
+    "id": "total_debt",
+    "version": 1,
+    "label": "Total debt",
+    "dimension": "money",
+    "level": "company",
+    "default_evidence": "reported",
+    "requires": [
+     "as_of_date",
+     "currency"
+    ],
+    "key_fields": [
+     "company_id",
+     "project_id",
+     "metric_id",
+     "as_of_date"
+    ],
+    "allowed_categories": [],
+    "nonnegative": true,
+    "display_decimals": 1,
+    "display_divisor": "1000000",
+    "display_suffix": " million",
+    "definition": "Borrowings (loans, notes, drawn facilities) on the stated date. A disclosed 'no debt' is recorded as zero; silence is recorded as unknown.",
+    "caution": ""
+   },
+   "period_cash_outflow": {
+    "id": "period_cash_outflow",
+    "version": 1,
+    "label": "Cash used in operating and investing activities",
+    "dimension": "money",
+    "level": "company",
+    "default_evidence": "reported",
+    "requires": [
+     "period_end",
+     "currency"
+    ],
+    "key_fields": [
+     "company_id",
+     "project_id",
+     "metric_id",
+     "period_start",
+     "period_end"
+    ],
+    "allowed_categories": [],
+    "nonnegative": true,
+    "display_decimals": 1,
+    "display_divisor": "1000000",
+    "display_suffix": " million",
+    "definition": "Cash used in operating and investing activities over the stated period.",
+    "caution": ""
+   },
+   "resource_tonnage": {
+    "id": "resource_tonnage",
+    "version": 1,
+    "label": "Mineral resource tonnage",
+    "dimension": "mass",
+    "level": "project",
+    "default_evidence": "reported",
+    "requires": [
+     "effective_date",
+     "resource_category"
+    ],
+    "key_fields": [
+     "company_id",
+     "project_id",
+     "metric_id",
+     "effective_date",
+     "resource_category",
+     "scope_basis",
+     "reporting_basis",
+     "zone",
+     "estimate_status"
+    ],
+    "allowed_categories": [
+     "measured",
+     "indicated",
+     "measured_indicated",
+     "inferred"
+    ],
+    "nonnegative": true,
+    "display_decimals": 1,
+    "display_divisor": "1000000",
+    "display_suffix": " Mt",
+    "definition": "Tonnes in one resource category, on the stated effective date and basis.",
+    "caution": ""
+   },
+   "resource_grade": {
+    "id": "resource_grade",
+    "version": 1,
+    "label": "Mineral resource grade",
+    "dimension": "grade",
+    "level": "project",
+    "default_evidence": "reported",
+    "requires": [
+     "effective_date",
+     "resource_category"
+    ],
+    "key_fields": [
+     "company_id",
+     "project_id",
+     "metric_id",
+     "effective_date",
+     "resource_category",
+     "scope_basis",
+     "reporting_basis",
+     "zone",
+     "estimate_status"
+    ],
+    "allowed_categories": [
+     "measured",
+     "indicated",
+     "measured_indicated",
+     "inferred"
+    ],
+    "nonnegative": true,
+    "display_decimals": 2,
+    "display_divisor": "1",
+    "display_suffix": "",
+    "definition": "Average grade for one resource category.",
+    "caution": ""
+   },
+   "resource_contained_metal": {
+    "id": "resource_contained_metal",
+    "version": 1,
+    "label": "Mineral resource contained metal",
+    "dimension": "metal",
+    "level": "project",
+    "default_evidence": "reported",
+    "requires": [
+     "effective_date",
+     "resource_category"
+    ],
+    "key_fields": [
+     "company_id",
+     "project_id",
+     "metric_id",
+     "effective_date",
+     "resource_category",
+     "scope_basis",
+     "reporting_basis",
+     "zone",
+     "estimate_status"
+    ],
+    "allowed_categories": [
+     "measured",
+     "indicated",
+     "measured_indicated",
+     "inferred"
+    ],
+    "nonnegative": true,
+    "display_decimals": 0,
+    "display_divisor": "1000",
+    "display_suffix": " koz",
+    "definition": "Contained metal in one resource category. Categories are never added together automatically; Inferred is never combined with Measured & Indicated.",
+    "caution": "Mineral resources are not mineral reserves and do not have demonstrated economic viability."
+   },
+   "reserve_tonnage": {
+    "id": "reserve_tonnage",
+    "version": 1,
+    "label": "Mineral reserve tonnage",
+    "dimension": "mass",
+    "level": "project",
+    "default_evidence": "reported",
+    "requires": [
+     "effective_date",
+     "resource_category"
+    ],
+    "key_fields": [
+     "company_id",
+     "project_id",
+     "metric_id",
+     "effective_date",
+     "resource_category",
+     "scope_basis",
+     "zone"
+    ],
+    "allowed_categories": [
+     "proven",
+     "probable",
+     "proven_probable"
+    ],
+    "nonnegative": true,
+    "display_decimals": 1,
+    "display_divisor": "1000000",
+    "display_suffix": " Mt",
+    "definition": "Tonnes in one reserve category (Proven/Probable only).",
+    "caution": ""
+   },
+   "reserve_grade": {
+    "id": "reserve_grade",
+    "version": 1,
+    "label": "Mineral reserve grade",
+    "dimension": "grade",
+    "level": "project",
+    "default_evidence": "reported",
+    "requires": [
+     "effective_date",
+     "resource_category"
+    ],
+    "key_fields": [
+     "company_id",
+     "project_id",
+     "metric_id",
+     "effective_date",
+     "resource_category",
+     "scope_basis",
+     "zone"
+    ],
+    "allowed_categories": [
+     "proven",
+     "probable",
+     "proven_probable"
+    ],
+    "nonnegative": true,
+    "display_decimals": 2,
+    "display_divisor": "1",
+    "display_suffix": "",
+    "definition": "Average grade for one reserve category.",
+    "caution": ""
+   },
+   "reserve_contained_metal": {
+    "id": "reserve_contained_metal",
+    "version": 1,
+    "label": "Mineral reserve contained metal",
+    "dimension": "metal",
+    "level": "project",
+    "default_evidence": "reported",
+    "requires": [
+     "effective_date",
+     "resource_category"
+    ],
+    "key_fields": [
+     "company_id",
+     "project_id",
+     "metric_id",
+     "effective_date",
+     "resource_category",
+     "scope_basis",
+     "zone"
+    ],
+    "allowed_categories": [
+     "proven",
+     "probable",
+     "proven_probable"
+    ],
+    "nonnegative": true,
+    "display_decimals": 0,
+    "display_divisor": "1000",
+    "display_suffix": " koz",
+    "definition": "Contained metal in one reserve category (Proven/Probable only).",
+    "caution": ""
+   },
+   "historical_estimate_contained_metal": {
+    "id": "historical_estimate_contained_metal",
+    "version": 1,
+    "label": "Historical estimate (not current)",
+    "dimension": "metal",
+    "level": "project",
+    "default_evidence": "reported",
+    "requires": [],
+    "key_fields": [
+     "company_id",
+     "project_id",
+     "metric_id",
+     "source_year"
+    ],
+    "allowed_categories": [],
+    "nonnegative": true,
+    "display_decimals": 0,
+    "display_divisor": "1000",
+    "display_suffix": " koz",
+    "definition": "A historical estimate that a qualified person has not classified as a current mineral resource. Never compared with current estimates.",
+    "caution": ""
+   },
+   "npv": {
+    "id": "npv",
+    "version": 1,
+    "label": "Net present value (study)",
+    "dimension": "money",
+    "level": "project",
+    "default_evidence": "forecast",
+    "requires": [
+     "effective_date",
+     "currency",
+     "study_type",
+     "tax_basis",
+     "discount_rate"
+    ],
+    "key_fields": [
+     "company_id",
+     "project_id",
+     "metric_id",
+     "effective_date",
+     "study_type",
+     "tax_basis",
+     "discount_rate",
+     "scope_basis",
+     "price_case"
+    ],
+    "allowed_categories": [],
+    "nonnegative": false,
+    "display_decimals": 0,
+    "display_divisor": "1000000",
+    "display_suffix": " million",
+    "definition": "Study NPV with its tax basis, discount rate, commodity-price case, study type and effective date. Project NPV is not company equity value.",
+    "caution": "A PEA may include Inferred resources and is preliminary in nature."
+   },
+   "irr": {
+    "id": "irr",
+    "version": 1,
+    "label": "Internal rate of return (study)",
+    "dimension": "percent",
+    "level": "project",
+    "default_evidence": "forecast",
+    "requires": [
+     "effective_date",
+     "study_type",
+     "tax_basis"
+    ],
+    "key_fields": [
+     "company_id",
+     "project_id",
+     "metric_id",
+     "effective_date",
+     "study_type",
+     "tax_basis",
+     "price_case"
+    ],
+    "allowed_categories": [],
+    "nonnegative": false,
+    "display_decimals": 1,
+    "display_divisor": "1",
+    "display_suffix": "",
+    "definition": "Study IRR with tax basis and price case.",
+    "caution": ""
+   },
+   "initial_capex": {
+    "id": "initial_capex",
+    "version": 1,
+    "label": "Initial capital cost (study)",
+    "dimension": "money",
+    "level": "project",
+    "default_evidence": "forecast",
+    "requires": [
+     "effective_date",
+     "currency",
+     "study_type"
+    ],
+    "key_fields": [
+     "company_id",
+     "project_id",
+     "metric_id",
+     "effective_date",
+     "study_type"
+    ],
+    "allowed_categories": [],
+    "nonnegative": true,
+    "display_decimals": 0,
+    "display_divisor": "1000000",
+    "display_suffix": " million",
+    "definition": "Pre-production capital estimate from the stated study.",
+    "caution": ""
+   },
+   "aisc": {
+    "id": "aisc",
+    "version": 1,
+    "label": "All-in sustaining cost (study or reported)",
+    "dimension": "price_per_metal",
+    "level": "project",
+    "default_evidence": "forecast",
+    "requires": [
+     "currency",
+     "study_type"
+    ],
+    "key_fields": [
+     "company_id",
+     "project_id",
+     "metric_id",
+     "effective_date",
+     "study_type",
+     "period_end"
+    ],
+    "allowed_categories": [],
+    "nonnegative": true,
+    "display_decimals": 0,
+    "display_divisor": "1",
+    "display_suffix": "",
+    "definition": "AISC per ounce as defined by the issuer. Definitions differ between issuers; values are compared only with that caveat shown.",
+    "caution": ""
+   },
+   "commodity_price_assumption": {
+    "id": "commodity_price_assumption",
+    "version": 1,
+    "label": "Commodity price assumption (study base case)",
+    "dimension": "price_per_metal",
+    "level": "project",
+    "default_evidence": "forecast",
+    "requires": [
+     "currency",
+     "study_type"
+    ],
+    "key_fields": [
+     "company_id",
+     "project_id",
+     "metric_id",
+     "effective_date",
+     "study_type",
+     "price_case"
+    ],
+    "allowed_categories": [],
+    "nonnegative": true,
+    "display_decimals": 0,
+    "display_divisor": "1",
+    "display_suffix": "",
+    "definition": "Base-case commodity price used by the study.",
+    "caution": ""
+   },
+   "met_test_recovery": {
+    "id": "met_test_recovery",
+    "version": 1,
+    "label": "Metallurgical test recovery",
+    "dimension": "percent",
+    "level": "project",
+    "default_evidence": "reported",
+    "requires": [],
+    "key_fields": [
+     "company_id",
+     "project_id",
+     "metric_id",
+     "test_type",
+     "bound"
+    ],
+    "allowed_categories": [],
+    "nonnegative": true,
+    "display_decimals": 1,
+    "display_divisor": "1",
+    "display_suffix": "",
+    "definition": "Recovery measured in laboratory testwork under the stated test conditions. Not the same as proposed plant performance.",
+    "caution": ""
+   },
+   "plant_recovery_assumption": {
+    "id": "plant_recovery_assumption",
+    "version": 1,
+    "label": "Process recovery assumed in study",
+    "dimension": "percent",
+    "level": "project",
+    "default_evidence": "forecast",
+    "requires": [
+     "study_type"
+    ],
+    "key_fields": [
+     "company_id",
+     "project_id",
+     "metric_id",
+     "study_type"
+    ],
+    "allowed_categories": [],
+    "nonnegative": true,
+    "display_decimals": 1,
+    "display_divisor": "1",
+    "display_suffix": "",
+    "definition": "Recovery assumed for the proposed plant in a study.",
+    "caution": ""
+   },
+   "drill_intercept_length": {
+    "id": "drill_intercept_length",
+    "version": 1,
+    "label": "Drill intercept length (core length)",
+    "dimension": "length",
+    "level": "project",
+    "default_evidence": "reported",
+    "requires": [],
+    "key_fields": [
+     "company_id",
+     "project_id",
+     "metric_id",
+     "hole_id",
+     "interval"
+    ],
+    "allowed_categories": [],
+    "nonnegative": true,
+    "display_decimals": 1,
+    "display_divisor": "1",
+    "display_suffix": "",
+    "definition": "Down-hole sample length. Not true width. Where true width is unknown it stays unknown.",
+    "caution": ""
+   },
+   "drill_intercept_grade": {
+    "id": "drill_intercept_grade",
+    "version": 1,
+    "label": "Drill intercept grade",
+    "dimension": "grade",
+    "level": "project",
+    "default_evidence": "reported",
+    "requires": [],
+    "key_fields": [
+     "company_id",
+     "project_id",
+     "metric_id",
+     "hole_id",
+     "interval"
+    ],
+    "allowed_categories": [],
+    "nonnegative": true,
+    "display_decimals": 2,
+    "display_divisor": "1",
+    "display_suffix": "",
+    "definition": "Grade over the stated down-hole interval.",
+    "caution": ""
+   },
+   "true_width": {
+    "id": "true_width",
+    "version": 1,
+    "label": "True width (explicitly stated)",
+    "dimension": "length",
+    "level": "project",
+    "default_evidence": "reported",
+    "requires": [],
+    "key_fields": [
+     "company_id",
+     "project_id",
+     "metric_id",
+     "hole_id",
+     "interval"
+    ],
+    "allowed_categories": [],
+    "nonnegative": true,
+    "display_decimals": 1,
+    "display_divisor": "1",
+    "display_suffix": "",
+    "definition": "True thickness, only when the source states it explicitly.",
+    "caution": ""
+   },
+   "permit_status": {
+    "id": "permit_status",
+    "version": 1,
+    "label": "Permit / authorization status",
+    "dimension": "status",
+    "level": "project",
+    "default_evidence": "reported",
+    "requires": [
+     "as_of_date"
+    ],
+    "key_fields": [
+     "company_id",
+     "project_id",
+     "metric_id",
+     "permit",
+     "as_of_date"
+    ],
+    "allowed_categories": [],
+    "nonnegative": true,
+    "display_decimals": 0,
+    "display_divisor": "1",
+    "display_suffix": "",
+    "definition": "Status of a named authorization. Application, acceptance for review, conditional approval and issuance are distinct states.",
+    "caution": ""
+   },
+   "ownership_interest": {
+    "id": "ownership_interest",
+    "version": 1,
+    "label": "Ownership interest in project",
+    "dimension": "percent",
+    "level": "project",
+    "default_evidence": "reported",
+    "requires": [],
+    "key_fields": [
+     "company_id",
+     "project_id",
+     "metric_id",
+     "as_of_date"
+    ],
+    "allowed_categories": [],
+    "nonnegative": true,
+    "display_decimals": 1,
+    "display_divisor": "1",
+    "display_suffix": "",
+    "definition": "The company's percentage interest in the project on the stated date.",
+    "caution": ""
+   },
+   "disclosure_signal": {
+    "id": "disclosure_signal",
+    "version": 1,
+    "label": "Disclosure signal",
+    "dimension": "text",
+    "level": "company",
+    "default_evidence": "reported",
+    "requires": [],
+    "key_fields": [
+     "company_id",
+     "project_id",
+     "metric_id",
+     "signal",
+     "as_of_date"
+    ],
+    "allowed_categories": [],
+    "nonnegative": true,
+    "display_decimals": 0,
+    "display_divisor": "1",
+    "display_suffix": "",
+    "definition": "A specific disclosure (e.g. going-concern material uncertainty) quoted from the source. It prompts diligence; it is not a verdict.",
+    "caution": ""
+   }
+  },
+  "evidence_types": {
+   "observed": "Measured/observed (e.g. a market price on a stated date)",
+   "reported": "Reported by the issuer or a named third party",
+   "calculated": "Calculated by this application from recorded inputs",
+   "forecast": "Estimate or forecast (study economics, management targets)",
+   "unknown_disputed": "Unknown or disputed"
+  },
+  "workflow_states": {
+   "candidate": "Candidate \u2014 proposed by extraction; no checks completed",
+   "source_matched": "Source-matched \u2014 the quoted text was found at the cited location and the automated identity/period/unit checks passed. Not independently verified.",
+   "needs_review": "Needs review \u2014 at least one automated check could not be completed",
+   "conflicting": "Conflicting \u2014 another source reports a different value for the same defined metric",
+   "reviewer_approved": "Reviewer-approved \u2014 a reviewer confirmed the extraction matches the source. This does not independently establish the underlying geological, legal or commercial claim.",
+   "superseded": "Superseded \u2014 replaced by a later correction or restatement (preserved)",
+   "rejected": "Rejected \u2014 failed a check or was rejected by a reviewer (preserved)"
+  },
+  "permit_statuses": {
+   "not_applied": "No application disclosed",
+   "applied": "Application submitted",
+   "accepted_for_review": "Application accepted for review",
+   "conditional_approval": "Conditional approval",
+   "issued": "Authorization issued",
+   "refused": "Refused",
+   "withdrawn": "Withdrawn"
+  },
+  "stages": {
+   "exploration": "Exploration",
+   "resource": "Resource definition",
+   "pea": "Preliminary economic assessment",
+   "pfs": "Pre-feasibility",
+   "fs": "Feasibility",
+   "construction": "Construction",
+   "operating": "Operating"
+  },
+  "risk_categories": {
+   "geology_resource": "Geology / resource quality",
+   "metallurgy_process": "Metallurgy / process",
+   "engineering_construction": "Engineering / construction",
+   "infrastructure": "Infrastructure",
+   "permitting_environment": "Permitting / environment",
+   "land_community": "Land / community / Indigenous relationships",
+   "management_governance": "Management / governance",
+   "financing_shareholder": "Financing / shareholder outcomes",
+   "commercial_jurisdiction": "Commercial / jurisdiction",
+   "execution_catalysts": "Execution / catalysts",
+   "liquidity_portfolio": "Liquidity / portfolio",
+   "relative_value": "Relative value / opportunity cost",
+   "evidence_quality": "Evidence quality"
+  },
+  "risk_statuses": {
+   "open_question": "Open question \u2014 not an established adverse finding",
+   "documented_finding": "Documented finding \u2014 supported by cited evidence and reviewer-confirmed",
+   "mitigated": "Mitigated \u2014 mitigant documented",
+   "resolved": "Resolved",
+   "dismissed": "Dismissed with reason"
+  }
+ },
+ "calculations": {
+  "rounding": "ROUND_HALF_EVEN at display only; stored outputs keep full Decimal precision (34 digits)",
+  "formulas": {
+   "market_cap": {
+    "id": "market_cap",
+    "version": 1,
+    "label": "Basic market capitalisation",
+    "expression": "share_price \u00d7 basic_shares",
+    "output": "currency",
+    "display_decimals": 1,
+    "display_divisor": "1000000",
+    "definition": "Price on a stated date times basic shares on a stated date. Not enterprise value. Excludes warrants, options and convertibles."
+   },
+   "enterprise_value": {
+    "id": "enterprise_value",
+    "version": 1,
+    "label": "Enterprise value (explicit bridge)",
+    "expression": "market_cap + total_debt \u2212 unrestricted_cash (each converted with a stated FX rate if needed)",
+    "output": "currency",
+    "display_decimals": 1,
+    "display_divisor": "1000000",
+    "definition": "Each component is dated. Restricted cash is excluded. Warrant proceeds are not added. No other adjustments unless entered as assumptions."
+   },
+   "diluted_shares": {
+    "id": "diluted_shares",
+    "version": 1,
+    "label": "Diluted share scenario",
+    "expression": "basic_shares + \u03a3 included tranches",
+    "output": "shares",
+    "display_decimals": 0,
+    "display_divisor": "1",
+    "definition": "Scenario: which tranches are assumed exercised is a stated parameter. Exercise proceeds are reported separately as hypothetical and are not cash held."
+   },
+   "runway": {
+    "id": "runway",
+    "version": 1,
+    "label": "Cash runway scenario (from the cash date)",
+    "expression": "unrestricted_cash \u00f7 monthly_spend",
+    "output": "months",
+    "display_decimals": 1,
+    "display_divisor": "1",
+    "definition": "Months from the balance-sheet date, not from today. Spending is an assumption or a historical average; future spending may differ."
+   },
+   "attributable_npv": {
+    "id": "attributable_npv",
+    "version": 1,
+    "label": "Attributable share of reported project NPV",
+    "expression": "project_npv(100% basis) \u00d7 ownership_interest",
+    "output": "currency",
+    "display_decimals": 0,
+    "display_divisor": "1000000",
+    "definition": "Not company equity value. Excludes corporate costs, cash, debt, financing dilution, corporate taxes and the time and risk to reach production."
+   },
+   "equity_bridge": {
+    "id": "equity_bridge",
+    "version": 1,
+    "label": "Project-to-equity bridge (analyst scenario)",
+    "expression": "attributable_npv + unrestricted_cash \u2212 total_debt \u2212 corporate_costs_pv \u2212 funding_dilution_adjustment",
+    "output": "currency",
+    "display_decimals": 0,
+    "display_divisor": "1000000",
+    "definition": "Computed only when every component is specified. A scenario, not a price target or a recommendation."
+   },
+   "ev_per_contained_oz": {
+    "id": "ev_per_contained_oz",
+    "version": 1,
+    "label": "EV per contained ounce (single category set)",
+    "expression": "enterprise_value \u00f7 contained_oz(category set, basis)",
+    "output": "currency/oz",
+    "display_decimals": 2,
+    "display_divisor": "1",
+    "definition": "Uses one category set only (M&I, or P&P). Inferred is never added. Basis (100% or attributable) and effective date are stated."
+   },
+   "inferred_share": {
+    "id": "inferred_share",
+    "version": 1,
+    "label": "Inferred share of reported resource ounces",
+    "expression": "inferred_oz \u00f7 (measured_indicated_oz + inferred_oz)",
+    "output": "percent",
+    "display_decimals": 1,
+    "display_divisor": "1",
+    "definition": "Objective composition ratio on one effective date and basis. Not a quality grade."
+   },
+   "liquidity_days": {
+    "id": "liquidity_days",
+    "version": 1,
+    "label": "Days to trade a position at stated participation rates",
+    "expression": "position_shares \u00f7 (ADV \u00d7 participation_rate)",
+    "output": "days",
+    "display_decimals": 1,
+    "display_divisor": "1",
+    "definition": "Mechanical scenario over the stated ADV window. Market impact, liquidity changes and block trades are not modelled; there is no universally valid exit estimate."
+   },
+   "fx_convert": {
+    "id": "fx_convert",
+    "version": 1,
+    "label": "Currency conversion",
+    "expression": "amount \u00d7 fx_rate",
+    "output": "currency",
+    "display_decimals": 2,
+    "display_divisor": "1",
+    "definition": "Uses an analyst-entered rate with its source and date."
+   }
+  }
+ }
+}

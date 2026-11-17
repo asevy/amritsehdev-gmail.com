@@ -1,0 +1,22 @@
+[project]
+name = "junior-mining-intelligence"
+version = "0.1.0"
+description = "Evidence-first diligence, risk, comparison and monitoring for junior-mining investment teams (working name; no brand clearance assumed)."
+requires-python = ">=3.12"
+# The server, store and calculations use the standard library only. These
+# libraries are parsing/rendering adapters; each reports itself unavailable
+# rather than producing output when missing.
+dependencies = [
+    "pdfplumber>=0.11",
+    "pypdfium2>=4",
+    "openpyxl>=3.1",
+    "reportlab>=4",
+    "Pillow>=10",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"

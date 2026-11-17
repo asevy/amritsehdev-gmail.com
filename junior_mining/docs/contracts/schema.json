@@ -1,0 +1,5144 @@
+{
+ "assumptions": {
+  "tenant_scoped": true,
+  "columns": [
+   {
+    "name": "id",
+    "type": "TEXT",
+    "not_null": false,
+    "default": null,
+    "primary_key": true,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "tenant_id",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "company_id",
+    "type": "TEXT",
+    "not_null": false,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "name",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "value",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "unit",
+    "type": "TEXT",
+    "not_null": true,
+    "default": "''",
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "as_of_date",
+    "type": "TEXT",
+    "not_null": false,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "source",
+    "type": "TEXT",
+    "not_null": true,
+    "default": "''",
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "rationale",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "created_by",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "created_at",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "superseded_by",
+    "type": "TEXT",
+    "not_null": false,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": true
+   }
+  ]
+ },
+ "audit": {
+  "tenant_scoped": false,
+  "columns": [
+   {
+    "name": "seq",
+    "type": "INTEGER",
+    "not_null": false,
+    "default": null,
+    "primary_key": true,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "ts",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "tenant_id",
+    "type": "TEXT",
+    "not_null": true,
+    "default": "''",
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "actor",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "role",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "action",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "target",
+    "type": "TEXT",
+    "not_null": true,
+    "default": "''",
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "detail",
+    "type": "TEXT",
+    "not_null": true,
+    "default": "''",
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "count",
+    "type": "INTEGER",
+    "not_null": true,
+    "default": "0",
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "chain",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   }
+  ]
+ },
+ "calculations": {
+  "tenant_scoped": true,
+  "columns": [
+   {
+    "name": "id",
+    "type": "TEXT",
+    "not_null": false,
+    "default": null,
+    "primary_key": true,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "tenant_id",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "company_id",
+    "type": "TEXT",
+    "not_null": false,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "formula_id",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "formula_version",
+    "type": "INTEGER",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "label",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "status",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "output_value",
+    "type": "TEXT",
+    "not_null": false,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "output_unit",
+    "type": "TEXT",
+    "not_null": false,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "display_value",
+    "type": "TEXT",
+    "not_null": false,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "inputs",
+    "type": "TEXT",
+    "not_null": true,
+    "default": "'[]'",
+    "primary_key": false,
+    "json": true,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "missing",
+    "type": "TEXT",
+    "not_null": true,
+    "default": "'[]'",
+    "primary_key": false,
+    "json": true,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "warnings",
+    "type": "TEXT",
+    "not_null": true,
+    "default": "'[]'",
+    "primary_key": false,
+    "json": true,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "caveats",
+    "type": "TEXT",
+    "not_null": true,
+    "default": "'[]'",
+    "primary_key": false,
+    "json": true,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "parameters",
+    "type": "TEXT",
+    "not_null": true,
+    "default": "'{}'",
+    "primary_key": false,
+    "json": true,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "created_by",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "created_at",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "stale",
+    "type": "INTEGER",
+    "not_null": true,
+    "default": "0",
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": true
+   },
+   {
+    "name": "stale_reason",
+    "type": "TEXT",
+    "not_null": true,
+    "default": "''",
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": true
+   }
+  ]
+ },
+ "commitment_updates": {
+  "tenant_scoped": true,
+  "columns": [
+   {
+    "name": "id",
+    "type": "TEXT",
+    "not_null": false,
+    "default": null,
+    "primary_key": true,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "tenant_id",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "commitment_id",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "kind",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "wording",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "location_id",
+    "type": "TEXT",
+    "not_null": false,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "new_target_text",
+    "type": "TEXT",
+    "not_null": false,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "new_window_end",
+    "type": "TEXT",
+    "not_null": false,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "stated_on",
+    "type": "TEXT",
+    "not_null": false,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "created_at",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   }
+  ]
+ },
+ "commitments": {
+  "tenant_scoped": true,
+  "columns": [
+   {
+    "name": "id",
+    "type": "TEXT",
+    "not_null": false,
+    "default": null,
+    "primary_key": true,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "tenant_id",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "company_id",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "project_id",
+    "type": "TEXT",
+    "not_null": false,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "original_wording",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "attribution",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "stated_on",
+    "type": "TEXT",
+    "not_null": false,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "location_id",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "subject",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "target_text",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "target_window_start",
+    "type": "TEXT",
+    "not_null": false,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "target_window_end",
+    "type": "TEXT",
+    "not_null": false,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "window_note",
+    "type": "TEXT",
+    "not_null": true,
+    "default": "''",
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "conditions",
+    "type": "TEXT",
+    "not_null": true,
+    "default": "''",
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "status",
+    "type": "TEXT",
+    "not_null": true,
+    "default": "'pending'",
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": true
+   },
+   {
+    "name": "created_at",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   }
+  ]
+ },
+ "companies": {
+  "tenant_scoped": true,
+  "columns": [
+   {
+    "name": "id",
+    "type": "TEXT",
+    "not_null": false,
+    "default": null,
+    "primary_key": true,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "tenant_id",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "name",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "legal_name",
+    "type": "TEXT",
+    "not_null": false,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "incorporation",
+    "type": "TEXT",
+    "not_null": false,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "reporting_currency",
+    "type": "TEXT",
+    "not_null": false,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "fiscal_year_end",
+    "type": "TEXT",
+    "not_null": false,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "synthetic",
+    "type": "INTEGER",
+    "not_null": true,
+    "default": "0",
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "created_by",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "created_at",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   }
+  ]
+ },
+ "comparison_snapshots": {
+  "tenant_scoped": true,
+  "columns": [
+   {
+    "name": "id",
+    "type": "TEXT",
+    "not_null": false,
+    "default": null,
+    "primary_key": true,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "tenant_id",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "peer_set_id",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "market_data_date",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "body",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": true,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "created_by",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "created_at",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "stale",
+    "type": "INTEGER",
+    "not_null": true,
+    "default": "0",
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": true
+   },
+   {
+    "name": "stale_reason",
+    "type": "TEXT",
+    "not_null": true,
+    "default": "''",
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": true
+   }
+  ]
+ },
+ "counterparties": {
+  "tenant_scoped": true,
+  "columns": [
+   {
+    "name": "id",
+    "type": "TEXT",
+    "not_null": false,
+    "default": null,
+    "primary_key": true,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "tenant_id",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "name",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "kind",
+    "type": "TEXT",
+    "not_null": true,
+    "default": "''",
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "synthetic",
+    "type": "INTEGER",
+    "not_null": true,
+    "default": "0",
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "created_at",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   }
+  ]
+ },
+ "counterparty_links": {
+  "tenant_scoped": true,
+  "columns": [
+   {
+    "name": "id",
+    "type": "TEXT",
+    "not_null": false,
+    "default": null,
+    "primary_key": true,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "tenant_id",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "company_id",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "project_id",
+    "type": "TEXT",
+    "not_null": false,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "counterparty_id",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "relation",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "terms_summary",
+    "type": "TEXT",
+    "not_null": true,
+    "default": "''",
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "location_id",
+    "type": "TEXT",
+    "not_null": false,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "created_by",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "created_at",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   }
+  ]
+ },
+ "dependencies": {
+  "tenant_scoped": false,
+  "columns": [
+   {
+    "name": "tenant_id",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": true,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "from_kind",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": true,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "from_id",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": true,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "to_kind",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": true,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "to_id",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": true,
+    "json": false,
+    "mutable_after_insert": false
+   }
+  ]
+ },
+ "diligence_items": {
+  "tenant_scoped": true,
+  "columns": [
+   {
+    "name": "id",
+    "type": "TEXT",
+    "not_null": false,
+    "default": null,
+    "primary_key": true,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "tenant_id",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "company_id",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "project_id",
+    "type": "TEXT",
+    "not_null": false,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "template",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "item_key",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "title",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "specialist",
+    "type": "TEXT",
+    "not_null": true,
+    "default": "''",
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "required_metrics",
+    "type": "TEXT",
+    "not_null": true,
+    "default": "'[]'",
+    "primary_key": false,
+    "json": true,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "status",
+    "type": "TEXT",
+    "not_null": true,
+    "default": "'open'",
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": true
+   },
+   {
+    "name": "evidence",
+    "type": "TEXT",
+    "not_null": true,
+    "default": "'[]'",
+    "primary_key": false,
+    "json": true,
+    "mutable_after_insert": true
+   },
+   {
+    "name": "notes",
+    "type": "TEXT",
+    "not_null": true,
+    "default": "''",
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": true
+   },
+   {
+    "name": "reviewed_by",
+    "type": "TEXT",
+    "not_null": false,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": true
+   },
+   {
+    "name": "reviewed_at",
+    "type": "TEXT",
+    "not_null": false,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": true
+   }
+  ]
+ },
+ "diligence_questions": {
+  "tenant_scoped": true,
+  "columns": [
+   {
+    "name": "id",
+    "type": "TEXT",
+    "not_null": false,
+    "default": null,
+    "primary_key": true,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "tenant_id",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "company_id",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "project_id",
+    "type": "TEXT",
+    "not_null": false,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "item_id",
+    "type": "TEXT",
+    "not_null": false,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "question",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "specialist",
+    "type": "TEXT",
+    "not_null": true,
+    "default": "''",
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "document_request",
+    "type": "TEXT",
+    "not_null": true,
+    "default": "''",
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "status",
+    "type": "TEXT",
+    "not_null": true,
+    "default": "'open'",
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": true
+   },
+   {
+    "name": "answer_fact_id",
+    "type": "TEXT",
+    "not_null": false,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": true
+   },
+   {
+    "name": "origin",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "dedupe_key",
+    "type": "TEXT",
+    "not_null": false,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "created_by",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "created_at",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   }
+  ]
+ },
+ "discrepancies": {
+  "tenant_scoped": true,
+  "columns": [
+   {
+    "name": "id",
+    "type": "TEXT",
+    "not_null": false,
+    "default": null,
+    "primary_key": true,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "tenant_id",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "company_id",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "kind",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "fact_a",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "fact_b",
+    "type": "TEXT",
+    "not_null": false,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "detail",
+    "type": "TEXT",
+    "not_null": true,
+    "default": "''",
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "status",
+    "type": "TEXT",
+    "not_null": true,
+    "default": "'open'",
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": true
+   },
+   {
+    "name": "resolution",
+    "type": "TEXT",
+    "not_null": true,
+    "default": "''",
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": true
+   },
+   {
+    "name": "resolved_by",
+    "type": "TEXT",
+    "not_null": false,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": true
+   },
+   {
+    "name": "resolved_at",
+    "type": "TEXT",
+    "not_null": false,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": true
+   },
+   {
+    "name": "created_at",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   }
+  ]
+ },
+ "doc_tables": {
+  "tenant_scoped": true,
+  "columns": [
+   {
+    "name": "id",
+    "type": "TEXT",
+    "not_null": false,
+    "default": null,
+    "primary_key": true,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "tenant_id",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "version_id",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "page_no",
+    "type": "INTEGER",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "table_index",
+    "type": "INTEGER",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "title",
+    "type": "TEXT",
+    "not_null": true,
+    "default": "''",
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "rows",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": true,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "footnotes",
+    "type": "TEXT",
+    "not_null": true,
+    "default": "'[]'",
+    "primary_key": false,
+    "json": true,
+    "mutable_after_insert": false
+   }
+  ]
+ },
+ "document_versions": {
+  "tenant_scoped": true,
+  "columns": [
+   {
+    "name": "id",
+    "type": "TEXT",
+    "not_null": false,
+    "default": null,
+    "primary_key": true,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "tenant_id",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "document_id",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "version_no",
+    "type": "INTEGER",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "sha256",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "text_fingerprint",
+    "type": "TEXT",
+    "not_null": false,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": true
+   },
+   {
+    "name": "size_bytes",
+    "type": "INTEGER",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "filename",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "mime",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "storage_path",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "publication_date",
+    "type": "TEXT",
+    "not_null": false,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "retrieved_at",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "source_url",
+    "type": "TEXT",
+    "not_null": true,
+    "default": "''",
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "reporting_currency",
+    "type": "TEXT",
+    "not_null": false,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "supersedes_version_id",
+    "type": "TEXT",
+    "not_null": false,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "mirror_of_version_id",
+    "type": "TEXT",
+    "not_null": false,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": true
+   },
+   {
+    "name": "mirror_similarity",
+    "type": "TEXT",
+    "not_null": false,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": true
+   },
+   {
+    "name": "page_count",
+    "type": "INTEGER",
+    "not_null": false,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": true
+   },
+   {
+    "name": "unreadable_pages",
+    "type": "TEXT",
+    "not_null": true,
+    "default": "'[]'",
+    "primary_key": false,
+    "json": true,
+    "mutable_after_insert": true
+   },
+   {
+    "name": "parse_status",
+    "type": "TEXT",
+    "not_null": true,
+    "default": "'pending'",
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": true
+   },
+   {
+    "name": "parse_warnings",
+    "type": "TEXT",
+    "not_null": true,
+    "default": "'[]'",
+    "primary_key": false,
+    "json": true,
+    "mutable_after_insert": true
+   },
+   {
+    "name": "synthetic",
+    "type": "INTEGER",
+    "not_null": true,
+    "default": "0",
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "uploaded_by",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "uploaded_at",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   }
+  ]
+ },
+ "documents": {
+  "tenant_scoped": true,
+  "columns": [
+   {
+    "name": "id",
+    "type": "TEXT",
+    "not_null": false,
+    "default": null,
+    "primary_key": true,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "tenant_id",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "company_id",
+    "type": "TEXT",
+    "not_null": false,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "title",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "doc_type",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "publisher",
+    "type": "TEXT",
+    "not_null": true,
+    "default": "''",
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "is_issuer_primary",
+    "type": "INTEGER",
+    "not_null": true,
+    "default": "0",
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "created_by",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "created_at",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   }
+  ]
+ },
+ "entity_aliases": {
+  "tenant_scoped": true,
+  "columns": [
+   {
+    "name": "id",
+    "type": "TEXT",
+    "not_null": false,
+    "default": null,
+    "primary_key": true,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "tenant_id",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "entity_kind",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "entity_id",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "alias",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "alias_kind",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "valid_from",
+    "type": "TEXT",
+    "not_null": false,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "valid_to",
+    "type": "TEXT",
+    "not_null": false,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": true
+   },
+   {
+    "name": "created_by",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "created_at",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   }
+  ]
+ },
+ "event_links": {
+  "tenant_scoped": false,
+  "columns": [
+   {
+    "name": "tenant_id",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": true,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "event_id",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": true,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "kind",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": true,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "target_id",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": true,
+    "json": false,
+    "mutable_after_insert": false
+   }
+  ]
+ },
+ "events": {
+  "tenant_scoped": true,
+  "columns": [
+   {
+    "name": "id",
+    "type": "TEXT",
+    "not_null": false,
+    "default": null,
+    "primary_key": true,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "tenant_id",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "company_id",
+    "type": "TEXT",
+    "not_null": false,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "project_id",
+    "type": "TEXT",
+    "not_null": false,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "kind",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "title",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "detail",
+    "type": "TEXT",
+    "not_null": true,
+    "default": "'{}'",
+    "primary_key": false,
+    "json": true,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "source_version_id",
+    "type": "TEXT",
+    "not_null": false,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "event_date",
+    "type": "TEXT",
+    "not_null": false,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "dedupe_key",
+    "type": "TEXT",
+    "not_null": false,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "duplicate_of",
+    "type": "TEXT",
+    "not_null": false,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "status",
+    "type": "TEXT",
+    "not_null": true,
+    "default": "'new'",
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": true
+   },
+   {
+    "name": "status_reason",
+    "type": "TEXT",
+    "not_null": true,
+    "default": "''",
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": true
+   },
+   {
+    "name": "reviewed_by",
+    "type": "TEXT",
+    "not_null": false,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": true
+   },
+   {
+    "name": "reviewed_at",
+    "type": "TEXT",
+    "not_null": false,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": true
+   },
+   {
+    "name": "created_at",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   }
+  ]
+ },
+ "exports": {
+  "tenant_scoped": true,
+  "columns": [
+   {
+    "name": "id",
+    "type": "TEXT",
+    "not_null": false,
+    "default": null,
+    "primary_key": true,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "tenant_id",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "kind",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "target_id",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "target_version",
+    "type": "TEXT",
+    "not_null": false,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "fmt",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "status_label",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "sha256",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "created_by",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "created_at",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   }
+  ]
+ },
+ "facts": {
+  "tenant_scoped": true,
+  "columns": [
+   {
+    "name": "id",
+    "type": "TEXT",
+    "not_null": false,
+    "default": null,
+    "primary_key": true,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "tenant_id",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "company_id",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "project_id",
+    "type": "TEXT",
+    "not_null": false,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "metric_id",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "definition_version",
+    "type": "INTEGER",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "raw_text",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "raw_value",
+    "type": "TEXT",
+    "not_null": false,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "normalized_value",
+    "type": "TEXT",
+    "not_null": false,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "value_kind",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "unit",
+    "type": "TEXT",
+    "not_null": false,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "currency",
+    "type": "TEXT",
+    "not_null": false,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "precision_lo",
+    "type": "TEXT",
+    "not_null": false,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "precision_hi",
+    "type": "TEXT",
+    "not_null": false,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "transformations",
+    "type": "TEXT",
+    "not_null": true,
+    "default": "'[]'",
+    "primary_key": false,
+    "json": true,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "scope_basis",
+    "type": "TEXT",
+    "not_null": false,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "period_start",
+    "type": "TEXT",
+    "not_null": false,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "period_end",
+    "type": "TEXT",
+    "not_null": false,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "as_of_date",
+    "type": "TEXT",
+    "not_null": false,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "effective_date",
+    "type": "TEXT",
+    "not_null": false,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "publication_date",
+    "type": "TEXT",
+    "not_null": false,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "retrieved_at",
+    "type": "TEXT",
+    "not_null": false,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "study_type",
+    "type": "TEXT",
+    "not_null": false,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "tax_basis",
+    "type": "TEXT",
+    "not_null": false,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "discount_rate",
+    "type": "TEXT",
+    "not_null": false,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "resource_category",
+    "type": "TEXT",
+    "not_null": false,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "reporting_basis",
+    "type": "TEXT",
+    "not_null": false,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "estimate_status",
+    "type": "TEXT",
+    "not_null": false,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "qualifiers",
+    "type": "TEXT",
+    "not_null": true,
+    "default": "'{}'",
+    "primary_key": false,
+    "json": true,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "attribution",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "evidence_type",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "workflow_state",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": true
+   },
+   {
+    "name": "checks",
+    "type": "TEXT",
+    "not_null": true,
+    "default": "'[]'",
+    "primary_key": false,
+    "json": true,
+    "mutable_after_insert": true
+   },
+   {
+    "name": "missing_reason",
+    "type": "TEXT",
+    "not_null": false,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "version_id",
+    "type": "TEXT",
+    "not_null": false,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "location_id",
+    "type": "TEXT",
+    "not_null": false,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "equivalence_key",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "revision_of",
+    "type": "TEXT",
+    "not_null": false,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "relation",
+    "type": "TEXT",
+    "not_null": false,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "extractor",
+    "type": "TEXT",
+    "not_null": true,
+    "default": "''",
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "extractor_version",
+    "type": "TEXT",
+    "not_null": true,
+    "default": "''",
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "ingestion_run_id",
+    "type": "TEXT",
+    "not_null": false,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "created_by",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "created_at",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "updated_at",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": true
+   }
+  ]
+ },
+ "holdings": {
+  "tenant_scoped": true,
+  "columns": [
+   {
+    "name": "id",
+    "type": "TEXT",
+    "not_null": false,
+    "default": null,
+    "primary_key": true,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "tenant_id",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "portfolio",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "company_id",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "shares",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "as_of_date",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "created_by",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "created_at",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   }
+  ]
+ },
+ "ingestion_runs": {
+  "tenant_scoped": true,
+  "columns": [
+   {
+    "name": "id",
+    "type": "TEXT",
+    "not_null": false,
+    "default": null,
+    "primary_key": true,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "tenant_id",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "version_id",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "idempotency_key",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "status",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": true
+   },
+   {
+    "name": "attempts",
+    "type": "INTEGER",
+    "not_null": true,
+    "default": "0",
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": true
+   },
+   {
+    "name": "error",
+    "type": "TEXT",
+    "not_null": true,
+    "default": "''",
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": true
+   },
+   {
+    "name": "parser",
+    "type": "TEXT",
+    "not_null": true,
+    "default": "''",
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": true
+   },
+   {
+    "name": "parser_version",
+    "type": "TEXT",
+    "not_null": true,
+    "default": "''",
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": true
+   },
+   {
+    "name": "extractor",
+    "type": "TEXT",
+    "not_null": true,
+    "default": "''",
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": true
+   },
+   {
+    "name": "extractor_version",
+    "type": "TEXT",
+    "not_null": true,
+    "default": "''",
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": true
+   },
+   {
+    "name": "candidates",
+    "type": "INTEGER",
+    "not_null": true,
+    "default": "0",
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": true
+   },
+   {
+    "name": "created_at",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "started_at",
+    "type": "TEXT",
+    "not_null": false,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": true
+   },
+   {
+    "name": "finished_at",
+    "type": "TEXT",
+    "not_null": false,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": true
+   }
+  ]
+ },
+ "listings": {
+  "tenant_scoped": true,
+  "columns": [
+   {
+    "name": "id",
+    "type": "TEXT",
+    "not_null": false,
+    "default": null,
+    "primary_key": true,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "tenant_id",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "company_id",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "exchange",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "ticker",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "currency",
+    "type": "TEXT",
+    "not_null": false,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "valid_from",
+    "type": "TEXT",
+    "not_null": false,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "valid_to",
+    "type": "TEXT",
+    "not_null": false,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": true
+   },
+   {
+    "name": "created_at",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   }
+  ]
+ },
+ "memo_versions": {
+  "tenant_scoped": true,
+  "columns": [
+   {
+    "name": "id",
+    "type": "TEXT",
+    "not_null": false,
+    "default": null,
+    "primary_key": true,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "tenant_id",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "memo_id",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "version_no",
+    "type": "INTEGER",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "status",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": true
+   },
+   {
+    "name": "body",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": true,
+    "mutable_after_insert": true
+   },
+   {
+    "name": "author",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "created_at",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "submitted_at",
+    "type": "TEXT",
+    "not_null": false,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": true
+   },
+   {
+    "name": "approved_by",
+    "type": "TEXT",
+    "not_null": false,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": true
+   },
+   {
+    "name": "approved_at",
+    "type": "TEXT",
+    "not_null": false,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": true
+   },
+   {
+    "name": "content_sha256",
+    "type": "TEXT",
+    "not_null": false,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": true
+   },
+   {
+    "name": "evidence_cutoff",
+    "type": "TEXT",
+    "not_null": false,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": true
+   },
+   {
+    "name": "stale",
+    "type": "INTEGER",
+    "not_null": true,
+    "default": "0",
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": true
+   },
+   {
+    "name": "stale_reason",
+    "type": "TEXT",
+    "not_null": true,
+    "default": "''",
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": true
+   }
+  ]
+ },
+ "memos": {
+  "tenant_scoped": true,
+  "columns": [
+   {
+    "name": "id",
+    "type": "TEXT",
+    "not_null": false,
+    "default": null,
+    "primary_key": true,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "tenant_id",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "company_id",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "title",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "thesis_id",
+    "type": "TEXT",
+    "not_null": false,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "peer_set_id",
+    "type": "TEXT",
+    "not_null": false,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "created_by",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "created_at",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   }
+  ]
+ },
+ "meta": {
+  "tenant_scoped": false,
+  "columns": [
+   {
+    "name": "k",
+    "type": "TEXT",
+    "not_null": false,
+    "default": null,
+    "primary_key": true,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "v",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   }
+  ]
+ },
+ "notifications": {
+  "tenant_scoped": true,
+  "columns": [
+   {
+    "name": "id",
+    "type": "TEXT",
+    "not_null": false,
+    "default": null,
+    "primary_key": true,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "tenant_id",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "user_id",
+    "type": "TEXT",
+    "not_null": false,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "event_id",
+    "type": "TEXT",
+    "not_null": false,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "message",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "created_at",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "read_at",
+    "type": "TEXT",
+    "not_null": false,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": true
+   }
+  ]
+ },
+ "ownership_interests": {
+  "tenant_scoped": true,
+  "columns": [
+   {
+    "name": "id",
+    "type": "TEXT",
+    "not_null": false,
+    "default": null,
+    "primary_key": true,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "tenant_id",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "company_id",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "project_id",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "interest_pct",
+    "type": "TEXT",
+    "not_null": false,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "interest_kind",
+    "type": "TEXT",
+    "not_null": true,
+    "default": "'direct'",
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "effective_date",
+    "type": "TEXT",
+    "not_null": false,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "end_date",
+    "type": "TEXT",
+    "not_null": false,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": true
+   },
+   {
+    "name": "fact_id",
+    "type": "TEXT",
+    "not_null": false,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "notes",
+    "type": "TEXT",
+    "not_null": true,
+    "default": "''",
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "created_by",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "created_at",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   }
+  ]
+ },
+ "pages": {
+  "tenant_scoped": true,
+  "columns": [
+   {
+    "name": "id",
+    "type": "TEXT",
+    "not_null": false,
+    "default": null,
+    "primary_key": true,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "tenant_id",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "version_id",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "page_no",
+    "type": "INTEGER",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "label",
+    "type": "TEXT",
+    "not_null": true,
+    "default": "''",
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "text",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "readable",
+    "type": "INTEGER",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   }
+  ]
+ },
+ "passages_fts": {
+  "tenant_scoped": false,
+  "columns": [
+   {
+    "name": "text",
+    "type": "",
+    "not_null": false,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "tenant_id",
+    "type": "",
+    "not_null": false,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "version_id",
+    "type": "",
+    "not_null": false,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "page_no",
+    "type": "",
+    "not_null": false,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "company_id",
+    "type": "",
+    "not_null": false,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   }
+  ]
+ },
+ "peer_members": {
+  "tenant_scoped": true,
+  "columns": [
+   {
+    "name": "id",
+    "type": "TEXT",
+    "not_null": false,
+    "default": null,
+    "primary_key": true,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "tenant_id",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "peer_set_id",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "company_id",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "project_id",
+    "type": "TEXT",
+    "not_null": false,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "classification",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": true
+   },
+   {
+    "name": "inclusion_reasons",
+    "type": "TEXT",
+    "not_null": true,
+    "default": "'[]'",
+    "primary_key": false,
+    "json": true,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "differences",
+    "type": "TEXT",
+    "not_null": true,
+    "default": "'[]'",
+    "primary_key": false,
+    "json": true,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "decision",
+    "type": "TEXT",
+    "not_null": true,
+    "default": "'proposed'",
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": true
+   },
+   {
+    "name": "decision_rationale",
+    "type": "TEXT",
+    "not_null": true,
+    "default": "''",
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": true
+   },
+   {
+    "name": "decided_by",
+    "type": "TEXT",
+    "not_null": false,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": true
+   },
+   {
+    "name": "decided_at",
+    "type": "TEXT",
+    "not_null": false,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": true
+   }
+  ]
+ },
+ "peer_sets": {
+  "tenant_scoped": true,
+  "columns": [
+   {
+    "name": "id",
+    "type": "TEXT",
+    "not_null": false,
+    "default": null,
+    "primary_key": true,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "tenant_id",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "subject_company_id",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "subject_project_id",
+    "type": "TEXT",
+    "not_null": false,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "name",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": true
+   },
+   {
+    "name": "status",
+    "type": "TEXT",
+    "not_null": true,
+    "default": "'draft'",
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": true
+   },
+   {
+    "name": "approved_by",
+    "type": "TEXT",
+    "not_null": false,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": true
+   },
+   {
+    "name": "approved_at",
+    "type": "TEXT",
+    "not_null": false,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": true
+   },
+   {
+    "name": "approval_rationale",
+    "type": "TEXT",
+    "not_null": true,
+    "default": "''",
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": true
+   },
+   {
+    "name": "created_by",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "created_at",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   }
+  ]
+ },
+ "projects": {
+  "tenant_scoped": true,
+  "columns": [
+   {
+    "name": "id",
+    "type": "TEXT",
+    "not_null": false,
+    "default": null,
+    "primary_key": true,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "tenant_id",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "name",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "commodity",
+    "type": "TEXT",
+    "not_null": false,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": true
+   },
+   {
+    "name": "jurisdiction",
+    "type": "TEXT",
+    "not_null": false,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": true
+   },
+   {
+    "name": "country",
+    "type": "TEXT",
+    "not_null": false,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": true
+   },
+   {
+    "name": "stage",
+    "type": "TEXT",
+    "not_null": false,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": true
+   },
+   {
+    "name": "stage_source_location_id",
+    "type": "TEXT",
+    "not_null": false,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": true
+   },
+   {
+    "name": "deposit_type",
+    "type": "TEXT",
+    "not_null": false,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": true
+   },
+   {
+    "name": "process_route",
+    "type": "TEXT",
+    "not_null": false,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": true
+   },
+   {
+    "name": "infrastructure",
+    "type": "TEXT",
+    "not_null": true,
+    "default": "'[]'",
+    "primary_key": false,
+    "json": true,
+    "mutable_after_insert": true
+   },
+   {
+    "name": "synthetic",
+    "type": "INTEGER",
+    "not_null": true,
+    "default": "0",
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "created_by",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "created_at",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   }
+  ]
+ },
+ "review_decisions": {
+  "tenant_scoped": true,
+  "columns": [
+   {
+    "name": "id",
+    "type": "TEXT",
+    "not_null": false,
+    "default": null,
+    "primary_key": true,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "tenant_id",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "target_kind",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "target_id",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "decision",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "from_state",
+    "type": "TEXT",
+    "not_null": false,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "to_state",
+    "type": "TEXT",
+    "not_null": false,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "reason",
+    "type": "TEXT",
+    "not_null": true,
+    "default": "''",
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "actor",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "at",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   }
+  ]
+ },
+ "risk_evidence": {
+  "tenant_scoped": true,
+  "columns": [
+   {
+    "name": "id",
+    "type": "TEXT",
+    "not_null": false,
+    "default": null,
+    "primary_key": true,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "tenant_id",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "risk_id",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "stance",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "fact_id",
+    "type": "TEXT",
+    "not_null": false,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "location_id",
+    "type": "TEXT",
+    "not_null": false,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "note",
+    "type": "TEXT",
+    "not_null": true,
+    "default": "''",
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "evidence_date",
+    "type": "TEXT",
+    "not_null": false,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "added_by",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "added_at",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   }
+  ]
+ },
+ "risk_findings": {
+  "tenant_scoped": true,
+  "columns": [
+   {
+    "name": "id",
+    "type": "TEXT",
+    "not_null": false,
+    "default": null,
+    "primary_key": true,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "tenant_id",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "company_id",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "project_id",
+    "type": "TEXT",
+    "not_null": false,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": true
+   },
+   {
+    "name": "category",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": true
+   },
+   {
+    "name": "title",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": true
+   },
+   {
+    "name": "consequence",
+    "type": "TEXT",
+    "not_null": true,
+    "default": "''",
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": true
+   },
+   {
+    "name": "dependencies_text",
+    "type": "TEXT",
+    "not_null": true,
+    "default": "''",
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": true
+   },
+   {
+    "name": "mitigants",
+    "type": "TEXT",
+    "not_null": true,
+    "default": "''",
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": true
+   },
+   {
+    "name": "unresolved_questions",
+    "type": "TEXT",
+    "not_null": true,
+    "default": "''",
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": true
+   },
+   {
+    "name": "monitoring_trigger",
+    "type": "TEXT",
+    "not_null": true,
+    "default": "''",
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": true
+   },
+   {
+    "name": "owner",
+    "type": "TEXT",
+    "not_null": true,
+    "default": "''",
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": true
+   },
+   {
+    "name": "reviewer",
+    "type": "TEXT",
+    "not_null": true,
+    "default": "''",
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": true
+   },
+   {
+    "name": "status",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": true
+   },
+   {
+    "name": "attention",
+    "type": "INTEGER",
+    "not_null": true,
+    "default": "0",
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": true
+   },
+   {
+    "name": "attention_reason",
+    "type": "TEXT",
+    "not_null": true,
+    "default": "''",
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": true
+   },
+   {
+    "name": "origin",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "created_by",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "created_at",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "updated_at",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": true
+   }
+  ]
+ },
+ "risk_history": {
+  "tenant_scoped": true,
+  "columns": [
+   {
+    "name": "id",
+    "type": "TEXT",
+    "not_null": false,
+    "default": null,
+    "primary_key": true,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "tenant_id",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "risk_id",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "actor",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "at",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "change",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": true,
+    "mutable_after_insert": false
+   }
+  ]
+ },
+ "schema_migrations": {
+  "tenant_scoped": false,
+  "columns": [
+   {
+    "name": "id",
+    "type": "INTEGER",
+    "not_null": false,
+    "default": null,
+    "primary_key": true,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "applied_at",
+    "type": "TEXT",
+    "not_null": true,
+    "default": "CURRENT_TIMESTAMP",
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   }
+  ]
+ },
+ "sessions": {
+  "tenant_scoped": false,
+  "columns": [
+   {
+    "name": "token_sha",
+    "type": "TEXT",
+    "not_null": false,
+    "default": null,
+    "primary_key": true,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "user_id",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "csrf",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "expires",
+    "type": "REAL",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   }
+  ]
+ },
+ "source_feeds": {
+  "tenant_scoped": true,
+  "columns": [
+   {
+    "name": "id",
+    "type": "TEXT",
+    "not_null": false,
+    "default": null,
+    "primary_key": true,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "tenant_id",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "name",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "kind",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "status",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": true
+   },
+   {
+    "name": "last_success_at",
+    "type": "TEXT",
+    "not_null": false,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": true
+   },
+   {
+    "name": "last_attempt_at",
+    "type": "TEXT",
+    "not_null": false,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": true
+   },
+   {
+    "name": "last_error",
+    "type": "TEXT",
+    "not_null": true,
+    "default": "''",
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": true
+   },
+   {
+    "name": "refresh_expectation_days",
+    "type": "INTEGER",
+    "not_null": false,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "licensing_note",
+    "type": "TEXT",
+    "not_null": true,
+    "default": "''",
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   }
+  ]
+ },
+ "source_locations": {
+  "tenant_scoped": true,
+  "columns": [
+   {
+    "name": "id",
+    "type": "TEXT",
+    "not_null": false,
+    "default": null,
+    "primary_key": true,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "tenant_id",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "version_id",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "page_no",
+    "type": "INTEGER",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "table_index",
+    "type": "INTEGER",
+    "not_null": false,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "row_index",
+    "type": "INTEGER",
+    "not_null": false,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "col_index",
+    "type": "INTEGER",
+    "not_null": false,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "cell_ref",
+    "type": "TEXT",
+    "not_null": false,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "char_start",
+    "type": "INTEGER",
+    "not_null": false,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "char_end",
+    "type": "INTEGER",
+    "not_null": false,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "quote",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "context",
+    "type": "TEXT",
+    "not_null": true,
+    "default": "''",
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "row_header",
+    "type": "TEXT",
+    "not_null": false,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "col_header",
+    "type": "TEXT",
+    "not_null": false,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "footnotes",
+    "type": "TEXT",
+    "not_null": true,
+    "default": "'[]'",
+    "primary_key": false,
+    "json": true,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "bbox",
+    "type": "TEXT",
+    "not_null": false,
+    "default": null,
+    "primary_key": false,
+    "json": true,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "bbox_note",
+    "type": "TEXT",
+    "not_null": true,
+    "default": "''",
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   }
+  ]
+ },
+ "tenants": {
+  "tenant_scoped": false,
+  "columns": [
+   {
+    "name": "id",
+    "type": "TEXT",
+    "not_null": false,
+    "default": null,
+    "primary_key": true,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "name",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "plan",
+    "type": "TEXT",
+    "not_null": true,
+    "default": "'pilot'",
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "seats",
+    "type": "INTEGER",
+    "not_null": true,
+    "default": "5",
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "entitlements",
+    "type": "TEXT",
+    "not_null": true,
+    "default": "'{}'",
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "created_at",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   }
+  ]
+ },
+ "theses": {
+  "tenant_scoped": true,
+  "columns": [
+   {
+    "name": "id",
+    "type": "TEXT",
+    "not_null": false,
+    "default": null,
+    "primary_key": true,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "tenant_id",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "company_id",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "title",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "created_by",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "created_at",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   }
+  ]
+ },
+ "thesis_assumptions": {
+  "tenant_scoped": true,
+  "columns": [
+   {
+    "name": "id",
+    "type": "TEXT",
+    "not_null": false,
+    "default": null,
+    "primary_key": true,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "tenant_id",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "thesis_version_id",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "text",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "company_id",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "project_id",
+    "type": "TEXT",
+    "not_null": false,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "metric_ids",
+    "type": "TEXT",
+    "not_null": true,
+    "default": "'[]'",
+    "primary_key": false,
+    "json": true,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "fact_ids",
+    "type": "TEXT",
+    "not_null": true,
+    "default": "'[]'",
+    "primary_key": false,
+    "json": true,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "calc_ids",
+    "type": "TEXT",
+    "not_null": true,
+    "default": "'[]'",
+    "primary_key": false,
+    "json": true,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "commitment_ids",
+    "type": "TEXT",
+    "not_null": true,
+    "default": "'[]'",
+    "primary_key": false,
+    "json": true,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "status",
+    "type": "TEXT",
+    "not_null": true,
+    "default": "'holding'",
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": true
+   },
+   {
+    "name": "status_reason",
+    "type": "TEXT",
+    "not_null": true,
+    "default": "''",
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": true
+   },
+   {
+    "name": "updated_at",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": true
+   }
+  ]
+ },
+ "thesis_versions": {
+  "tenant_scoped": true,
+  "columns": [
+   {
+    "name": "id",
+    "type": "TEXT",
+    "not_null": false,
+    "default": null,
+    "primary_key": true,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "tenant_id",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "thesis_id",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "version_no",
+    "type": "INTEGER",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "thesis_text",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "counter_thesis_text",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "created_by",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "created_at",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   }
+  ]
+ },
+ "usage_ledger": {
+  "tenant_scoped": true,
+  "columns": [
+   {
+    "name": "id",
+    "type": "TEXT",
+    "not_null": false,
+    "default": null,
+    "primary_key": true,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "tenant_id",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "at",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "kind",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "quantity",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "unit",
+    "type": "TEXT",
+    "not_null": true,
+    "default": "''",
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "model",
+    "type": "TEXT",
+    "not_null": false,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "tokens_in",
+    "type": "INTEGER",
+    "not_null": false,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "tokens_out",
+    "type": "INTEGER",
+    "not_null": false,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "cost_usd",
+    "type": "TEXT",
+    "not_null": false,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "detail",
+    "type": "TEXT",
+    "not_null": true,
+    "default": "''",
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   }
+  ]
+ },
+ "users": {
+  "tenant_scoped": false,
+  "columns": [
+   {
+    "name": "user_id",
+    "type": "TEXT",
+    "not_null": false,
+    "default": null,
+    "primary_key": true,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "tenant_id",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "role",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "salt",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "hash",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "active",
+    "type": "INTEGER",
+    "not_null": true,
+    "default": "1",
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "created_at",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "password_changed_at",
+    "type": "TEXT",
+    "not_null": false,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   }
+  ]
+ },
+ "watchlist_members": {
+  "tenant_scoped": false,
+  "columns": [
+   {
+    "name": "tenant_id",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "watchlist_id",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": true,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "company_id",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": true,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "added_at",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   }
+  ]
+ },
+ "watchlists": {
+  "tenant_scoped": true,
+  "columns": [
+   {
+    "name": "id",
+    "type": "TEXT",
+    "not_null": false,
+    "default": null,
+    "primary_key": true,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "tenant_id",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "name",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "created_by",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "created_at",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   }
+  ]
+ },
+ "workspaces": {
+  "tenant_scoped": true,
+  "columns": [
+   {
+    "name": "id",
+    "type": "TEXT",
+    "not_null": false,
+    "default": null,
+    "primary_key": true,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "tenant_id",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "name",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "created_by",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   },
+   {
+    "name": "created_at",
+    "type": "TEXT",
+    "not_null": true,
+    "default": null,
+    "primary_key": false,
+    "json": false,
+    "mutable_after_insert": false
+   }
+  ]
+ }
+}
