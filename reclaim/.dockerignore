@@ -1,0 +1,6 @@
+node_modules
+.next
+.data
+public/mediapipe
+public/models
+*.tsbuildinfo

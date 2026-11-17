@@ -1,0 +1,18 @@
+# Render Blueprint for the RECLAIM website prototype (the app lives in reclaim/).
+# Render → New → Blueprint → pick this repository and branch → Apply.
+services:
+  - type: web
+    name: reclaim-prototype
+    runtime: node
+    rootDir: reclaim
+    plan: free
+    buildCommand: npm ci && npm run build
+    startCommand: npm start
+    healthCheckPath: /login
+    envVars:
+      - key: SITE_PASSWORD        # shared password for the whole site; Render asks you for it
+        sync: false
+      - key: RECLAIM_MEDIA_SECRET # signs short-lived video links
+        generateValue: true
+      - key: NEXT_TELEMETRY_DISABLED
+        value: "1"
