@@ -171,12 +171,14 @@ These are enforced by server code:
 
 ## 8. Rollout phases and gates
 
-| Phase | Ship | Gate to move on |
+Each gate is a condition for **entering** that phase, not a review after it. Nothing is charged before gate 1; no medical care starts before gate 2.
+
+| Phase | Ship | Gate to enter this phase |
 |---|---|---|
-| **0. Demand test (weeks 0–6)** | Public pages, assessment, waitlist, willingness-to-pay survey, fake doors, admin insights. **No payments and no health data.** `RECLAIM_DEMO_MODE=false`; noindex removed only after counsel review of copy | Counsel sign-off on public copy; enough completed assessments and survey responses to read the price range and medical-interest share |
-| **1. Coaching pilot** | Memberships with the payment provider, portal, video library on the host, coach scheduler, real coaches | Cooling-off and trust questions answered; signed agreements with coaches and two or three partners; accessibility audit; privacy impact assessment |
-| **2. Medical arm** | Care area wired to the practice's EMR; pharmacy integration for fill status; clinical notices and agreements live | Signed agent/ESP agreements; formulary approved by the medical director; legal opinion on the funnel (O. Reg. 114/94 s.7) and pharmacy relationship; LegitScript before any paid acquisition |
-| **3. Scale and expand** | Jurisdiction rows switched on province by province; employer sponsor codes; licensing tools | Waitlist density per province or state, licensed clinicians, pharmacy permissions and partners in place. The US needs separate entities and a HIPAA programme |
+| **0. Demand test (weeks 0–6)** | Public pages, assessment, waitlist, willingness-to-pay survey, fake doors, admin insights. **No payments and no health data.** `RECLAIM_DEMO_MODE=false`; noindex removed only after counsel review of copy | Counsel review of public copy |
+| **1. Coaching pilot** | Memberships with the payment provider, portal, video library on the host, coach scheduler, real coaches | **Gate 1:** demand data justifies it (completed assessments and survey responses enough to read the price range and medical-interest share); counsel signs off public copy and the cooling-off and trust questions; coach and partner contracts signed; privacy impact assessment and accessibility audit done |
+| **2. Medical arm** | Care area wired to the practice's EMR; pharmacy integration for fill status; clinical notices live | **Gate 2:** agent/ESP agreements with the practice and pharmacy signed; formulary approved by the medical director; legal opinion on the funnel (O. Reg. 114/94 s.7) and the pharmacy relationship |
+| **3. Scale and expand** | Jurisdiction rows switched on province by province; employer sponsor codes; licensing tools | **Gate 3:** LegitScript before any paid acquisition; per province or state, waitlist density, licensed clinicians, pharmacy permissions and partners in place. The US needs separate entities and a HIPAA programme |
 
 ## 9. What is real and what is mocked in this prototype
 
